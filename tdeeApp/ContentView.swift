@@ -11,7 +11,6 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var userSettings = UserSettings()
-    @State var measurementsSet: Bool = false
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -20,49 +19,57 @@ struct ContentView: View {
     }
     
     var body: some View {
+        
+        ScrollView {
         VStack {
-            if !measurementsSet {
-            Image("runningFig").resizable()
+            
+                
+                Image("runningFig").resizable()
             .frame(width: 100.0, height: 100.0)
             .clipShape(Circle())
             .shadow(radius: 10)
             .overlay(Circle().stroke(Color.red, lineWidth: 5))
         
-            Text("First, we need some info:")
-            TextField("Enter first name", text: $userSettings.firstName).padding(12)
-            Text("Birthday")
-            DatePicker("", selection: $userSettings.birthday, displayedComponents: .date).labelsHidden()
-            TextField("Enter your height in CM", value: $userSettings.heightInCM, formatter: NumberFormatter()).padding(12)
-            TextField("Enter your current weight in KG", value: $userSettings.startingWeightInKg, formatter: NumberFormatter()).padding(12)
-            TextField("Enter your goal weight in KG", value: $userSettings.startingWeightInKg, formatter: NumberFormatter()).padding(12)
-                Button("Calculate TDEE", action: {
-                    self.measurementsSet = true
-                })
-            //slider desired days to lose a pound
-            } else {
-                Text("Thanks for the info \(userSettings.firstName)!")
-                Text("Your current TDEE is")
-                Text("\(userSettings.currentTDEE)").font(.largeTitle).foregroundColor(.red)
-                Spacer()
-                Text("This means you should eat")
-                Text("\(userSettings.caloriesIn)").font(.largeTitle).foregroundColor(.red)
-                HStack {
-                    Text("to lose a pound every")
-                    Text("\(userSettings.desiredDaysPerPoundLost)").font(.largeTitle).foregroundColor(.red)
-                    Text("days")
+            
+            
+            if userSettings.goalWeightSet {
+                
+                VStack {
+                    Text("You currently run an average of")
+                    Text("\(userSettings.milesRunPerDay)").font(.largeTitle).foregroundColor(.red)
+                    Text("miles per day")
                 }
                 Spacer()
-                Text("Please check back soon to see how these values change as your watch reports data on your miles run per week.")
-                Button("Recalculate TDEE", action: {
-                    self.measurementsSet = false
-                })
+                Text("Your current TDEE is")
+                Text("\(userSettings.caloriesToSustainGoalWeight)").font(.largeTitle).foregroundColor(.red)
+                Spacer()
+                Text("This means you should eat")
+                Text(String(userSettings.caloriesToEatPerDay)).font(.largeTitle).foregroundColor(.red)
+                HStack {
+                    Text(" calories to lose a pound every")
+                    Text("\(userSettings.daysToLoseAPound)").font(.largeTitle).foregroundColor(.red)
+                    Text("days")
+                }
+                Text("Adjust days to lose a pound:")
+                Slider(value: $userSettings.selectedDayValue, in: 1...365,step: 1,onEditingChanged: { data in
+                    self.userSettings.getCurrentCaloriesInAndDaysToLoseAPound()
+                }).padding(12)
+                
+            } else {
+                TextField("Enter your goal weight in lbs", text: $userSettings.goalWeightInLbs).padding(12)
+                Button(action: {
+                    self.userSettings.getCurrentCaloriesInAndDaysToLoseAPound()
+                    self.userSettings.goalWeightSet = true
+                }) {
+                    Text("Calculate your TDEE")
+                }
             }
             
             
-            
-            
+            }
         }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
