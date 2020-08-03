@@ -43,8 +43,16 @@ struct ContentView: View {
                 Text("Thanks for the info \(userSettings.firstName)!")
                 Text("Your current TDEE is")
                 Text("\(userSettings.currentTDEE)").font(.largeTitle).foregroundColor(.red)
-                Text("This means you should eat \(userSettings.caloriesIn) to lose a pound every \(userSettings.desiredDaysPerPoundLost) days")
-                Text("Please check back soon to see how these values change with your running routine.")
+                Spacer()
+                Text("This means you should eat")
+                Text("\(userSettings.caloriesIn)").font(.largeTitle).foregroundColor(.red)
+                HStack {
+                    Text("to lose a pound every")
+                    Text("\(userSettings.desiredDaysPerPoundLost)").font(.largeTitle).foregroundColor(.red)
+                    Text("days")
+                }
+                Spacer()
+                Text("Please check back soon to see how these values change as your watch reports data on your miles run per week.")
                 Button("Recalculate TDEE", action: {
                     self.measurementsSet = false
                 })
