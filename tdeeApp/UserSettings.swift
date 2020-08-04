@@ -28,6 +28,12 @@ class UserSettings: ObservableObject {
             daysToLoseAPound = intValue
         }
     }
+    @Published var calorieDeficetPerDay: Int = 0 {
+        didSet {
+            print("calorieDeficetPerDay \(calorieDeficetPerDay)")
+        }
+    }
+    
     
     func getCurrentCaloriesInAndDaysToLoseAPound() {
         guard let goalWeight = Int(goalWeightInLbs) else { return }
@@ -41,9 +47,30 @@ class UserSettings: ObservableObject {
 
         caloriesToEatPerDay = caloriesToSustainGoalWeight - (runnersCalorieBonus/2)
 
-        let calorieDeficetPerDay = caloriesRequiredPerDay - caloriesToEatPerDay
-
+        calorieDeficetPerDay = caloriesRequiredPerDay - caloriesToEatPerDay
+        
         daysToLoseAPound = 3500/calorieDeficetPerDay
+        selectedDayValue = Double(daysToLoseAPound)
+        
+        
+    }
+    
+    func updateCaloriesForDaysToLoseAPound() {
+        guard let goalWeight = Int(goalWeightInLbs) else { return }
+        let miles = 4
+        
+        caloriesToSustainGoalWeight = goalWeight * 15
+
+
+        let runnersCalorieBonus = miles * 100
+        let caloriesRequiredPerDay = caloriesToSustainGoalWeight + runnersCalorieBonus
+
+        //how to calculate?
+        calorieDeficetPerDay = 3500/daysToLoseAPound
+        print("calorie deficet is \(calorieDeficetPerDay)")
+        caloriesToEatPerDay = caloriesRequiredPerDay - calorieDeficetPerDay
+        
+        
         
     }
 }

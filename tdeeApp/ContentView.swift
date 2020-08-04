@@ -23,13 +23,18 @@ struct ContentView: View {
         ScrollView {
         VStack {
             
-                
-                Image("runningFig").resizable()
-            .frame(width: 100.0, height: 100.0)
-            .clipShape(Circle())
-            .shadow(radius: 10)
-            .overlay(Circle().stroke(Color.red, lineWidth: 5))
-        
+            ZStack {
+            Image("fixx").resizable()
+            .frame(width: 200.0, height: 250.0)
+            .cornerRadius(25)
+                if userSettings.goalWeightSet {
+                    VStack {
+                        Text("\(userSettings.goalWeightInLbs)").font(.largeTitle).foregroundColor(.white)
+                        Text("goal weight").font(.caption).foregroundColor(.white)
+                    }
+                }
+            }
+            
             
             
             if userSettings.goalWeightSet {
@@ -51,8 +56,8 @@ struct ContentView: View {
                     Text("days")
                 }
                 Text("Adjust days to lose a pound:")
-                Slider(value: $userSettings.selectedDayValue, in: 1...365,step: 1,onEditingChanged: { data in
-                    self.userSettings.getCurrentCaloriesInAndDaysToLoseAPound()
+                Slider(value: $userSettings.selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
+                    self.userSettings.updateCaloriesForDaysToLoseAPound()
                 }).padding(12)
                 
             } else {
