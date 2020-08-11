@@ -36,6 +36,7 @@ class UserSettings: ObservableObject {
     
     
     func getCurrentCaloriesInAndDaysToLoseAPound() {
+        self.goalWeightSet = true
         guard let goalWeight = Int(goalWeightInLbs) else { return }
         let miles = 4
         

@@ -10,7 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var userSettings = UserSettings()
+    @EnvironmentObject var settings: UserSettings
+    
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -19,60 +20,40 @@ struct ContentView: View {
     }
     
     var body: some View {
+        NavigationView {
         
-        ScrollView {
-        VStack {
-            
-            ZStack {
-            Image("fixx").resizable()
-            .frame(width: 200.0, height: 250.0)
-            .cornerRadius(25)
-                if userSettings.goalWeightSet {
-                    VStack {
-                        Text("\(userSettings.goalWeightInLbs)").font(.largeTitle).foregroundColor(.white)
-                        Text("goal weight").font(.caption).foregroundColor(.white)
+            ScrollView {
+            VStack {
+                
+               
+                
+                ZStack {
+                Image("fixx").resizable()
+                .frame(width: 200.0, height: 250.0)
+                .cornerRadius(25)
+                    if settings.goalWeightInLbs != "" {
+                        VStack {
+                            Text("\(settings.goalWeightInLbs)").font(.largeTitle).foregroundColor(.white)
+                            Text("goal weight").font(.caption).foregroundColor(.white)
+                            
+                        }
                     }
                 }
-            }
-            
-            
-            
-            if userSettings.goalWeightSet {
                 
-                VStack {
-                    Text("You currently run an average of")
-                    Text("\(userSettings.milesRunPerDay)").font(.largeTitle).foregroundColor(.red)
-                    Text("miles per day")
-                }
-                Spacer()
-                Text("Your current TDEE is")
-                Text("\(userSettings.caloriesToSustainGoalWeight)").font(.largeTitle).foregroundColor(.red)
-                Spacer()
-                Text("This means you should eat")
-                Text(String(userSettings.caloriesToEatPerDay)).font(.largeTitle).foregroundColor(.red)
-                HStack {
-                    Text(" calories to lose a pound every")
-                    Text("\(userSettings.daysToLoseAPound)").font(.largeTitle).foregroundColor(.red)
-                    Text("days")
-                }
-                Text("Adjust days to lose a pound:")
-                Slider(value: $userSettings.selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
-                    self.userSettings.updateCaloriesForDaysToLoseAPound()
-                }).padding(12)
+                TextField("Enter your goal weight in lbs", text: $settings.goalWeightInLbs).padding(12)
                 
-            } else {
-                TextField("Enter your goal weight in lbs", text: $userSettings.goalWeightInLbs).padding(12)
-                Button(action: {
-                    self.userSettings.getCurrentCaloriesInAndDaysToLoseAPound()
-                    self.userSettings.goalWeightSet = true
+                NavigationLink(destination: ResultsView().onAppear {
+                               
+                    self.settings.getCurrentCaloriesInAndDaysToLoseAPound()
+
                 }) {
-                    Text("Calculate your TDEE")
+                  Text("Calculate Your Bonus")
                 }
-            }
-            
-            
-            }
+                
+                }
+            }.navigationBarTitle("Runner's Bonus")
         }
+        
     }
     
 }
@@ -82,3 +63,41 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+struct ResultsView: View {
+    
+    @EnvironmentObject var settings: UserSettings
+    var body: some View {
+        
+        
+        
+        VStack {
+            VStack {
+                Text("You currently run an average of")
+                Text("\(settings.milesRunPerDay)").font(.largeTitle).foregroundColor(.red)
+                Text("miles per day")
+            }
+            Spacer()
+            Text("Your current TDEE is")
+            Text("\(settings.caloriesToSustainGoalWeight)").font(.largeTitle).foregroundColor(.red)
+            Spacer()
+            Text("This means you should eat")
+            Text(String(settings.caloriesToEatPerDay)).font(.largeTitle).foregroundColor(.red)
+            HStack {
+                Text(" calories to lose a pound every")
+                Text("\(settings.daysToLoseAPound)").font(.largeTitle).foregroundColor(.red)
+                Text("days")
+            }
+            Text("Adjust days to lose a pound:")
+            Slider(value: $settings.selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
+                self.settings.updateCaloriesForDaysToLoseAPound()
+            }).padding(12)
+        }
+          
+    }
+}
+
+    
+
+    
