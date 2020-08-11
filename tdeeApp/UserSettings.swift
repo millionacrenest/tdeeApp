@@ -22,6 +22,7 @@ class UserSettings: ObservableObject {
     @Published var milesRunPerDay: String = "4"
     @Published var daysToLoseAPound: Int = 0
     @Published var goalWeightSet: Bool = false
+    @Published var runnersBonus: String = ""
     @Published var selectedDayValue: Double = 0 {
         didSet {
             let intValue = Int(selectedDayValue)
@@ -33,6 +34,7 @@ class UserSettings: ObservableObject {
             print("calorieDeficetPerDay \(calorieDeficetPerDay)")
         }
     }
+    @Published var progressItems = [Progress]()
     
     
     func getCurrentCaloriesInAndDaysToLoseAPound() {
@@ -44,6 +46,7 @@ class UserSettings: ObservableObject {
 
 
         let runnersCalorieBonus = miles * 100
+        runnersBonus = "\(runnersCalorieBonus)"
         let caloriesRequiredPerDay = caloriesToSustainGoalWeight + runnersCalorieBonus
 
         caloriesToEatPerDay = caloriesToSustainGoalWeight - (runnersCalorieBonus/2)
