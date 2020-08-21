@@ -35,7 +35,7 @@ struct ContentView: View {
                     }
                     TextField("Enter your goal weight in lbs", text: $settings.goalWeightInLbs).padding(12).multilineTextAlignment(.center).textFieldStyle(RoundedBorderTextFieldStyle())
                     
-            NavigationLink(destination: ResultsView().onAppear {
+                    NavigationLink(destination: ResultsView().onAppear {
                                    
                         self.settings.getCurrentCaloriesInAndDaysToLoseAPound()
 
