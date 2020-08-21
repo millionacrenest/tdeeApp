@@ -11,14 +11,7 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var settings: UserSettings
-    @State var progessButtonTapped = false
     
-    
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        return formatter
-    }
     
     var body: some View {
         NavigationView {
@@ -26,7 +19,6 @@ struct ContentView: View {
             ScrollView {
             VStack {
                 
-                if progessButtonTapped == false {
                     Text("The Runner's Bonus helps you calculate how many calories you should eat daily to reach your weightloss goal.").multilineTextAlignment(.leading).padding(12)
                     Spacer()
                     ZStack {
@@ -41,16 +33,16 @@ struct ContentView: View {
                             }
                         }
                     }
-                        TextField("Enter your goal weight in lbs", text: $settings.goalWeightInLbs).padding(12).multilineTextAlignment(.center).textFieldStyle(RoundedBorderTextFieldStyle())
-                        
-                        NavigationLink(destination: ResultsView().onAppear {
-                                       
-                            self.settings.getCurrentCaloriesInAndDaysToLoseAPound()
+                    TextField("Enter your goal weight in lbs", text: $settings.goalWeightInLbs).padding(12).multilineTextAlignment(.center).textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+            NavigationLink(destination: ResultsView().onAppear {
+                                   
+                        self.settings.getCurrentCaloriesInAndDaysToLoseAPound()
 
-                        }) {
-                          Text("Calculate Your Bonus")
-                        }
+                    }) {
+                      Text("Calculate Your Bonus")
                     }
+                    
                 
                 }
                 
@@ -71,102 +63,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-
-struct ResultsView: View {
-    
-    @EnvironmentObject var settings: UserSettings
-    var body: some View {
-        
-        
-        
-            VStack {
-                VStack {
-                    Text("You currently run an average of")
-                    Text("\(settings.milesRunPerDay)").font(.largeTitle).foregroundColor(.red)
-                    Text("miles per day")
-                }
-                Text("Your current Runner's Bonus is")
-                Text("\(settings.runnersBonus)").font(.largeTitle).foregroundColor(.red)
-               
-                Text("This means you should eat")
-                Text(String(settings.caloriesToEatPerDay)).font(.largeTitle).foregroundColor(.red)
-                HStack {
-                    Text(" calories to lose a pound every")
-                    Text("\(settings.daysToLoseAPound)").font(.largeTitle).foregroundColor(.red)
-                    Text("days")
-                }
-                Text("Adjust days to lose a pound:")
-                Slider(value: $settings.selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
-                    self.settings.updateCaloriesForDaysToLoseAPound()
-                }).padding(12)
-                
-            }
-        
-    }
-}
-
-
-struct ProgressView: View {
-
-    @EnvironmentObject var settings: UserSettings
-    
-    @State var addWeight: String = ""
-    
-    
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        return formatter
-    }
-
-    @State private var weighInDate = Date()
-    
-    var body: some View {
-            VStack {
-                
-                //add items to the weightloss array
-                
-                VStack {
-                    TextField("Record today's weight", text: self.$addWeight).multilineTextAlignment(.center).textFieldStyle(RoundedBorderTextFieldStyle()).padding(12)
-                    if addWeight != "" {
-                        DatePicker(selection: $weighInDate, in: ...Date(), displayedComponents: .date) {
-                            Text("")
-                        }.labelsHidden()
-                    }
-                    
-                }
-                Button(action: {
-                    self.settings.progressItems.append(Progress(id: UUID(), weight: self.addWeight, date: self.weighInDate))
-                                         self.addWeight = ""
-                    
-                    
-                                     }, label: {
-                                         Text("Add")
-                                     })
-                
-                List(self.settings.progressItems, rowContent: ProgressRow.init)
-            }
-    }
-
-}
-
-struct Progress: Identifiable {
-    var id = UUID()
-    var weight: String
-    var date: Date
-}
-
-struct ProgressRow: View {
-    var progress: Progress
-
-    var body: some View {
-        VStack {
-            Text("Recorded weight \(progress.weight)").multilineTextAlignment(.leading).foregroundColor(.black)
-            Text("On \(progress.date)").font(.caption).foregroundColor(.gray)
-        }.padding(12)
-    }
-}
-    
-
-    

@@ -6,43 +6,33 @@
 //  Copyright © 2020 Deloitte Digital. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
-import Combine
-
 
 class UserSettings: ObservableObject {
     
-    @Published var firstName: String = ""
     @Published var startingWeightInLbs: String = ""
     @Published var goalWeightInLbs: String = ""
-    @Published var profileImage: UIImage?
-    @Published var caloriesToSustainGoalWeight: Int = 0
-    @Published var caloriesToEatPerDay: Int = 0
-    @Published var milesRunPerDay: String = "4"
-    @Published var daysToLoseAPound: Int = 0
+    @Published var caloriesToSustainGoalWeight: Double = 0
+    @Published var caloriesToEatPerDay: Double = 0
+    @Published var milesRunPerDay: String = "4.45"
+    @Published var daysToLoseAPound: Double = 0
     @Published var goalWeightSet: Bool = false
     @Published var runnersBonus: String = ""
+    @Published var calorieDeficetPerDay: Double = 0
     @Published var selectedDayValue: Double = 0 {
         didSet {
             let intValue = Int(selectedDayValue)
-            daysToLoseAPound = intValue
+            daysToLoseAPound = Double(intValue)
         }
     }
-    @Published var calorieDeficetPerDay: Int = 0 {
-        didSet {
-            print("calorieDeficetPerDay \(calorieDeficetPerDay)")
-        }
-    }
-    @Published var progressItems = [Progress]()
     
     
     func getCurrentCaloriesInAndDaysToLoseAPound() {
         self.goalWeightSet = true
         guard let goalWeight = Int(goalWeightInLbs) else { return }
-        let miles = 4
+        let miles = 4.45
         
-        caloriesToSustainGoalWeight = goalWeight * 15
+        caloriesToSustainGoalWeight = Double(goalWeight * 15)
 
 
         let runnersCalorieBonus = miles * 100
@@ -61,9 +51,9 @@ class UserSettings: ObservableObject {
     
     func updateCaloriesForDaysToLoseAPound() {
         guard let goalWeight = Int(goalWeightInLbs) else { return }
-        let miles = 4
+        let miles = 4.45
         
-        caloriesToSustainGoalWeight = goalWeight * 15
+        caloriesToSustainGoalWeight = Double(goalWeight * 15)
 
 
         let runnersCalorieBonus = miles * 100
