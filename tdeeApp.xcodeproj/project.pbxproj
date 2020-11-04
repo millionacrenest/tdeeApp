@@ -13,6 +13,8 @@
 		F318094624F00EC800199AA3 /* ProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094524F00EC800199AA3 /* ProgressRow.swift */; };
 		F318094824F00F4500199AA3 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094724F00F4500199AA3 /* ProgressView.swift */; };
 		F318094B24F00FE100199AA3 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094A24F00FE100199AA3 /* ResultsView.swift */; };
+		F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC68255317E30002AA8C /* User+CoreDataClass.swift */; };
+		F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */; };
 		F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC624D79B7100075619 /* AppDelegate.swift */; };
 		F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC824D79B7100075619 /* SceneDelegate.swift */; };
 		F383EACC24D79B7100075619 /* tdeeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */; };
@@ -49,6 +51,8 @@
 		F318094524F00EC800199AA3 /* ProgressRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRow.swift; sourceTree = "<group>"; };
 		F318094724F00F4500199AA3 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		F318094A24F00FE100199AA3 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		F332DC68255317E30002AA8C /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F383EAC324D79B7100075619 /* tdeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tdeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F383EAC624D79B7100075619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F383EAC824D79B7100075619 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 		F318093C24F00B9A00199AA3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F332DC68255317E30002AA8C /* User+CoreDataClass.swift */,
+				F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */,
 				F383EAF924D79DA900075619 /* UserSettings.swift */,
 				F318093824F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift */,
 				F318093924F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift */,
@@ -309,6 +315,7 @@
 			files = (
 				F383EACC24D79B7100075619 /* tdeeApp.xcdatamodeld in Sources */,
 				F318094024F00D1300199AA3 /* ProgressList.swift in Sources */,
+				F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */,
 				F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */,
 				F383EACE24D79B7100075619 /* ContentView.swift in Sources */,
 				F318093B24F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift in Sources */,
@@ -316,6 +323,7 @@
 				F318094624F00EC800199AA3 /* ProgressRow.swift in Sources */,
 				F383EAFA24D79DA900075619 /* UserSettings.swift in Sources */,
 				F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */,
+				F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */,
 				F318093A24F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift in Sources */,
 				F318094824F00F4500199AA3 /* ProgressView.swift in Sources */,
 			);

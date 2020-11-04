@@ -20,5 +20,5 @@ extension ProgressEntity: Identifiable {
     @NSManaged public var date: Date?
     @NSManaged public var id: UUID?
     @NSManaged public var pounds: String?
-
+    @NSManaged public var goalWeightDifference: String?
 }
