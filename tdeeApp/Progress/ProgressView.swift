@@ -19,9 +19,9 @@ struct ProgressView: View {
     }
     
     var body: some View {
-        VStack(alignment: .center) {
-            
-            TextField("Record your progress:", text: $currentWeight).padding(12)
+        VStack {
+            Text("Record your progress:")
+            TextField("Enter current weight:", text: $currentWeight).padding(12).textFieldStyle(RoundedBorderTextFieldStyle())
             Button(action: {
                 self.saveToCoreData()
             }) {

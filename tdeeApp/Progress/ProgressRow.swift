@@ -15,7 +15,11 @@ struct ProgressRow: View {
     var body: some View {
         HStack() {
             Text("\(progressItem.pounds ?? "") pounds on")
-            Text("\(progressItem.date!.description)")
+            if #available(iOS 14.0, *) {
+                Text(progressItem.date?.addingTimeInterval(600) ?? Date(), style: .date)
+            } else {
+                Text(progressItem.date?.description ?? "today")
+            }
         }
     }
 }
