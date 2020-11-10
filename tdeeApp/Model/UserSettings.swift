@@ -17,7 +17,7 @@ class UserSettings: ObservableObject {
     @Published var milesRunPerDay: String = "4.45"
     @Published var daysToLoseAPound: Double = 0
     @Published var goalWeightSet: Bool = false
-    @Published var runnersBonus: String = ""
+    @Published var runnersBonus: String = "445"
     @Published var calorieDeficetPerDay: Double = 0
     @Published var selectedDayValue: Double = 0 {
         didSet {

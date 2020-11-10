@@ -38,6 +38,8 @@ struct ResultsView: View {
                 self.settings.updateCaloriesForDaysToLoseAPound()
             }).padding(12)
             
+        }.onAppear {
+            self.settings.getCurrentCaloriesInAndDaysToLoseAPound()
         }
         
     }

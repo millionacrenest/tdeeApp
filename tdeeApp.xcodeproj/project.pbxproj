@@ -15,6 +15,9 @@
 		F318094B24F00FE100199AA3 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094A24F00FE100199AA3 /* ResultsView.swift */; };
 		F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC68255317E30002AA8C /* User+CoreDataClass.swift */; };
 		F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */; };
+		F34E06BE255AFCC500A1E60B /* RunsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06BD255AFCC500A1E60B /* RunsView.swift */; };
+		F34E06C7255AFD0000A1E60B /* ShoesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06C6255AFD0000A1E60B /* ShoesView.swift */; };
+		F34E06E2255B13A300A1E60B /* Color+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06E1255B13A300A1E60B /* Color+extensions.swift */; };
 		F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC624D79B7100075619 /* AppDelegate.swift */; };
 		F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC824D79B7100075619 /* SceneDelegate.swift */; };
 		F383EACC24D79B7100075619 /* tdeeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */; };
@@ -27,6 +30,7 @@
 		F383EAFA24D79DA900075619 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAF924D79DA900075619 /* UserSettings.swift */; };
 		F3C821C42559BE04007D4207 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C821C32559BE04007D4207 /* HealthKit.framework */; };
 		F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */; };
+		F3C821E42559E605007D4207 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821E32559E605007D4207 /* AppView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,9 @@
 		F318094A24F00FE100199AA3 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		F332DC68255317E30002AA8C /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F34E06BD255AFCC500A1E60B /* RunsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunsView.swift; sourceTree = "<group>"; };
+		F34E06C6255AFD0000A1E60B /* ShoesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoesView.swift; sourceTree = "<group>"; };
+		F34E06E1255B13A300A1E60B /* Color+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extensions.swift"; sourceTree = "<group>"; };
 		F383EAC324D79B7100075619 /* tdeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tdeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F383EAC624D79B7100075619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F383EAC824D79B7100075619 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +81,7 @@
 		F3C821C12559BE04007D4207 /* tdeeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tdeeApp.entitlements; sourceTree = "<group>"; };
 		F3C821C32559BE04007D4207 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
+		F3C821E32559E605007D4207 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +132,37 @@
 			path = Progress;
 			sourceTree = "<group>";
 		};
+		F34E06C2255AFCD300A1E60B /* Runs */ = {
+			isa = PBXGroup;
+			children = (
+				F34E06BD255AFCC500A1E60B /* RunsView.swift */,
+			);
+			path = Runs;
+			sourceTree = "<group>";
+		};
+		F34E06CE255AFD0600A1E60B /* Shoes */ = {
+			isa = PBXGroup;
+			children = (
+				F34E06C6255AFD0000A1E60B /* ShoesView.swift */,
+			);
+			path = Shoes;
+			sourceTree = "<group>";
+		};
+		F34E06DA255B116000A1E60B /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ReusableViews;
+			sourceTree = "<group>";
+		};
+		F34E06E6255B13F900A1E60B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F34E06E1255B13A300A1E60B /* Color+extensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		F383EABA24D79B7100075619 = {
 			isa = PBXGroup;
 			children = (
@@ -154,13 +193,18 @@
 				F383EAC824D79B7100075619 /* SceneDelegate.swift */,
 				F383EACD24D79B7100075619 /* ContentView.swift */,
 				F318094A24F00FE100199AA3 /* ResultsView.swift */,
+				F34E06DA255B116000A1E60B /* ReusableViews */,
+				F34E06C2255AFCD300A1E60B /* Runs */,
 				F318094924F00F8500199AA3 /* Progress */,
+				F34E06CE255AFD0600A1E60B /* Shoes */,
 				F383EACF24D79B7400075619 /* Assets.xcassets */,
 				F383EAD424D79B7400075619 /* LaunchScreen.storyboard */,
 				F383EAD724D79B7400075619 /* Info.plist */,
 				F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */,
 				F383EAD124D79B7400075619 /* Preview Content */,
 				F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */,
+				F3C821E32559E605007D4207 /* AppView.swift */,
+				F34E06E6255B13F900A1E60B /* Utilities */,
 			);
 			path = tdeeApp;
 			sourceTree = "<group>";
@@ -338,11 +382,15 @@
 				F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */,
 				F318093B24F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift in Sources */,
 				F318094B24F00FE100199AA3 /* ResultsView.swift in Sources */,
+				F3C821E42559E605007D4207 /* AppView.swift in Sources */,
 				F318094624F00EC800199AA3 /* ProgressRow.swift in Sources */,
+				F34E06C7255AFD0000A1E60B /* ShoesView.swift in Sources */,
 				F383EAFA24D79DA900075619 /* UserSettings.swift in Sources */,
 				F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */,
+				F34E06BE255AFCC500A1E60B /* RunsView.swift in Sources */,
 				F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */,
 				F318093A24F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift in Sources */,
+				F34E06E2255B13A300A1E60B /* Color+extensions.swift in Sources */,
 				F318094824F00F4500199AA3 /* ProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +562,7 @@
 				DEVELOPMENT_TEAM = V243T33UAS;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tdeeApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -535,6 +584,7 @@
 				DEVELOPMENT_TEAM = V243T33UAS;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tdeeApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
