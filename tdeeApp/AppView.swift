@@ -12,7 +12,7 @@ struct AppView: View {
     var body: some View {
        
         TabView {
-            ContentView()
+            ProfileView()
                 .tabItem {
                     Image(systemName: "person.circle")
                     Text("Profile")

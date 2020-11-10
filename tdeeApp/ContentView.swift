@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ProfileView.swift
 //  tdeeApp
 //
 //  Created by McEntire, Allison on 8/2/20.
@@ -9,13 +9,18 @@
 import SwiftUI
 import HealthKit
 
-struct ContentView: View {
+struct ProfileView: View {
     
     @EnvironmentObject var settings: UserSettings
     @State private var currentBMI = "no BMI data"
     @State private var currentWeight = "no Weight data"
     @State private var miles = "0"
-    @State private var runnersBonus = "0"
+    @State private var runnersBonus: String? {
+        didSet {
+            getCurrentCaloriesInAndDaysToLoseAPound()
+        }
+    }
+    @State private var daysToLoseAPound = "0"
     
     let healthStore = HKHealthStore()
     
@@ -43,15 +48,17 @@ struct ContentView: View {
                 VStack {
                     Text("This means your Runner's Bonus is")
                     HStack {
-                        Text(runnersBonus).bold()
+                        Text(runnersBonus ?? "").bold()
                         Text("extra calories per day!")
                     }
+                    Text("You'll lose a pound every \(daysToLoseAPound) days")
                 }
                 Spacer()
             }.onAppear {
                 getBMI()
                 getWeight()
                 getRunningWorkouts()
+                
             }
         }
         
@@ -161,12 +168,34 @@ struct ContentView: View {
         healthStore.execute(sampleQuery)
         
     }
+    
+    func getCurrentCaloriesInAndDaysToLoseAPound() {
+        
+        let miles = Double(self.miles)
+        let goalWeight = 126
+        let bonus = Double(runnersBonus ?? "") ?? 0
+        
+        let caloriesToSustainGoalWeight = Double(goalWeight * 15)
+        
+
+        let caloriesRequiredPerDay = caloriesToSustainGoalWeight + bonus
+
+        let caloriesToEatPerDay = caloriesToSustainGoalWeight - (bonus/2)
+
+        let calorieDeficetPerDay = caloriesRequiredPerDay - caloriesToEatPerDay
+        
+        let daysToLoseAPound = 3500/calorieDeficetPerDay
+        self.daysToLoseAPound = String(format: "%.0f", daysToLoseAPound)
+        //selectedDayValue = Double(daysToLoseAPound)
+        
+        
+    }
 
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ProfileView()
     }
 }
 
