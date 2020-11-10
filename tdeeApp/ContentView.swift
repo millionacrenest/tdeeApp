@@ -17,6 +17,8 @@ struct ContentView: View {
     @State private var miles = "0"
     @State private var runnersBonus = "0"
     
+    let healthStore = HKHealthStore()
+    
     var body: some View {
         ZStack {
             VStack {
@@ -49,15 +51,13 @@ struct ContentView: View {
             }.onAppear {
                 getBMI()
                 getWeight()
-                getDistanceWalkingRunning()
+                getRunningWorkouts()
             }
         }
         
     }
     
     func getBMI() {
-        
-        let healthStore = HKHealthStore()
         let bodyMassIndexType = HKObjectType.quantityType(forIdentifier: .bodyMassIndex)
 
         // Use a sortDescriptor to get the recent data first (optional)
@@ -78,8 +78,6 @@ struct ContentView: View {
         )
         // Execute our query
         healthStore.execute(query)
-        
-        
     }
 
     func updateBMIData(query: HKSampleQuery, results: [HKSample]?, error: Error?) {
@@ -92,7 +90,6 @@ struct ContentView: View {
     
     func getWeight() {
         
-        let healthStore = HKHealthStore()
         let bodyMassType = HKObjectType.quantityType(forIdentifier: .bodyMass)
 
         // Use a sortDescriptor to get the recent data first (optional)
@@ -126,37 +123,43 @@ struct ContentView: View {
         
         self.currentWeight = String(weightString.prefix(3))
         
-       
- 
     }
     
-    func getDistanceWalkingRunning() {
-        
-        let healthStore = HKHealthStore()
-        let distanceWalkingRunningType = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)
+    
+    func getRunningWorkouts() {
 
-        // Use a sortDescriptor to get the recent data first (optional)
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        var workouts = [HKWorkout]()
+        let predicate =  HKQuery.predicateForWorkouts(with: HKWorkoutActivityType.running)
+           
+           let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
+           
+           let sampleQuery = HKSampleQuery(sampleType: HKWorkoutType.workoutType(), predicate: predicate, limit: 0, sortDescriptors: [sortDescriptor])
+               { (sampleQuery, results, error ) -> Void in
 
-        // Get all samples from the last 24 hours
-        let endDate = Date()
-        let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 168.0)
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-
-        // Create the HealthKit Query
-        
-        let query = HKStatisticsQuery(quantityType: distanceWalkingRunningType!, quantitySamplePredicate: predicate, options: [.cumulativeSum]) { (query, statistics, error) in
+                   if let queryError = error {
+                       print( "There was an error while reading the samples: \(queryError.localizedDescription)")
+                   }
             
-
-            if error != nil {
-                print("something went wrong")
-            } else if let quantity = statistics?.sumQuantity() {
-                self.miles = "\(quantity.doubleValue(for: HKUnit.mile())/7)"
-                let runnersBonus = (quantity.doubleValue(for: HKUnit.mile())/7) * 100
-                self.runnersBonus = String(format: "%.0f", runnersBonus)
+            let endDate = Date()
+            let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 168.0)
+            var miles = [Double]()
+            
+            workouts = results as! [HKWorkout]
+            for workout in workouts.prefix(7) {
+                if workout.endDate > startDate {
+                    miles.append(workout.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
+                }
             }
-        }
-        healthStore.execute(query)
+            
+            let averageOfMiles = miles.reduce(0, +)
+            self.miles = String(averageOfMiles/7)
+            let runnersBonus = (averageOfMiles/7) * 100
+            self.runnersBonus = String(format: "%.0f", runnersBonus)
+            
+           }
+        
+        healthStore.execute(sampleQuery)
+        
     }
 
 }
