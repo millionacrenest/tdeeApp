@@ -12,10 +12,11 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    private var healthKitIsAuthorized = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
               
           guard authorized else {
@@ -27,14 +28,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
               print(baseMessage)
             }
-                
+            self.healthKitIsAuthorized = authorized
             return
           }
-              
           print("HealthKit Successfully Authorized.")
         }
-        return true
+       
+        return healthKitIsAuthorized
     }
+    
+    
+        
+    
 
     // MARK: UISceneSession Lifecycle
 

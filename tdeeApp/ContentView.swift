@@ -11,6 +11,7 @@ import HealthKit
 
 struct ProfileView: View {
     
+    
     @EnvironmentObject var settings: UserSettings
     @State private var currentBMI = "no BMI data"
     @State private var currentWeight = "no Weight data"
@@ -55,9 +56,9 @@ struct ProfileView: View {
                 }
                 Spacer()
             }.onAppear {
-                getBMI()
-                getWeight()
-                getRunningWorkouts()
+                    getBMI()
+                    getWeight()
+                    getRunningWorkouts()
                 
             }
         }
