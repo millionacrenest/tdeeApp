@@ -22,8 +22,16 @@ struct ProfileView: View {
         }
     }
     @State private var daysToLoseAPound = "0"
+    @State private var healthKitIsAuthorized: Bool = false {
+        didSet {
+            getBMI()
+            getWeight()
+            getRunningWorkouts()
+        }
+    }
     
     let healthStore = HKHealthStore()
+    
     
     var body: some View {
         ZStack {
@@ -56,13 +64,37 @@ struct ProfileView: View {
                 }
                 Spacer()
             }.onAppear {
+                if healthKitIsAuthorized {
                     getBMI()
                     getWeight()
                     getRunningWorkouts()
+                } else {
+                    getHealthKitAuth()
+                }
                 
             }
         }
         
+    }
+    
+    func getHealthKitAuth() {
+        HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
+              
+          guard authorized else {
+                
+            let baseMessage = "HealthKit Authorization Failed"
+                
+            if let error = error {
+              print("\(baseMessage). Reason: \(error.localizedDescription)")
+            } else {
+              print(baseMessage)
+            }
+            
+            return
+          }
+          healthKitIsAuthorized = true
+          print("HealthKit Successfully Authorized.")
+        }
     }
     
     func getBMI() {
@@ -73,7 +105,7 @@ struct ProfileView: View {
 
         // Get all samples from the last 24 hours
         let endDate = Date()
-        let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
+        let startDate = Date(timeIntervalSince1970: 0)
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
 
         // Create the HealthKit Query
@@ -105,7 +137,7 @@ struct ProfileView: View {
 
         // Get all samples from the last 24 hours
         let endDate = Date()
-        let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 24.0)
+        let startDate = Date(timeIntervalSince1970: 0)
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
 
         // Create the HealthKit Query

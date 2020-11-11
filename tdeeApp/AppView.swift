@@ -10,6 +10,14 @@ import SwiftUI
 
 struct AppView: View {
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.userID, ascending: true)
+        ]
+    ) var userAccount: FetchedResults<User>
+    
     var body: some View {
         
         ZStack {
@@ -36,11 +44,25 @@ struct AppView: View {
                     }
                 }
                 
+        }.onAppear {
+            if (userAccount.first == nil) {
+                let userAccount = User(context: managedObjectContext)
+                userAccount.userID = UUID()
+                if managedObjectContext.hasChanges {
+                    do {
+                        try managedObjectContext.save()
+                    } catch {
+                        // Show the error here
+                    }
+                }
             }
-            
         }
+    }
+    
     
 }
+    
+
 
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {

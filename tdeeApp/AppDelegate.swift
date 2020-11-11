@@ -12,29 +12,11 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private var healthKitIsAuthorized = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
-              
-          guard authorized else {
-                
-            let baseMessage = "HealthKit Authorization Failed"
-                
-            if let error = error {
-              print("\(baseMessage). Reason: \(error.localizedDescription)")
-            } else {
-              print(baseMessage)
-            }
-            self.healthKitIsAuthorized = authorized
-            return
-          }
-          print("HealthKit Successfully Authorized.")
-        }
-       
-        return healthKitIsAuthorized
+        return true
     }
     
     
