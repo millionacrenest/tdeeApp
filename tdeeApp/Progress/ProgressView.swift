@@ -12,6 +12,12 @@ struct ProgressView: View {
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settings: UserSettings
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.userID, ascending: true)
+        ]
+    ) var userAccount: FetchedResults<User>
     
     @State var showingDetail = false
     
@@ -23,8 +29,8 @@ struct ProgressView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
                 VStack {
+                    
                     Text("Record your progress:")
                     
                     TextField("Enter current weight in lbs", text: $currentWeight).padding(12).textFieldStyle(RoundedBorderTextFieldStyle())
@@ -35,7 +41,7 @@ struct ProgressView: View {
                     }
                     ProgressList()
                 }
-            }.navigationTitle("Progress")
+            .navigationTitle("Progress")
             .navigationBarItems(trailing:
                 Button(action: {
                     self.showingDetail.toggle()
@@ -51,8 +57,7 @@ struct ProgressView: View {
     
     func saveToCoreData() {
         let newProgressItem = ProgressEntity(context: managedObjectContext)
-        let currentWeightInt = Int(currentWeight) ?? 0
-        let goalWeightInt = Int(settings.goalWeightInLbs) ?? 0
+        if let currentWeightInt = Int(userAccount.first?.currentWeight ?? "0") ?? 0, let goalWeightInt = Int(userAccount.first?.goalWeight ?? "0") ?? 0 {
         let goalWeightDifference = currentWeightInt - goalWeightInt
         
         
@@ -60,11 +65,12 @@ struct ProgressView: View {
         newProgressItem.pounds = currentWeight
         newProgressItem.goalWeightDifference = String(goalWeightDifference)
         newProgressItem.id = UUID()
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Show the error here
+            if managedObjectContext.hasChanges {
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    // Show the error here
+                }
             }
         }
     }

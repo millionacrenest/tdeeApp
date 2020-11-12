@@ -15,8 +15,11 @@ struct ProgressList: View {
     ) var progressItems: FetchedResults<ProgressEntity>
     
     var body: some View {
+        
         List(self.progressItems, rowContent: ProgressRow.init)
+        
     }
+    
 }
 
 struct ProgressList_Previews: PreviewProvider {

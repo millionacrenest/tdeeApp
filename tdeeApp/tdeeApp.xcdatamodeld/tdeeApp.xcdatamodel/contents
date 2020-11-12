@@ -7,6 +7,7 @@
         <attribute name="pounds" optional="YES" attributeType="String"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="currentWeight" optional="YES" attributeType="String"/>
         <attribute name="dateMilesLastSet" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goalWeight" optional="YES" attributeType="String"/>
         <attribute name="shoeMaxMiles" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -14,6 +15,6 @@
     </entity>
     <elements>
         <element name="ProgressEntity" positionX="-27" positionY="18" width="128" height="89"/>
-        <element name="User" positionX="-27" positionY="45" width="128" height="89"/>
+        <element name="User" positionX="-27" positionY="45" width="128" height="104"/>
     </elements>
 </model>

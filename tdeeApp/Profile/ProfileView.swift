@@ -15,7 +15,11 @@ struct ProfileView: View {
     
     @EnvironmentObject var settings: UserSettings
     @State private var currentBMI = "no BMI data"
-    @State private var currentWeight = "no Weight data"
+    @State private var currentWeight = "no Weight data" {
+        didSet {
+            saveToCoreData()
+        }
+    }
     @State private var miles = "0"
     @State private var runnersBonus: String? {
         didSet {
@@ -30,6 +34,14 @@ struct ProfileView: View {
             getRunningWorkouts()
         }
     }
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.userID, ascending: true)
+        ]
+    ) var userAccount: FetchedResults<User>
     
     let healthStore = HKHealthStore()
     
@@ -175,6 +187,7 @@ struct ProfileView: View {
         
         self.currentWeight = String(weightString.prefix(3))
         
+        
     }
     
     
@@ -234,6 +247,20 @@ struct ProfileView: View {
         //selectedDayValue = Double(daysToLoseAPound)
         
         
+    }
+    
+    func saveToCoreData() {
+        let userSettings = User(context: managedObjectContext)
+        
+        
+        userSettings.currentWeight = currentWeight
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
+        }
     }
 
 }
