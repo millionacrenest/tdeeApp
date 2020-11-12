@@ -14,22 +14,20 @@ struct RunsView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    Text("Coming Soon").bold()
-                    Text("~ List of Running Workouts Imported from WatchKit ~")
-                }
+            VStack {
+                RunsList()
             }.navigationTitle("Recorded Runs")
-            .navigationBarItems(trailing:
-                Button(action: {
-                    self.showingDetail.toggle()
-                }) {
-                    Image(systemName: "gear").imageScale(.large)
-                }.sheet(isPresented: $showingDetail) {
-                    SettingsView()
-                })
+        .navigationBarItems(trailing:
+            Button(action: {
+                self.showingDetail.toggle()
+            }) {
+                Image(systemName: "gear").imageScale(.large)
+            }.sheet(isPresented: $showingDetail) {
+                SettingsView()
+            })
         }
     }
+    
 }
 
 struct RunsView_Previews: PreviewProvider {

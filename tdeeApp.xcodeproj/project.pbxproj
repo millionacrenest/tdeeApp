@@ -12,7 +12,6 @@
 		F318094024F00D1300199AA3 /* ProgressList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318093F24F00D1300199AA3 /* ProgressList.swift */; };
 		F318094624F00EC800199AA3 /* ProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094524F00EC800199AA3 /* ProgressRow.swift */; };
 		F318094824F00F4500199AA3 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094724F00F4500199AA3 /* ProgressView.swift */; };
-		F318094B24F00FE100199AA3 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094A24F00FE100199AA3 /* ResultsView.swift */; };
 		F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC68255317E30002AA8C /* User+CoreDataClass.swift */; };
 		F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */; };
 		F34E06BE255AFCC500A1E60B /* RunsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06BD255AFCC500A1E60B /* RunsView.swift */; };
@@ -21,6 +20,9 @@
 		F34E06EE255B385A00A1E60B /* Date+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06ED255B385A00A1E60B /* Date+extensions.swift */; };
 		F3640954255D9FD100051A48 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3640953255D9FD100051A48 /* SettingsView.swift */; };
 		F364095D255DB27F00051A48 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364095C255DB27F00051A48 /* PickerView.swift */; };
+		F364EA3B255DEF1C008AAC25 /* RunsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364EA3A255DEF1C008AAC25 /* RunsList.swift */; };
+		F364EA40255DF0D8008AAC25 /* RunsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364EA3F255DF0D8008AAC25 /* RunsRow.swift */; };
+		F364EA48255DF6A1008AAC25 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364EA47255DF6A1008AAC25 /* ImagePicker.swift */; };
 		F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC624D79B7100075619 /* AppDelegate.swift */; };
 		F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC824D79B7100075619 /* SceneDelegate.swift */; };
 		F383EACC24D79B7100075619 /* tdeeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */; };
@@ -59,7 +61,6 @@
 		F318093F24F00D1300199AA3 /* ProgressList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressList.swift; sourceTree = "<group>"; };
 		F318094524F00EC800199AA3 /* ProgressRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRow.swift; sourceTree = "<group>"; };
 		F318094724F00F4500199AA3 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
-		F318094A24F00FE100199AA3 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		F332DC68255317E30002AA8C /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F34E06BD255AFCC500A1E60B /* RunsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunsView.swift; sourceTree = "<group>"; };
@@ -68,6 +69,9 @@
 		F34E06ED255B385A00A1E60B /* Date+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extensions.swift"; sourceTree = "<group>"; };
 		F3640953255D9FD100051A48 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F364095C255DB27F00051A48 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		F364EA3A255DEF1C008AAC25 /* RunsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunsList.swift; sourceTree = "<group>"; };
+		F364EA3F255DF0D8008AAC25 /* RunsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunsRow.swift; sourceTree = "<group>"; };
+		F364EA47255DF6A1008AAC25 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F383EAC324D79B7100075619 /* tdeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tdeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F383EAC624D79B7100075619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F383EAC824D79B7100075619 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				F34E06BD255AFCC500A1E60B /* RunsView.swift */,
+				F364EA3A255DEF1C008AAC25 /* RunsList.swift */,
+				F364EA3F255DF0D8008AAC25 /* RunsRow.swift */,
 			);
 			path = Runs;
 			sourceTree = "<group>";
@@ -157,8 +163,8 @@
 		F34E06DA255B116000A1E60B /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
-				F318094A24F00FE100199AA3 /* ResultsView.swift */,
 				F364095C255DB27F00051A48 /* PickerView.swift */,
+				F364EA47255DF6A1008AAC25 /* ImagePicker.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -404,16 +410,18 @@
 				F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */,
 				F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */,
 				F383EACE24D79B7100075619 /* ProfileView.swift in Sources */,
+				F364EA3B255DEF1C008AAC25 /* RunsList.swift in Sources */,
 				F364095D255DB27F00051A48 /* PickerView.swift in Sources */,
 				F3640954255D9FD100051A48 /* SettingsView.swift in Sources */,
 				F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */,
 				F318093B24F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift in Sources */,
-				F318094B24F00FE100199AA3 /* ResultsView.swift in Sources */,
 				F3C821E42559E605007D4207 /* AppView.swift in Sources */,
 				F318094624F00EC800199AA3 /* ProgressRow.swift in Sources */,
 				F34E06C7255AFD0000A1E60B /* ShoesView.swift in Sources */,
+				F364EA48255DF6A1008AAC25 /* ImagePicker.swift in Sources */,
 				F34E06EE255B385A00A1E60B /* Date+extensions.swift in Sources */,
 				F383EAFA24D79DA900075619 /* UserSettings.swift in Sources */,
+				F364EA40255DF0D8008AAC25 /* RunsRow.swift in Sources */,
 				F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */,
 				F34E06BE255AFCC500A1E60B /* RunsView.swift in Sources */,
 				F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */,

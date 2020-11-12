@@ -26,6 +26,8 @@
 	<string>App tracks health information to calculate current calorie usage</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>App tracks health information to calculate current calorie usage</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App needs access to camera to record images of shoes</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

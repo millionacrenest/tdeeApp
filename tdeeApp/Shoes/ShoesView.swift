@@ -25,10 +25,42 @@ struct ShoesView: View {
     @State private var milesRemaining: Int16?
     @State var showingDetail = false
     
+    @State private var isShowPhotoLibrary = false
+    @State private var image = UIImage()
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 ZStack {
+                    
+                    VStack {
+
+                                Image(uiImage: self.image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .edgesIgnoringSafeArea(.all)
+
+                                Button(action: {
+                                    self.isShowPhotoLibrary = true
+                                }) {
+                                    HStack {
+                                        Image(systemName: "photo")
+                                            .font(.system(size: 20))
+
+                                        Text("Photo library")
+                                            .font(.headline)
+                                    }
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(20)
+                                    .padding(.horizontal)
+                                }
+                            }.sheet(isPresented: $isShowPhotoLibrary) {
+                                ImagePicker(selectedImage: self.$image, sourceType: .camera)
+                            }
+                    
                     VStack {
                         if userAccount.first?.shoeMaxMiles == 0 || userAccount.first?.shoeMaxMiles == nil {
                             TextEditor(text: $shoeMaxMiles)
@@ -109,6 +141,10 @@ struct ShoesView: View {
         }
     }
     
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//     
+//    }
+    
     func getRunningWorkouts() -> Int16 {
         calculateMilesRemaining()
         var sumOfMiles: Int16 = 0
@@ -146,7 +182,7 @@ struct ShoesView: View {
     
     func calculateMilesRemaining() -> String {
 
-        var milesRemainingString = userAccount.first?.shoeMaxMiles.description ?? ""
+        let milesRemainingString = userAccount.first?.shoeMaxMiles.description ?? ""
         
         return milesRemainingString
     }
