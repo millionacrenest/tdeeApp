@@ -20,6 +20,7 @@ struct ShoesView: View {
         ]
     ) var userAccount: FetchedResults<User>
     @State private var shoeMaxMiles: String = "Enter a maximum mile target for your running shoes:"
+    @State private var milesRemaining: Int16?
     
     var body: some View {
         ZStack {
@@ -40,6 +41,7 @@ struct ShoesView: View {
                         if managedObjectContext.hasChanges {
                             do {
                                 try managedObjectContext.save()
+                                milesRemaining = getRunningWorkouts()
                             } catch {
                                 // Show the error here
                             }
@@ -56,7 +58,9 @@ struct ShoesView: View {
                     }
                 } else {
                     VStack {
+                        Spacer()
                         Text("Your shoe max miles: \(userAccount.first?.shoeMaxMiles ?? 0)").multilineTextAlignment(.leading)
+                        Spacer()
                         Button(action: {
                             userAccount.first?.shoeMaxMiles = 0
                             if managedObjectContext.hasChanges {
@@ -76,16 +80,24 @@ struct ShoesView: View {
                                 .padding([.leading, .trailing])
                             
                         }
+                        Spacer()
+                        Text("New shoes recorded: \(userAccount.first?.dateMilesLastSet ?? Date())")
+                        Spacer()
+                        Text("Your shoes have \(milesRemaining ?? 0) more miles in them.").multilineTextAlignment(.leading)
+                        Spacer()
                     }
                 }
+                
             }
         }.onAppear {
-            getRunningWorkouts()
+            milesRemaining = getRunningWorkouts()
         }
     }
     
-    func getRunningWorkouts() {
-
+    func getRunningWorkouts() -> Int16 {
+        calculateMilesRemaining()
+        var sumOfMiles: Int16 = 0
+        var milesValue: Int16 = Int16(shoeMaxMiles) ?? 0
         var workouts = [HKWorkout]()
         let predicate =  HKQuery.predicateForWorkouts(with: HKWorkoutActivityType.running)
            
@@ -98,26 +110,30 @@ struct ShoesView: View {
                        print( "There was an error while reading the samples: \(queryError.localizedDescription)")
                    }
             
-            let endDate = Date()
-            let startDate = endDate.addingTimeInterval(-1.0 * 60.0 * 60.0 * 168.0)
+            let startDate = userAccount.first?.dateMilesLastSet
             var miles = [Double]()
             
             workouts = results as! [HKWorkout]
             for workout in workouts.prefix(7) {
-                if workout.endDate > startDate {
+                if workout.endDate > startDate ?? Date() {
                     miles.append(workout.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
                 }
             }
             
-            let averageOfMiles = miles.reduce(0, +)
-          //  let milesString = String(averageOfMiles/7)
-            let runnersBonus = (averageOfMiles/7) * 100
-          //  let runnersBonusString = String(format: "%.0f", runnersBonus)
+            sumOfMiles = Int16(miles.reduce(0, +))
             
            }
         
         healthStore.execute(sampleQuery)
+        return userAccount.first?.shoeMaxMiles ?? 0 - sumOfMiles
         
+    }
+    
+    func calculateMilesRemaining() -> String {
+
+        var milesRemainingString = userAccount.first?.shoeMaxMiles.description ?? ""
+        
+        return milesRemainingString
     }
     
     func saveToCoreData() {
@@ -125,6 +141,7 @@ struct ShoesView: View {
         
         
         userSettings.shoeMaxMiles = Int16(shoeMaxMiles) ?? 0
+        userSettings.dateMilesLastSet = Date()
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
