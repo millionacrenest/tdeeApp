@@ -9,10 +9,25 @@
 import SwiftUI
 
 struct RunsView: View {
+    
+    @State var showingDetail = false
+    
     var body: some View {
-        VStack {
-            Text("Coming Soon").bold()
-            Text("~ List of Running Workouts Imported from WatchKit ~")
+        NavigationView {
+            ScrollView {
+                VStack {
+                    Text("Coming Soon").bold()
+                    Text("~ List of Running Workouts Imported from WatchKit ~")
+                }
+            }.navigationTitle("Recorded Runs")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingDetail.toggle()
+                }) {
+                    Image(systemName: "gear").imageScale(.large)
+                }.sheet(isPresented: $showingDetail) {
+                    SettingsView()
+                })
         }
     }
 }

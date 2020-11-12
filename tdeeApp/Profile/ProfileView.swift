@@ -11,6 +11,7 @@ import HealthKit
 
 struct ProfileView: View {
     
+    @State var showingDetail = false
     
     @EnvironmentObject var settings: UserSettings
     @State private var currentBMI = "no BMI data"
@@ -34,45 +35,56 @@ struct ProfileView: View {
     
     
     var body: some View {
-        ZStack {
-            VStack {
-                Spacer()
-                VStack {
-                    Text("Runner's Bonus").bold()
-                    Image("fixx").resizable()
-                        .clipShape(Circle()).frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/2.5)
-                        .shadow(radius: 10)
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 5))
-                    
-                    Text("Current BMI: \(currentBMI)")
-                    Text("Current Weight: \(currentWeight)")
-                }
-                Spacer()
-                Text("You run an average of:")
-                HStack {
-                    Text(miles.prefix(3)).bold()
-                    Text("miles per day")
-                }
-                Spacer()
-                VStack {
-                    Text("This means your Runner's Bonus is")
-                    HStack {
-                        Text(runnersBonus ?? "").bold()
-                        Text("extra calories per day!")
+        NavigationView {
+            ScrollView {
+                ZStack {
+                    VStack {
+                        Spacer()
+                        VStack {
+                            Image("fixx").resizable()
+                                .clipShape(Circle()).frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/2.5)
+                                .shadow(radius: 10)
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 5))
+                            
+                            Text("Current BMI: \(currentBMI)")
+                            Text("Current Weight: \(currentWeight)")
+                        }
+                        Spacer()
+                        Text("You run an average of:")
+                        HStack {
+                            Text(miles.prefix(3)).bold()
+                            Text("miles per day")
+                        }
+                        Spacer()
+                        VStack {
+                            Text("This means your Runner's Bonus is")
+                            HStack {
+                                Text(runnersBonus ?? "").bold()
+                                Text("extra calories per day!")
+                            }
+                            Text("You'll lose a pound every \(daysToLoseAPound) days")
+                        }
+                        Spacer()
+                    }.onAppear {
+                        if healthKitIsAuthorized {
+                            getBMI()
+                            getWeight()
+                            getRunningWorkouts()
+                        } else {
+                            getHealthKitAuth()
+                        }
+                        
                     }
-                    Text("You'll lose a pound every \(daysToLoseAPound) days")
                 }
-                Spacer()
-            }.onAppear {
-                if healthKitIsAuthorized {
-                    getBMI()
-                    getWeight()
-                    getRunningWorkouts()
-                } else {
-                    getHealthKitAuth()
-                }
-                
-            }
+            }.navigationTitle("Runner's Bonus")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingDetail.toggle()
+                }) {
+                    Image(systemName: "gear").imageScale(.large)
+                }.sheet(isPresented: $showingDetail) {
+                    SettingsView()
+                })
         }
         
     }

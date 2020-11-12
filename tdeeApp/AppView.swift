@@ -20,43 +20,46 @@ struct AppView: View {
     
     var body: some View {
         
+        
         ZStack {
-            TabView {
-                ProfileView()
-                    .tabItem {
-                        Image(systemName: "person.circle")
-                        Text("Profile")
+                   
+                TabView {
+                    ProfileView()
+                        .tabItem {
+                            Image(systemName: "person.circle")
+                            Text("Profile")
+                        }
+                    ProgressView()
+                        .tabItem {
+                            Image(systemName: "rosette")
+                            Text("Progress")
+                        }
+                    RunsView()
+                        .tabItem {
+                            Image(systemName: "map")
+                            Text("Runs")
+                        }
+                    ShoesView()
+                        .tabItem {
+                            Image(systemName: "hourglass")
+                            Text("Shoe Life")
+                        }
                     }
-                ProgressView()
-                    .tabItem {
-                        Image(systemName: "rosette")
-                        Text("Progress")
-                    }
-                RunsView()
-                    .tabItem {
-                        Image(systemName: "map")
-                        Text("Runs")
-                    }
-                ShoesView()
-                    .tabItem {
-                        Image(systemName: "hourglass")
-                        Text("Shoe Life")
-                    }
-                }
-                
-        }.onAppear {
-            if (userAccount.first == nil) {
-                let userAccount = User(context: managedObjectContext)
-                userAccount.userID = UUID()
-                if managedObjectContext.hasChanges {
-                    do {
-                        try managedObjectContext.save()
-                    } catch {
-                        // Show the error here
+                    
+            }.onAppear {
+                if (userAccount.first == nil) {
+                    let userAccount = User(context: managedObjectContext)
+                    userAccount.userID = UUID()
+                    if managedObjectContext.hasChanges {
+                        do {
+                            try managedObjectContext.save()
+                        } catch {
+                            // Show the error here
+                        }
                     }
                 }
             }
-        }
+        
     }
     
     

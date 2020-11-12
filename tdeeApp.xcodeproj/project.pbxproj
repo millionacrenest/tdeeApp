@@ -19,6 +19,7 @@
 		F34E06C7255AFD0000A1E60B /* ShoesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06C6255AFD0000A1E60B /* ShoesView.swift */; };
 		F34E06E2255B13A300A1E60B /* Color+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06E1255B13A300A1E60B /* Color+extensions.swift */; };
 		F34E06EE255B385A00A1E60B /* Date+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06ED255B385A00A1E60B /* Date+extensions.swift */; };
+		F3640954255D9FD100051A48 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3640953255D9FD100051A48 /* SettingsView.swift */; };
 		F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC624D79B7100075619 /* AppDelegate.swift */; };
 		F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC824D79B7100075619 /* SceneDelegate.swift */; };
 		F383EACC24D79B7100075619 /* tdeeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */; };
@@ -64,6 +65,7 @@
 		F34E06C6255AFD0000A1E60B /* ShoesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoesView.swift; sourceTree = "<group>"; };
 		F34E06E1255B13A300A1E60B /* Color+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extensions.swift"; sourceTree = "<group>"; };
 		F34E06ED255B385A00A1E60B /* Date+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extensions.swift"; sourceTree = "<group>"; };
+		F3640953255D9FD100051A48 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F383EAC324D79B7100075619 /* tdeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tdeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F383EAC624D79B7100075619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F383EAC824D79B7100075619 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		F3640958255D9FDC00051A48 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F3640953255D9FD100051A48 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		F383EABA24D79B7100075619 = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +218,7 @@
 				F34E06C2255AFCD300A1E60B /* Runs */,
 				F318094924F00F8500199AA3 /* Progress */,
 				F34E06CE255AFD0600A1E60B /* Shoes */,
+				F3640958255D9FDC00051A48 /* Settings */,
 				F383EACF24D79B7400075619 /* Assets.xcassets */,
 				F383EAD424D79B7400075619 /* LaunchScreen.storyboard */,
 				F383EAD724D79B7400075619 /* Info.plist */,
@@ -390,6 +401,7 @@
 				F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */,
 				F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */,
 				F383EACE24D79B7100075619 /* ProfileView.swift in Sources */,
+				F3640954255D9FD100051A48 /* SettingsView.swift in Sources */,
 				F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */,
 				F318093B24F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift in Sources */,
 				F318094B24F00FE100199AA3 /* ResultsView.swift in Sources */,

@@ -13,6 +13,8 @@ struct ProgressView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settings: UserSettings
     
+    @State var showingDetail = false
+    
     @State var currentWeight: String = "" {
         didSet {
             saveToCoreData()
@@ -20,16 +22,29 @@ struct ProgressView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("Record your progress:")
+        NavigationView {
+            ScrollView {
+                VStack {
+                    Text("Record your progress:")
+                    
+                    TextField("Enter current weight in lbs", text: $currentWeight).padding(12).textFieldStyle(RoundedBorderTextFieldStyle())
+                    Button(action: {
+                        self.saveToCoreData()
+                    }) {
+                        Text("Save")
+                    }
+                    ProgressList()
+                }
+            }.navigationTitle("Progress")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingDetail.toggle()
+                }) {
+                    Image(systemName: "gear").imageScale(.large)
+                }.sheet(isPresented: $showingDetail) {
+                    SettingsView()
+                })
             
-            TextField("Enter current weight in lbs", text: $currentWeight).padding(12).textFieldStyle(RoundedBorderTextFieldStyle())
-            Button(action: {
-                self.saveToCoreData()
-            }) {
-                Text("Save")
-            }
-            ProgressList()
         }
         
     }

@@ -11,6 +11,8 @@ import HealthKit
 
 struct ShoesView: View {
     
+    //TODO: have app send PN when shoe limit is reached
+    
     let healthStore = HKHealthStore()
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
@@ -21,76 +23,89 @@ struct ShoesView: View {
     ) var userAccount: FetchedResults<User>
     @State private var shoeMaxMiles: String = "Enter a maximum mile target for your running shoes:"
     @State private var milesRemaining: Int16?
+    @State var showingDetail = false
     
     var body: some View {
-        ZStack {
-            VStack {
-                if userAccount.first?.shoeMaxMiles == 0 || userAccount.first?.shoeMaxMiles == nil {
-                    TextEditor(text: $shoeMaxMiles)
-                        .frame(height: 55)
-                        .textFieldStyle(PlainTextFieldStyle())
-                        .padding([.leading, .trailing], 4)
-                        .cornerRadius(16)
-                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                        .padding([.leading, .trailing], 24).onTapGesture {
-                            shoeMaxMiles = ""
-                    }
-                    
-                    Button(action: {
-                        userAccount.first?.shoeMaxMiles = Int16(shoeMaxMiles) ?? 0
-                        if managedObjectContext.hasChanges {
-                            do {
-                                try managedObjectContext.save()
-                                milesRemaining = getRunningWorkouts()
-                            } catch {
-                                // Show the error here
-                            }
-                        }
-                    }) {
-                        Text("Save")
-                            .frame(height: 55)
-                            .textFieldStyle(PlainTextFieldStyle())
-                            .padding([.leading, .trailing], 4)
-                            .cornerRadius(16)
-                            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                            .padding([.leading, .trailing])
-                        
-                    }
-                } else {
+        NavigationView {
+            ScrollView {
+                ZStack {
                     VStack {
-                        Spacer()
-                        Text("Your shoe max miles: \(userAccount.first?.shoeMaxMiles ?? 0)").multilineTextAlignment(.leading)
-                        Spacer()
-                        Button(action: {
-                            userAccount.first?.shoeMaxMiles = 0
-                            if managedObjectContext.hasChanges {
-                                do {
-                                    try managedObjectContext.save()
-                                } catch {
-                                    // Show the error here
-                                }
-                            }
-                        }) {
-                            Text("Change")
+                        if userAccount.first?.shoeMaxMiles == 0 || userAccount.first?.shoeMaxMiles == nil {
+                            TextEditor(text: $shoeMaxMiles)
                                 .frame(height: 55)
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .padding([.leading, .trailing], 4)
                                 .cornerRadius(16)
                                 .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                                .padding([.leading, .trailing])
+                                .padding([.leading, .trailing], 24).onTapGesture {
+                                    shoeMaxMiles = ""
+                            }
                             
+                            Button(action: {
+                                userAccount.first?.shoeMaxMiles = Int16(shoeMaxMiles) ?? 0
+                                if managedObjectContext.hasChanges {
+                                    do {
+                                        try managedObjectContext.save()
+                                        milesRemaining = getRunningWorkouts()
+                                    } catch {
+                                        // Show the error here
+                                    }
+                                }
+                            }) {
+                                Text("Save")
+                                    .frame(height: 55)
+                                    .textFieldStyle(PlainTextFieldStyle())
+                                    .padding([.leading, .trailing], 4)
+                                    .cornerRadius(16)
+                                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                                    .padding([.leading, .trailing])
+                                
+                            }
+                        } else {
+                            VStack {
+                                Spacer()
+                                Text("Your shoe max miles: \(userAccount.first?.shoeMaxMiles ?? 0)").multilineTextAlignment(.leading)
+                                Spacer()
+                                Button(action: {
+                                    userAccount.first?.shoeMaxMiles = 0
+                                    if managedObjectContext.hasChanges {
+                                        do {
+                                            try managedObjectContext.save()
+                                        } catch {
+                                            // Show the error here
+                                        }
+                                    }
+                                }) {
+                                    Text("Change")
+                                        .frame(height: 55)
+                                        .textFieldStyle(PlainTextFieldStyle())
+                                        .padding([.leading, .trailing], 4)
+                                        .cornerRadius(16)
+                                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                                        .padding([.leading, .trailing])
+                                    
+                                }
+                                Spacer()
+                                Text("New shoes recorded: \(userAccount.first?.dateMilesLastSet ?? Date())")
+                                Spacer()
+                                Text("Your shoes have \(milesRemaining ?? 0) more miles in them.").multilineTextAlignment(.leading)
+                                Spacer()
+                            }
                         }
-                        Spacer()
-                        Text("New shoes recorded: \(userAccount.first?.dateMilesLastSet ?? Date())")
-                        Spacer()
-                        Text("Your shoes have \(milesRemaining ?? 0) more miles in them.").multilineTextAlignment(.leading)
-                        Spacer()
+                        
                     }
+                }.onAppear {
+                    milesRemaining = getRunningWorkouts()
                 }
-                
-            }
-        }.onAppear {
-            milesRemaining = getRunningWorkouts()
+            }.navigationTitle("Shoe Life")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingDetail.toggle()
+                }) {
+                    Image(systemName: "gear").imageScale(.large)
+                }.sheet(isPresented: $showingDetail) {
+                    SettingsView()
+                })
         }
     }
     
