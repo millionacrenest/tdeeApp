@@ -14,6 +14,14 @@ struct ProfileView: View {
     @State var showingDetail = false
     
     @EnvironmentObject var settings: UserSettings
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.userID, ascending: true)
+        ]
+    ) var userAccount: FetchedResults<User>
+    
     @State private var currentBMI = "no BMI data"
     @State private var currentWeight = "no Weight data" {
         didSet {
@@ -27,6 +35,7 @@ struct ProfileView: View {
         }
     }
     @State private var daysToLoseAPound = "0"
+    @State private var caloriesToEatPerDay = "1600"
     @State private var healthKitIsAuthorized: Bool = false {
         didSet {
             getBMI()
@@ -34,14 +43,6 @@ struct ProfileView: View {
             getRunningWorkouts()
         }
     }
-    
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(
-        entity: User.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \User.userID, ascending: true)
-        ]
-    ) var userAccount: FetchedResults<User>
     
     let healthStore = HKHealthStore()
     
@@ -53,11 +54,16 @@ struct ProfileView: View {
                     VStack {
                         Spacer()
                         VStack {
+                            ZStack {
                             Image("fixx").resizable()
                                 .clipShape(Circle()).frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/2.5)
                                 .shadow(radius: 10)
                                 .overlay(Circle().stroke(Color.gray, lineWidth: 5))
-                            
+                                
+                            }
+                            if userAccount.first?.goalWeight != nil {
+                                Text("GOAL: \(userAccount.first?.goalWeight ?? "0")")
+                            }
                             Text("Current BMI: \(currentBMI)")
                             Text("Current Weight: \(currentWeight)")
                         }
@@ -74,9 +80,15 @@ struct ProfileView: View {
                                 Text(runnersBonus ?? "").bold()
                                 Text("extra calories per day!")
                             }
-                            Text("You'll lose a pound every \(daysToLoseAPound) days")
+                            Text("If you eat \(caloriesToEatPerDay) calories per day")
+                            Text("You'll lose a pound every \(daysToLoseAPound) days.")
                         }
                         Spacer()
+                        Text("Adjust days to lose a pound:")
+                        Slider(value: $settings.selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
+                            self.daysToLoseAPound = String(format: "%.0f", settings.selectedDayValue)
+                            updateCaloriesForDaysToLoseAPound()
+                        }).padding(12)
                     }.onAppear {
                         if healthKitIsAuthorized {
                             getBMI()
@@ -229,22 +241,42 @@ struct ProfileView: View {
     
     func getCurrentCaloriesInAndDaysToLoseAPound() {
         
-        let miles = Double(self.miles)
-        let goalWeight = 126
+        
+        let goalWeight = Double(userAccount.first?.goalWeight ?? "0")
         let bonus = Double(runnersBonus ?? "") ?? 0
         
-        let caloriesToSustainGoalWeight = Double(goalWeight * 15)
+        let caloriesToSustainGoalWeight = Double(goalWeight ?? 0) * 15
         
 
         let caloriesRequiredPerDay = caloriesToSustainGoalWeight + bonus
 
-        let caloriesToEatPerDay = caloriesToSustainGoalWeight - (bonus/2)
+        let caloriesToEat = caloriesToSustainGoalWeight - (bonus/2)
+        self.caloriesToEatPerDay = String(format: "%.0f", caloriesToEat)
 
-        let calorieDeficetPerDay = caloriesRequiredPerDay - caloriesToEatPerDay
+        let calorieDeficetPerDay = caloriesRequiredPerDay - caloriesToEat
         
         let daysToLoseAPound = 3500/calorieDeficetPerDay
         self.daysToLoseAPound = String(format: "%.0f", daysToLoseAPound)
-        //selectedDayValue = Double(daysToLoseAPound)
+        DispatchQueue.main.async {
+            settings.selectedDayValue = Double(daysToLoseAPound)
+        }
+        
+    }
+    
+    func updateCaloriesForDaysToLoseAPound() {
+        let goalWeight = Double(userAccount.first?.goalWeight ?? "0")
+        let bonus = Double(runnersBonus ?? "") ?? 0
+        
+        let caloriesToSustainGoalWeight = Double(goalWeight ?? 0) * 15
+
+
+        let caloriesRequiredPerDay = caloriesToSustainGoalWeight + bonus
+
+        //how to calculate?
+        let calorieDeficetPerDay = 3500/settings.selectedDayValue
+        print("calorie deficet is \(calorieDeficetPerDay)")
+        let caloriesToEat = caloriesRequiredPerDay - calorieDeficetPerDay
+        self.caloriesToEatPerDay = String(format: "%.0f", caloriesToEat)
         
         
     }
