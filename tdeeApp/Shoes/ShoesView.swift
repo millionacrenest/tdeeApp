@@ -27,110 +27,39 @@ struct ShoesView: View {
     
     @State private var isShowPhotoLibrary = false
     @State private var image = UIImage()
+    @State private var milesOnShoes: Int16?
+    @State var shoeDate = Date()
+    
+    @State private var showingDatePicker = false
+    
+          
     
     var body: some View {
         NavigationView {
             ScrollView {
                 ZStack {
-                    
+                    Spacer()
                     VStack {
-
-                                Image(uiImage: self.image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                    .edgesIgnoringSafeArea(.all)
-                         
-
-                                Button(action: {
-                                    self.isShowPhotoLibrary = true
-                                    
-                                }) {
-                                    HStack {
-                                        Image(systemName: "photo")
-                                            .font(.system(size: 20))
-
-                                        Text("Post Image of Shoes")
-                                            .font(.headline)
-                                    }
-                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50)
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(20)
-                                    .padding(.horizontal)
-                                }
-                            }.sheet(isPresented: $isShowPhotoLibrary) {
-                                ImagePicker(selectedImage: self.$image, sourceType: .camera)
-                            }
-                    
-                    VStack {
-                        if userAccount.first?.shoeMaxMiles == 0 || userAccount.first?.shoeMaxMiles == nil {
-                            TextEditor(text: $shoeMaxMiles)
-                                .frame(height: 55)
-                                .textFieldStyle(PlainTextFieldStyle())
-                                .padding([.leading, .trailing], 4)
-                                .cornerRadius(16)
-                                .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                                .padding([.leading, .trailing], 24).onTapGesture {
-                                    shoeMaxMiles = ""
-                            }
-                            
-                            Button(action: {
-                                userAccount.first?.shoeMaxMiles = Int16(shoeMaxMiles) ?? 0
-                                if managedObjectContext.hasChanges {
-                                    do {
-                                        try managedObjectContext.save()
-                                        milesRemaining = getRunningWorkouts()
-                                    } catch {
-                                        // Show the error here
-                                    }
-                                }
-                            }) {
-                                Text("Save")
-                                    .frame(height: 55)
-                                    .textFieldStyle(PlainTextFieldStyle())
-                                    .padding([.leading, .trailing], 4)
-                                    .cornerRadius(16)
-                                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                                    .padding([.leading, .trailing])
-                                
-                            }
-                        } else {
-                            VStack {
-                                Spacer()
-                                Text("Your shoe max miles: \(userAccount.first?.shoeMaxMiles ?? 0)").multilineTextAlignment(.leading)
-                                Spacer()
-                                Button(action: {
-                                    userAccount.first?.shoeMaxMiles = 0
-                                    if managedObjectContext.hasChanges {
-                                        do {
-                                            try managedObjectContext.save()
-                                        } catch {
-                                            // Show the error here
-                                        }
-                                    }
-                                }) {
-                                    Text("Change")
-                                        .frame(height: 55)
-                                        .textFieldStyle(PlainTextFieldStyle())
-                                        .padding([.leading, .trailing], 4)
-                                        .cornerRadius(16)
-                                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                                        .padding([.leading, .trailing])
-                                    
-                                }
-                                Spacer()
-                                Text("New shoes recorded: \(userAccount.first?.dateMilesLastSet ?? Date())")
-                                Spacer()
-                                Text("Your shoes have \(milesRemaining ?? 0) more miles in them.").multilineTextAlignment(.leading)
-                                Spacer()
-                            }
+                        Text("New Shoes Recorded:")
+                        Text(shoeDate, style: .date)
+                        Spacer()
+                        Button("Adjust Recorded Date") {
+                            self.showingDatePicker.toggle()
                         }
+                        .sheet(isPresented: $showingDatePicker, onDismiss: getRunningWorkouts) {
+                            DatePicker("", selection: $shoeDate, displayedComponents: .date).datePickerStyle(GraphicalDatePickerStyle()).labelsHidden()
+                        }
+                        Spacer()
+                        Text("You have run \(milesOnShoes ?? 0) miles since \(shoeDate)")
+                        Spacer()
+                        Text("You will need new shoes in \(milesRemaining ?? 0) miles")
                         
+                    }.onAppear {
+                        shoeDate = userAccount.first?.dateMilesLastSet ?? Date()
+                        getRunningWorkouts()
                     }
-                }.onAppear {
-                    fetchSavedImage()
-                    milesRemaining = getRunningWorkouts()
+                    Spacer()
+                    
                 }
             }.navigationTitle("Shoe Life")
             .navigationBarItems(trailing:
@@ -144,10 +73,20 @@ struct ShoesView: View {
         }
     }
     
-    func getRunningWorkouts() -> Int16 {
-        calculateMilesRemaining()
-        var sumOfMiles: Int16 = 0
-        var milesValue: Int16 = Int16(shoeMaxMiles) ?? 0
+    func saveToCoreData() {
+        userAccount.first?.dateMilesLastSet = shoeDate
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
+        }
+        
+    }
+    
+    func getRunningWorkouts() {
+        saveToCoreData()
         var workouts = [HKWorkout]()
         let predicate =  HKQuery.predicateForWorkouts(with: HKWorkoutActivityType.running)
            
@@ -160,30 +99,23 @@ struct ShoesView: View {
                        print( "There was an error while reading the samples: \(queryError.localizedDescription)")
                    }
             
-            let startDate = userAccount.first?.dateMilesLastSet
             var miles = [Double]()
             
             workouts = results as! [HKWorkout]
-            for workout in workouts.prefix(7) {
-                if workout.endDate > startDate ?? Date() {
+            for workout in workouts {
+                if workout.endDate > shoeDate {
                     miles.append(workout.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
                 }
             }
             
-            sumOfMiles = Int16(miles.reduce(0, +))
+            milesOnShoes = Int16(miles.reduce(0, +))
+            milesRemaining = Int16(300 - milesOnShoes!)
             
            }
         
         healthStore.execute(sampleQuery)
-        return userAccount.first?.shoeMaxMiles ?? 0 - sumOfMiles
         
-    }
-    
-    func calculateMilesRemaining() -> String {
-
-        let milesRemainingString = userAccount.first?.shoeMaxMiles.description ?? ""
         
-        return milesRemainingString
     }
     
     func fetchSavedImage() {
