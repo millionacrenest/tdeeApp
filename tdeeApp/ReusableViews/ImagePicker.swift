@@ -11,7 +11,21 @@ import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     
-    @Binding var selectedImage: UIImage
+    @Binding var selectedImage: UIImage {
+        didSet {
+            saveToCoreData()
+        }
+    }
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \User.userID, ascending: true)
+        ]
+    ) var userAccount: FetchedResults<User>
+    
+    
     @Environment(\.presentationMode) private var presentationMode
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
@@ -51,4 +65,19 @@ struct ImagePicker: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
+    
+    func saveToCoreData() {
+        let userSettings = User(context: managedObjectContext)
+        
+        userSettings.shoeImage = selectedImage
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
+        }
+    }
+    
+    
 }

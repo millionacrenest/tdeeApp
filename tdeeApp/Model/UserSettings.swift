@@ -21,8 +21,7 @@ class UserSettings: ObservableObject {
     @Published var calorieDeficetPerDay: Double = 0
     @Published var selectedDayValue: Double = 0 {
         didSet {
-            let intValue = Int(selectedDayValue)
-            daysToLoseAPound = Double(intValue)
+            daysToLoseAPound = selectedDayValue
         }
     }
     
@@ -44,7 +43,7 @@ class UserSettings: ObservableObject {
         calorieDeficetPerDay = caloriesRequiredPerDay - caloriesToEatPerDay
         
         daysToLoseAPound = 3500/calorieDeficetPerDay
-        selectedDayValue = Double(daysToLoseAPound)
+        selectedDayValue = daysToLoseAPound
         
         
     }

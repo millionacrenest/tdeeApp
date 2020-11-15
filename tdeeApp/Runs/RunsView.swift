@@ -16,7 +16,7 @@ struct RunsView: View {
         NavigationView {
             VStack {
                 RunsList()
-            }.navigationTitle("Recorded Runs")
+            }.navigationTitle("Running Log")
         .navigationBarItems(trailing:
             Button(action: {
                 self.showingDetail.toggle()

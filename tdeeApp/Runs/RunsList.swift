@@ -16,8 +16,14 @@ struct RunsList: View {
     
     var body: some View {
         VStack {
-            List(workouts, rowContent: RunsRow.init)
-        }.onAppear {
+           List(workouts) { workout in
+            NavigationLink(destination: RunsDetailView(workoutItem: workout)) {
+                RunsRow(workoutItem: workout)
+                }
+//
+            }
+        }
+    .onAppear {
             getRunningWorkouts()
         }
     }

@@ -40,15 +40,17 @@ struct ShoesView: View {
                                     .scaledToFill()
                                     .frame(minWidth: 0, maxWidth: .infinity)
                                     .edgesIgnoringSafeArea(.all)
+                         
 
                                 Button(action: {
                                     self.isShowPhotoLibrary = true
+                                    
                                 }) {
                                     HStack {
                                         Image(systemName: "photo")
                                             .font(.system(size: 20))
 
-                                        Text("Photo library")
+                                        Text("Post Image of Shoes")
                                             .font(.headline)
                                     }
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50)
@@ -127,6 +129,7 @@ struct ShoesView: View {
                         
                     }
                 }.onAppear {
+                    fetchSavedImage()
                     milesRemaining = getRunningWorkouts()
                 }
             }.navigationTitle("Shoe Life")
@@ -140,10 +143,6 @@ struct ShoesView: View {
                 })
         }
     }
-    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//     
-//    }
     
     func getRunningWorkouts() -> Int16 {
         calculateMilesRemaining()
@@ -187,20 +186,11 @@ struct ShoesView: View {
         return milesRemainingString
     }
     
-    func saveToCoreData() {
-        let userSettings = User(context: managedObjectContext)
-        
-        
-        userSettings.shoeMaxMiles = Int16(shoeMaxMiles) ?? 0
-        userSettings.dateMilesLastSet = Date()
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Show the error here
-            }
-        }
+    func fetchSavedImage() {
+        let data = userAccount.first?.shoeImage
+        self.image = UIImage(data: ((data ?? Data() as NSObject) as! Data as NSObject) as! Data) ?? UIImage()
     }
+    
 }
 
 struct ShoesView_Previews: PreviewProvider {

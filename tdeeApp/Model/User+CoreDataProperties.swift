@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  tdeeApp
 //
-//  Created by McEntire, Allison on 11/11/20.
+//  Created by McEntire, Allison on 11/12/20.
 //  Copyright © 2020 Deloitte Digital. All rights reserved.
 //
 //
@@ -17,11 +17,12 @@ extension User {
         return NSFetchRequest<User>(entityName: "User")
     }
 
-    @NSManaged public var goalWeight: String?
     @NSManaged public var currentWeight: String?
+    @NSManaged public var dateMilesLastSet: Date?
+    @NSManaged public var goalWeight: String?
     @NSManaged public var shoeMaxMiles: Int16
     @NSManaged public var userID: UUID?
-    @NSManaged public var dateMilesLastSet: Date?
+    @NSManaged public var shoeImage: NSObject?
 
 }
 

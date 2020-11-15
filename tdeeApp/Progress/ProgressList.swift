@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ProgressList: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
         entity: ProgressEntity.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \ProgressEntity.date, ascending: false)]

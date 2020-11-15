@@ -52,7 +52,6 @@ struct ProfileView: View {
             ScrollView {
                 ZStack {
                     VStack {
-                        Spacer()
                         VStack {
                             ZStack {
                             Image("fixx").resizable()
