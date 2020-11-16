@@ -273,7 +273,6 @@ struct ProfileView: View {
 
         //how to calculate?
         let calorieDeficetPerDay = 3500/settings.selectedDayValue
-        print("calorie deficet is \(calorieDeficetPerDay)")
         let caloriesToEat = caloriesRequiredPerDay - calorieDeficetPerDay
         self.caloriesToEatPerDay = String(format: "%.0f", caloriesToEat)
         

@@ -60,7 +60,6 @@ class UserSettings: ObservableObject {
 
         //how to calculate?
         calorieDeficetPerDay = 3500/daysToLoseAPound
-        print("calorie deficet is \(calorieDeficetPerDay)")
         caloriesToEatPerDay = caloriesRequiredPerDay - calorieDeficetPerDay
         
         

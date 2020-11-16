@@ -13,7 +13,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var selectedImage: UIImage {
         didSet {
-            saveToCoreData()
+         //   saveToCoreData()
         }
     }
     
@@ -66,10 +66,12 @@ struct ImagePicker: UIViewControllerRepresentable {
         Coordinator(self)
     }
     
-    func saveToCoreData() {
+    func saveToCoreData(image: UIImage) {
         let userSettings = User(context: managedObjectContext)
         
-        userSettings.shoeImage = selectedImage
+        let data = image.jpegData(compressionQuality: 1.0)
+        
+        // save image
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()

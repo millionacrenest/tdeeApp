@@ -12,6 +12,7 @@ import HealthKit
 struct RunsRow: View {
     
     var workoutItem: HKWorkout
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
         VStack {
@@ -20,6 +21,28 @@ struct RunsRow: View {
             Text("Total Distance: \(workoutItem.totalDistance!)")
             Text("Duration: \(workoutItem.duration)")
             Text("Calories Burned: \(workoutItem.totalEnergyBurned!)")
+        }.onAppear {
+            saveToCoreData()
+        }
+    }
+    
+    func saveToCoreData() {
+        
+        let runLogged = RunLogged(context: managedObjectContext)
+        runLogged.runUUID = UUID()
+        runLogged.dateRun = "\(workoutItem.endDate)"
+       
+        
+        //let data = image.jpegData(compressionQuality: 1.0)
+     //   runLogged.runUUID = workoutItem
+        
+        // save image
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
         }
     }
 }

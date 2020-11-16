@@ -26,8 +26,7 @@ struct ShoesView: View {
     @State private var milesRemaining: Int16?
     @State var showingDetail = false
     
-    @State private var isShowPhotoLibrary = false
-    @State private var image = UIImage()
+    
     @State private var milesOnShoes: Int16?
     @State var shoeDate = Date()
     
@@ -145,10 +144,6 @@ struct ShoesView: View {
         
     }
     
-    func fetchSavedImage() {
-        let data = userAccount.first?.shoeImage
-        self.image = UIImage(data: ((data ?? Data() as NSObject) as! Data as NSObject) as! Data) ?? UIImage()
-    }
     
 }
 

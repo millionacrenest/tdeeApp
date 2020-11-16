@@ -22,7 +22,6 @@ extension User {
     @NSManaged public var goalWeight: String?
     @NSManaged public var shoeMaxMiles: Int16
     @NSManaged public var userID: UUID?
-    @NSManaged public var shoeImage: NSObject?
 
 }
 

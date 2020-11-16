@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3053D2F2562D1D9006F60DA /* RunLogged+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3053D2D2562D1D9006F60DA /* RunLogged+CoreDataClass.swift */; };
+		F3053D302562D1D9006F60DA /* RunLogged+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3053D2E2562D1D9006F60DA /* RunLogged+CoreDataProperties.swift */; };
 		F318093A24F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318093824F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift */; };
 		F318093B24F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318093924F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift */; };
 		F318094024F00D1300199AA3 /* ProgressList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318093F24F00D1300199AA3 /* ProgressList.swift */; };
@@ -57,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F3053D2D2562D1D9006F60DA /* RunLogged+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RunLogged+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F3053D2E2562D1D9006F60DA /* RunLogged+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RunLogged+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F318093824F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F318093924F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F318093F24F00D1300199AA3 /* ProgressList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressList.swift; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 		F318093C24F00B9A00199AA3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F3053D2D2562D1D9006F60DA /* RunLogged+CoreDataClass.swift */,
+				F3053D2E2562D1D9006F60DA /* RunLogged+CoreDataProperties.swift */,
 				F332DC68255317E30002AA8C /* User+CoreDataClass.swift */,
 				F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */,
 				F383EAF924D79DA900075619 /* UserSettings.swift */,
@@ -429,8 +435,10 @@
 				F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */,
 				F34E06BE255AFCC500A1E60B /* RunsView.swift in Sources */,
 				F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */,
+				F3053D302562D1D9006F60DA /* RunLogged+CoreDataProperties.swift in Sources */,
 				F318093A24F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift in Sources */,
 				F34E06E2255B13A300A1E60B /* Color+extensions.swift in Sources */,
+				F3053D2F2562D1D9006F60DA /* RunLogged+CoreDataClass.swift in Sources */,
 				F318094824F00F4500199AA3 /* ProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
