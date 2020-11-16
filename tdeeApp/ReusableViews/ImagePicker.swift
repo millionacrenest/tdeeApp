@@ -11,24 +11,9 @@ import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     
-    @Binding var selectedImage: UIImage {
-        didSet {
-         //   saveToCoreData()
-        }
-    }
+    @Binding var selectedImage: UIImage
     
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(
-        entity: User.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \User.userID, ascending: true)
-        ]
-    ) var userAccount: FetchedResults<User>
-    
-    
-    @Environment(\.presentationMode) private var presentationMode
-    
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    var sourceType: UIImagePickerController.SourceType
  
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
  
@@ -58,28 +43,11 @@ struct ImagePicker: UIViewControllerRepresentable {
                 parent.selectedImage = image
             }
      
-            parent.presentationMode.wrappedValue.dismiss()
         }
     }
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
-    func saveToCoreData(image: UIImage) {
-        let userSettings = User(context: managedObjectContext)
-        
-        let data = image.jpegData(compressionQuality: 1.0)
-        
-        // save image
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Show the error here
-            }
-        }
-    }
-    
     
 }

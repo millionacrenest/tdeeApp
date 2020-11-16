@@ -97,6 +97,7 @@ struct RunDetail : View {
     @FetchRequest var runInfo: FetchedResults<RunLogged>
     
     @State private var runDescription: String = ""
+    @State private var runImage = UIImage()
     
     var body: some View {
         VStack {
@@ -107,6 +108,7 @@ struct RunDetail : View {
                 .scaledToFill()
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .edgesIgnoringSafeArea(.all)
+            ImagePicker(selectedImage: $runImage, sourceType: .camera)
             Button(action: {
                 saveRunData()
             }) {
@@ -117,9 +119,7 @@ struct RunDetail : View {
     
     func saveRunData() {
         runInfo.first?.runDescription = runDescription
-        let image = UIImage(systemName: "rectangle")
-        
-        runInfo.first?.runImage = image?.jpegData(compressionQuality: 1.0)
+        runInfo.first?.runImage = runImage.jpegData(compressionQuality: 1.0)
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
