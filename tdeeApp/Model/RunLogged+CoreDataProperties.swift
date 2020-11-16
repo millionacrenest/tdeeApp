@@ -18,8 +18,9 @@ extension RunLogged {
     }
 
     @NSManaged public var runImage: Data?
-    @NSManaged public var runUUID: UUID
-    @NSManaged public var dateRun: String
+    @NSManaged public var runUUID: UUID?
+    @NSManaged public var dateRun: String?
+    @NSManaged public var runDescription: String?
 
 }
 

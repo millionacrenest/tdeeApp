@@ -9,6 +9,7 @@
 import SwiftUI
 import HealthKit
 import CoreData
+import Combine
 
 struct RunsDetailView: View {
     
@@ -92,8 +93,39 @@ struct RunView: View {
 }
 
 struct RunDetail : View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest var runInfo: FetchedResults<RunLogged>
+    
+    @State private var runDescription: String = ""
+    
     var body: some View {
-        Text("run info \(runInfo.first?.dateRun ?? "")")
+        VStack {
+            Text("run info \(runInfo.first?.dateRun ?? "")")
+            Text(runInfo.first?.runDescription ?? "")
+            TextField("run description:", text: $runDescription)
+            Image(uiImage: UIImage(data: runInfo.first?.runImage ?? Data()) ?? UIImage()).resizable()
+                .scaledToFill()
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .edgesIgnoringSafeArea(.all)
+            Button(action: {
+                saveRunData()
+            }) {
+                Text("SAVE CHANGES TO RUN LOG")
+            }
+        }
+    }
+    
+    func saveRunData() {
+        runInfo.first?.runDescription = runDescription
+        let image = UIImage(systemName: "rectangle")
+        
+        runInfo.first?.runImage = image?.jpegData(compressionQuality: 1.0)
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
+        }
     }
 }
