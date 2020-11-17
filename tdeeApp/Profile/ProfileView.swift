@@ -13,7 +13,6 @@ struct ProfileView: View {
     
     @State var showingDetail = false
     
-    @EnvironmentObject var settings: UserSettings
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
         entity: User.entity(),

@@ -35,7 +35,6 @@
 		F383EAD624D79B7400075619 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F383EAD424D79B7400075619 /* LaunchScreen.storyboard */; };
 		F383EAE124D79B7400075619 /* tdeeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAE024D79B7400075619 /* tdeeAppTests.swift */; };
 		F383EAEC24D79B7400075619 /* tdeeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAEB24D79B7400075619 /* tdeeAppUITests.swift */; };
-		F383EAFA24D79DA900075619 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAF924D79DA900075619 /* UserSettings.swift */; };
 		F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DC0256466E7008F7A87 /* TextView.swift */; };
 		F3AA1DD025646B1E008F7A87 /* RunDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */; };
 		F3AA1DD525646C12008F7A87 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DD425646C12008F7A87 /* RunView.swift */; };
@@ -96,7 +95,6 @@
 		F383EAE724D79B7400075619 /* tdeeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tdeeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F383EAEB24D79B7400075619 /* tdeeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tdeeAppUITests.swift; sourceTree = "<group>"; };
 		F383EAED24D79B7400075619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F383EAF924D79DA900075619 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		F3AA1DC0256466E7008F7A87 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetail.swift; sourceTree = "<group>"; };
 		F3AA1DD425646C12008F7A87 /* RunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 				F3053D2E2562D1D9006F60DA /* RunLogged+CoreDataProperties.swift */,
 				F332DC68255317E30002AA8C /* User+CoreDataClass.swift */,
 				F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */,
-				F383EAF924D79DA900075619 /* UserSettings.swift */,
 				F318093824F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift */,
 				F318093924F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift */,
 			);
@@ -449,7 +446,6 @@
 				F34E06C7255AFD0000A1E60B /* ShoesView.swift in Sources */,
 				F364EA48255DF6A1008AAC25 /* ImagePicker.swift in Sources */,
 				F34E06EE255B385A00A1E60B /* Date+extensions.swift in Sources */,
-				F383EAFA24D79DA900075619 /* UserSettings.swift in Sources */,
 				F364EA40255DF0D8008AAC25 /* RunsRow.swift in Sources */,
 				F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */,
 				F34E06BE255AFCC500A1E60B /* RunsView.swift in Sources */,

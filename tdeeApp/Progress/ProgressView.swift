@@ -11,7 +11,6 @@ import SwiftUI
 struct ProgressView: View {
 
     @Environment(\.managedObjectContext) var managedObjectContext
-    @EnvironmentObject var settings: UserSettings
     @FetchRequest(
         entity: User.entity(),
         sortDescriptors: [
