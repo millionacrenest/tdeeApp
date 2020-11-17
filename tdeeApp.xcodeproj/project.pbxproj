@@ -36,6 +36,9 @@
 		F383EAE124D79B7400075619 /* tdeeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAE024D79B7400075619 /* tdeeAppTests.swift */; };
 		F383EAEC24D79B7400075619 /* tdeeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAEB24D79B7400075619 /* tdeeAppUITests.swift */; };
 		F383EAFA24D79DA900075619 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAF924D79DA900075619 /* UserSettings.swift */; };
+		F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DC0256466E7008F7A87 /* TextView.swift */; };
+		F3AA1DD025646B1E008F7A87 /* RunDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */; };
+		F3AA1DD525646C12008F7A87 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DD425646C12008F7A87 /* RunView.swift */; };
 		F3C821C42559BE04007D4207 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C821C32559BE04007D4207 /* HealthKit.framework */; };
 		F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */; };
 		F3C821E42559E605007D4207 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821E32559E605007D4207 /* AppView.swift */; };
@@ -94,6 +97,9 @@
 		F383EAEB24D79B7400075619 /* tdeeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tdeeAppUITests.swift; sourceTree = "<group>"; };
 		F383EAED24D79B7400075619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F383EAF924D79DA900075619 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		F3AA1DC0256466E7008F7A87 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetail.swift; sourceTree = "<group>"; };
+		F3AA1DD425646C12008F7A87 /* RunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
 		F3C821C12559BE04007D4207 /* tdeeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tdeeApp.entitlements; sourceTree = "<group>"; };
 		F3C821C32559BE04007D4207 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
@@ -156,7 +162,7 @@
 				F34E06BD255AFCC500A1E60B /* RunsView.swift */,
 				F364EA3A255DEF1C008AAC25 /* RunsList.swift */,
 				F364EA3F255DF0D8008AAC25 /* RunsRow.swift */,
-				F364EA63255EFB09008AAC25 /* RunsDetailView.swift */,
+				F3AA1DCB25646AF3008F7A87 /* RunsDetailViews */,
 			);
 			path = Runs;
 			sourceTree = "<group>";
@@ -183,6 +189,7 @@
 			children = (
 				F34E06E1255B13A300A1E60B /* Color+extensions.swift */,
 				F34E06ED255B385A00A1E60B /* Date+extensions.swift */,
+				F3AA1DC0256466E7008F7A87 /* TextView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -273,6 +280,16 @@
 				F383EAED24D79B7400075619 /* Info.plist */,
 			);
 			path = tdeeAppUITests;
+			sourceTree = "<group>";
+		};
+		F3AA1DCB25646AF3008F7A87 /* RunsDetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				F364EA63255EFB09008AAC25 /* RunsDetailView.swift */,
+				F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */,
+				F3AA1DD425646C12008F7A87 /* RunView.swift */,
+			);
+			path = RunsDetailViews;
 			sourceTree = "<group>";
 		};
 		F3C821C22559BE04007D4207 /* Frameworks */ = {
@@ -415,7 +432,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F383EACC24D79B7100075619 /* tdeeApp.xcdatamodeld in Sources */,
+				F3AA1DD525646C12008F7A87 /* RunView.swift in Sources */,
 				F318094024F00D1300199AA3 /* ProgressList.swift in Sources */,
+				F3AA1DD025646B1E008F7A87 /* RunDetail.swift in Sources */,
 				F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */,
 				F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */,
 				F383EACE24D79B7100075619 /* ProfileView.swift in Sources */,
@@ -438,6 +457,7 @@
 				F3053D302562D1D9006F60DA /* RunLogged+CoreDataProperties.swift in Sources */,
 				F318093A24F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift in Sources */,
 				F34E06E2255B13A300A1E60B /* Color+extensions.swift in Sources */,
+				F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */,
 				F3053D2F2562D1D9006F60DA /* RunLogged+CoreDataClass.swift in Sources */,
 				F318094824F00F4500199AA3 /* ProgressView.swift in Sources */,
 			);

@@ -34,6 +34,7 @@ struct ProfileView: View {
             getCurrentCaloriesInAndDaysToLoseAPound()
         }
     }
+    @State private var selectedDayValue: Double = 0
     @State private var daysToLoseAPound = "0"
     @State private var caloriesToEatPerDay = "1600"
     @State private var healthKitIsAuthorized: Bool = false {
@@ -84,8 +85,8 @@ struct ProfileView: View {
                         }
                         Spacer()
                         Text("Adjust days to lose a pound:")
-                        Slider(value: $settings.selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
-                            self.daysToLoseAPound = String(format: "%.0f", settings.selectedDayValue)
+                        Slider(value: $selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
+                            self.daysToLoseAPound = String(format: "%.0f", selectedDayValue)
                             updateCaloriesForDaysToLoseAPound()
                         }).padding(12)
                     }.onAppear {
@@ -257,7 +258,7 @@ struct ProfileView: View {
         let daysToLoseAPound = 3500/calorieDeficetPerDay
         self.daysToLoseAPound = String(format: "%.0f", daysToLoseAPound)
         DispatchQueue.main.async {
-            settings.selectedDayValue = Double(daysToLoseAPound)
+            selectedDayValue = Double(daysToLoseAPound)
         }
         
     }
@@ -272,7 +273,7 @@ struct ProfileView: View {
         let caloriesRequiredPerDay = caloriesToSustainGoalWeight + bonus
 
         //how to calculate?
-        let calorieDeficetPerDay = 3500/settings.selectedDayValue
+        let calorieDeficetPerDay = 3500/selectedDayValue
         let caloriesToEat = caloriesRequiredPerDay - calorieDeficetPerDay
         self.caloriesToEatPerDay = String(format: "%.0f", caloriesToEat)
         

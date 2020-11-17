@@ -37,7 +37,6 @@ struct RunsDetailView: View {
                 Text("Run distance: \(distanceToShow ?? "") miles")
                 Text("Run calories: \(caloriesBurned ?? "")")
                 
-                
                 Image(uiImage: self.image)
                     .resizable()
                     .scaledToFill()
@@ -82,50 +81,4 @@ struct RunsDetailView: View {
     }
     
 
-}
-
-struct RunView: View {
-    var dateRun: String
-    var body: some View {
-        // ChatList body will be called every time but this ChatView body is only run when there is a new teamName so that's ok.
-        RunDetail(runInfo: FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "dateRun = %@", dateRun)))
-    }
-}
-
-struct RunDetail : View {
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest var runInfo: FetchedResults<RunLogged>
-    
-    @State private var runDescription: String = ""
-    @State private var runImage = UIImage()
-    
-    var body: some View {
-        VStack {
-            Text("run info \(runInfo.first?.dateRun ?? "")")
-            Text(runInfo.first?.runDescription ?? "")
-            TextField("run description:", text: $runDescription)
-            Image(uiImage: UIImage(data: runInfo.first?.runImage ?? Data()) ?? UIImage()).resizable()
-                .scaledToFill()
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .edgesIgnoringSafeArea(.all)
-            ImagePicker(selectedImage: $runImage, sourceType: .camera)
-            Button(action: {
-                saveRunData()
-            }) {
-                Text("SAVE CHANGES TO RUN LOG")
-            }
-        }
-    }
-    
-    func saveRunData() {
-        runInfo.first?.runDescription = runDescription
-        runInfo.first?.runImage = runImage.jpegData(compressionQuality: 1.0)
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Show the error here
-            }
-        }
-    }
 }
