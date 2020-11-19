@@ -94,7 +94,8 @@ struct ShoesView: View {
                 }) {
                     Image(systemName: "gear").imageScale(.large)
                 }.sheet(isPresented: $showingDetail) {
-                    SettingsView()
+                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                    SettingsView().environment(\.managedObjectContext, context)
                 })
         }
     }

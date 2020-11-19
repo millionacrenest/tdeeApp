@@ -47,7 +47,8 @@ struct ProgressView: View {
                 }) {
                     Image(systemName: "gear").imageScale(.large)
                 }.sheet(isPresented: $showingDetail) {
-                    SettingsView()
+                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                    SettingsView().environment(\.managedObjectContext, context)
                 })
             
         }
@@ -56,7 +57,8 @@ struct ProgressView: View {
     
     func saveToCoreData() {
         let newProgressItem = ProgressEntity(context: managedObjectContext)
-        if let currentWeightInt = Int(userAccount.first?.currentWeight ?? "0") ?? 0, let goalWeightInt = Int(userAccount.first?.goalWeight ?? "0") ?? 0 {
+        let currentWeightInt = Int(userAccount.first?.currentWeight ?? "0") ?? 0
+        let goalWeightInt = Int(userAccount.first?.goalWeight ?? "0") ?? 0
         let goalWeightDifference = currentWeightInt - goalWeightInt
         
         
@@ -71,7 +73,7 @@ struct ProgressView: View {
                     // Show the error here
                 }
             }
-        }
+        
     }
 
 }

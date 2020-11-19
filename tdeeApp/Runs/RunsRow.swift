@@ -31,6 +31,8 @@ struct RunsRow: View {
         let runLogged = RunLogged(context: managedObjectContext)
         runLogged.runUUID = UUID()
         runLogged.dateRun = "\(workoutItem.endDate)"
+        runLogged.caloriesBurned = String(format: "%.0f", workoutItem.totalEnergyBurned?.doubleValue(for: HKUnit.kilocalorie()) ?? 0)
+        runLogged.distance = String(format: "%.0f", workoutItem.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
        
         
         //let data = image.jpegData(compressionQuality: 1.0)

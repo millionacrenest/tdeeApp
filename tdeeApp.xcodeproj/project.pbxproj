@@ -38,6 +38,7 @@
 		F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DC0256466E7008F7A87 /* TextView.swift */; };
 		F3AA1DD025646B1E008F7A87 /* RunDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */; };
 		F3AA1DD525646C12008F7A87 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DD425646C12008F7A87 /* RunView.swift */; };
+		F3AA1DF52564715C008F7A87 /* RunDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DF42564715C008F7A87 /* RunDetailHeaderView.swift */; };
 		F3C821C42559BE04007D4207 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C821C32559BE04007D4207 /* HealthKit.framework */; };
 		F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */; };
 		F3C821E42559E605007D4207 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821E32559E605007D4207 /* AppView.swift */; };
@@ -98,6 +99,7 @@
 		F3AA1DC0256466E7008F7A87 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetail.swift; sourceTree = "<group>"; };
 		F3AA1DD425646C12008F7A87 /* RunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
+		F3AA1DF42564715C008F7A87 /* RunDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailHeaderView.swift; sourceTree = "<group>"; };
 		F3C821C12559BE04007D4207 /* tdeeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tdeeApp.entitlements; sourceTree = "<group>"; };
 		F3C821C32559BE04007D4207 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				F318093C24F00B9A00199AA3 /* Model */,
 				F383EAC624D79B7100075619 /* AppDelegate.swift */,
 				F383EAC824D79B7100075619 /* SceneDelegate.swift */,
+				F3C821E32559E605007D4207 /* AppView.swift */,
 				F364090B255C4DF600051A48 /* Profile */,
 				F34E06DA255B116000A1E60B /* ReusableViews */,
 				F34E06C2255AFCD300A1E60B /* Runs */,
@@ -247,7 +250,6 @@
 				F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */,
 				F383EAD124D79B7400075619 /* Preview Content */,
 				F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */,
-				F3C821E32559E605007D4207 /* AppView.swift */,
 				F34E06E6255B13F900A1E60B /* Utilities */,
 			);
 			path = tdeeApp;
@@ -284,6 +286,7 @@
 			children = (
 				F364EA63255EFB09008AAC25 /* RunsDetailView.swift */,
 				F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */,
+				F3AA1DF42564715C008F7A87 /* RunDetailHeaderView.swift */,
 				F3AA1DD425646C12008F7A87 /* RunView.swift */,
 			);
 			path = RunsDetailViews;
@@ -447,6 +450,7 @@
 				F364EA48255DF6A1008AAC25 /* ImagePicker.swift in Sources */,
 				F34E06EE255B385A00A1E60B /* Date+extensions.swift in Sources */,
 				F364EA40255DF0D8008AAC25 /* RunsRow.swift in Sources */,
+				F3AA1DF52564715C008F7A87 /* RunDetailHeaderView.swift in Sources */,
 				F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */,
 				F34E06BE255AFCC500A1E60B /* RunsView.swift in Sources */,
 				F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */,

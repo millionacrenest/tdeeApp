@@ -79,6 +79,5 @@ struct RunsDetailView: View {
         formatter.unitsStyle = .abbreviated
         return formatter.string(from: TimeInterval(interval))!
     }
-    
 
 }
