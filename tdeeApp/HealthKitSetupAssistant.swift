@@ -43,6 +43,7 @@ class HealthKitSetupAssistant {
                                                    bodyMass,
                                                    activeEnergy,
                                                    distanceWalkingRunning,
+                                                   HKSeriesType.workoutRoute(),
                                                    HKObjectType.workoutType()]
     
     //4. Request Authorization

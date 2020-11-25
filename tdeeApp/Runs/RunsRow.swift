@@ -21,32 +21,10 @@ struct RunsRow: View {
             Text("Total Distance: \(workoutItem.totalDistance!)")
             Text("Duration: \(workoutItem.duration)")
             Text("Calories Burned: \(workoutItem.totalEnergyBurned!)")
-        }.onAppear {
-            saveToCoreData()
+            Text("UUID \(workoutItem.uuid)")
         }
     }
     
-    func saveToCoreData() {
-        
-        let runLogged = RunLogged(context: managedObjectContext)
-        runLogged.runUUID = UUID()
-        runLogged.dateRun = "\(workoutItem.endDate)"
-        runLogged.caloriesBurned = String(format: "%.0f", workoutItem.totalEnergyBurned?.doubleValue(for: HKUnit.kilocalorie()) ?? 0)
-        runLogged.distance = String(format: "%.0f", workoutItem.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
-       
-        
-        //let data = image.jpegData(compressionQuality: 1.0)
-     //   runLogged.runUUID = workoutItem
-        
-        // save image
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Show the error here
-            }
-        }
-    }
 }
 
 

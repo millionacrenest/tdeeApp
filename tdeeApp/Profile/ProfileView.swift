@@ -222,7 +222,11 @@ struct ProfileView: View {
             var miles = [Double]()
             
             workouts = results as! [HKWorkout]
+            for workout in workouts {
+                saveRunToCoreData(workoutItem: workout)
+            }
             for workout in workouts.prefix(7) {
+                getRunningWorkoutRoute(workoutItem: workout)
                 if workout.endDate > startDate {
                     miles.append(workout.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
                 }
@@ -236,6 +240,39 @@ struct ProfileView: View {
            }
         
         healthStore.execute(sampleQuery)
+        
+    }
+    
+    func getRunningWorkoutRoute(workoutItem: HKWorkout) {
+        
+        let runningObjectQuery = HKQuery.predicateForObjects(from: workoutItem)
+        
+       
+        
+        let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+            
+            guard error == nil else {
+                // Handle any errors here.
+                fatalError("The initial query failed.")
+            }
+            
+            
+           
+        }
+
+        routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
+            
+            guard error == nil else {
+                // Handle any errors here.
+                fatalError("The update failed.")
+            }
+            
+            // Process updates or additions here.
+            
+            
+        }
+
+        healthStore.execute(routeQuery)
         
     }
     
@@ -285,6 +322,28 @@ struct ProfileView: View {
         
         
         userSettings.currentWeight = currentWeight
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
+        }
+    }
+    
+    func saveRunToCoreData(workoutItem: HKWorkout) {
+        
+        let runLogged = RunLogged(context: managedObjectContext)
+        runLogged.runUUID = workoutItem.uuid
+        runLogged.dateRun = "\(workoutItem.endDate)"
+        runLogged.caloriesBurned = String(format: "%.0f", workoutItem.totalEnergyBurned?.doubleValue(for: HKUnit.kilocalorie()) ?? 0)
+        runLogged.distance = String(format: "%.0f", workoutItem.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
+       
+        
+        //let data = image.jpegData(compressionQuality: 1.0)
+     //   runLogged.runUUID = workoutItem
+        
+        // save image
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
