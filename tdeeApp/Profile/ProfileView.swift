@@ -62,6 +62,8 @@ struct ProfileView: View {
                             }
                             if userAccount.first?.goalWeight != nil {
                                 Text("GOAL: \(userAccount.first?.goalWeight ?? "0")")
+                            } else {
+                                Text("GOAL WEIGHT NOT SET")
                             }
                             Text("Current BMI: \(currentBMI)")
                             Text("Current Weight: \(currentWeight)")
@@ -93,6 +95,7 @@ struct ProfileView: View {
                             getBMI()
                             getWeight()
                             getRunningWorkouts()
+                            
                         } else {
                             getHealthKitAuth()
                         }
@@ -222,9 +225,9 @@ struct ProfileView: View {
             var miles = [Double]()
             
             workouts = results as! [HKWorkout]
-            for workout in workouts {
-                saveRunToCoreData(workoutItem: workout)
-            }
+//            for workout in workouts {
+//              //  saveRunToCoreData(workoutItem: workout)
+//            }
             for workout in workouts.prefix(7) {
                 getRunningWorkoutRoute(workoutItem: workout)
                 if workout.endDate > startDate {
@@ -318,10 +321,8 @@ struct ProfileView: View {
     }
     
     func saveToCoreData() {
-        let userSettings = User(context: managedObjectContext)
         
-        
-        userSettings.currentWeight = currentWeight
+        userAccount.first?.currentWeight = currentWeight
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()

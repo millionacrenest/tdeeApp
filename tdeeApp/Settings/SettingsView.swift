@@ -39,14 +39,7 @@ struct SettingsView: View {
                     }
                     PickerView(data: data, selection: $selection)
                     Button(action: {
-                        userAccount.first?.goalWeight = "\(selection[0])\(selection[1])\(selection[2])"
-                        if managedObjectContext.hasChanges {
-                            do {
-                                try managedObjectContext.save()
-                            } catch {
-                                // Show the error here
-                            }
-                        }
+                        saveToCoreData()
                     }) {
                         Text("Save")
                             .frame(height: 55)
@@ -63,10 +56,9 @@ struct SettingsView: View {
     }
     
     func saveToCoreData() {
-        let userSettings = User(context: managedObjectContext)
         
         
-        userSettings.goalWeight = ""
+        userAccount.first?.goalWeight = "\(selection[0])\(selection[1])\(selection[2])"
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
