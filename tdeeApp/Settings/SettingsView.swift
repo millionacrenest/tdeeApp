@@ -39,7 +39,8 @@ struct SettingsView: View {
                     }
                     PickerView(data: data, selection: $selection)
                     Button(action: {
-                        saveToCoreData()
+                        //saveGoalWeightToCoreData(goalWeightString: "\(selection[0])\(selection[1])\(selection[2])")
+                        saveGoalWeightToCoreData(goalWeightString: "\(selection[0])\(selection[1])\(selection[2])")
                     }) {
                         Text("Save")
                             .frame(height: 55)
@@ -55,10 +56,10 @@ struct SettingsView: View {
         }
     }
     
-    func saveToCoreData() {
+    func saveGoalWeightToCoreData(goalWeightString: String) {
         
+        userAccount.first?.goalWeight = goalWeightString
         
-        userAccount.first?.goalWeight = "\(selection[0])\(selection[1])\(selection[2])"
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
@@ -67,6 +68,7 @@ struct SettingsView: View {
             }
         }
     }
+    
 }
 
 struct SettingsView_Previews: PreviewProvider {

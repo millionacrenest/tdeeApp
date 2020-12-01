@@ -21,12 +21,6 @@ struct ProfileView: View {
         ]
     ) var userAccount: FetchedResults<User>
     
-    @State private var currentBMI = "no BMI data"
-    @State private var currentWeight = "no Weight data" {
-        didSet {
-            saveToCoreData()
-        }
-    }
     @State private var miles = "0"
     @State private var runnersBonus: String? {
         didSet {
@@ -61,12 +55,13 @@ struct ProfileView: View {
                                 
                             }
                             if userAccount.first?.goalWeight != nil {
-                                Text("GOAL: \(userAccount.first?.goalWeight ?? "0")")
+                                Text("GOAL Weight: \(userAccount.first?.goalWeight ?? "0")")
+                                Text("Current BMI: \(userAccount.first?.userBMI ?? "no BMI data")")
+                                Text("Current Weight: \(userAccount.first?.currentWeight ?? "no weight data")")
                             } else {
                                 Text("GOAL WEIGHT NOT SET")
                             }
-                            Text("Current BMI: \(currentBMI)")
-                            Text("Current Weight: \(currentWeight)")
+                            
                         }
                         Spacer()
                         Text("You run an average of:")
@@ -92,9 +87,7 @@ struct ProfileView: View {
                         }).padding(12)
                     }.onAppear {
                         if healthKitIsAuthorized {
-                            getBMI()
-                            getWeight()
-                            getRunningWorkouts()
+                           // getRunningWorkouts()
                             
                         } else {
                             getHealthKitAuth()
@@ -136,76 +129,6 @@ struct ProfileView: View {
         }
     }
     
-    func getBMI() {
-        let bodyMassIndexType = HKObjectType.quantityType(forIdentifier: .bodyMassIndex)
-
-        // Use a sortDescriptor to get the recent data first (optional)
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-
-        // Get all samples from the last 24 hours
-        let endDate = Date()
-        let startDate = Date(timeIntervalSince1970: 0)
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-
-        // Create the HealthKit Query
-        let query = HKSampleQuery(
-            sampleType: bodyMassIndexType!,
-            predicate: predicate,
-            limit: 0,
-            sortDescriptors: [sortDescriptor],
-            resultsHandler: updateBMIData
-        )
-        // Execute our query
-        healthStore.execute(query)
-    }
-
-    func updateBMIData(query: HKSampleQuery, results: [HKSample]?, error: Error?) {
-        
-        let currData = results?.first as? HKQuantitySample
-        
-        self.currentBMI = String(currData?.quantity.doubleValue(for: .count()) ?? 0)
- 
-    }
-    
-    func getWeight() {
-        
-        let bodyMassType = HKObjectType.quantityType(forIdentifier: .bodyMass)
-
-        // Use a sortDescriptor to get the recent data first (optional)
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-
-        // Get all samples from the last 24 hours
-        let endDate = Date()
-        let startDate = Date(timeIntervalSince1970: 0)
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-
-        // Create the HealthKit Query
-        let query = HKSampleQuery(
-            sampleType: bodyMassType!,
-            predicate: predicate,
-            limit: 0,
-            sortDescriptors: [sortDescriptor],
-            resultsHandler: updateWeightData
-        )
-        // Execute our query
-        healthStore.execute(query)
-        
-        
-    }
-
-    func updateWeightData(query: HKSampleQuery, results: [HKSample]?, error: Error?) {
-        
-        let currData = results?.first as? HKQuantitySample
-        
-        let weightInKilograms = Measurement(value: currData?.quantity.doubleValue(for: .gramUnit(with: .kilo)) ?? 0, unit: UnitMass.kilograms)
-        let weightString = "\(weightInKilograms.converted(to: .pounds))"
-        
-        self.currentWeight = String(weightString.prefix(3))
-        
-        
-    }
-    
-    
     func getRunningWorkouts() {
 
         var workouts = [HKWorkout]()
@@ -225,9 +148,9 @@ struct ProfileView: View {
             var miles = [Double]()
             
             workouts = results as! [HKWorkout]
-//            for workout in workouts {
-//              //  saveRunToCoreData(workoutItem: workout)
-//            }
+            for workout in workouts {
+                saveRunToCoreData(workoutItem: workout)
+            }
             for workout in workouts.prefix(7) {
                 getRunningWorkoutRoute(workoutItem: workout)
                 if workout.endDate > startDate {
@@ -320,16 +243,74 @@ struct ProfileView: View {
         
     }
     
-    func saveToCoreData() {
+    func getBMI() {
+        let healthStore = HKHealthStore()
+        let bodyMassIndexType = HKObjectType.quantityType(forIdentifier: .bodyMassIndex)
+
+        // Use a sortDescriptor to get the recent data first (optional)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+
+        // Get all samples from the last 24 hours
+        let endDate = Date()
+        let startDate = Date(timeIntervalSince1970: 0)
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
+
+        // Create the HealthKit Query
+        let query = HKSampleQuery(
+            sampleType: bodyMassIndexType!,
+            predicate: predicate,
+            limit: 0,
+            sortDescriptors: [sortDescriptor],
+            resultsHandler: updateBMIData
+        )
+        // Execute our query
+        healthStore.execute(query)
+    }
+    
+    func updateBMIData(query: HKSampleQuery, results: [HKSample]?, error: Error?) {
         
-        userAccount.first?.currentWeight = currentWeight
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Show the error here
-            }
+        if let currData = results?.first as? HKQuantitySample {
+            print("BMI IS ", String(currData.quantity.doubleValue(for: .count())))
+            saveHealthKitBMIDataToUserEntity(bmiString: String(currData.quantity.doubleValue(for: .count())))
         }
+        
+    }
+    
+    func getWeight() {
+        let healthStore = HKHealthStore()
+        let bodyMassType = HKObjectType.quantityType(forIdentifier: .bodyMass)
+
+        // Use a sortDescriptor to get the recent data first (optional)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+
+        // Get all samples from the last 24 hours
+        let endDate = Date()
+        let startDate = Date(timeIntervalSince1970: 0)
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
+
+        // Create the HealthKit Query
+        let query = HKSampleQuery(
+            sampleType: bodyMassType!,
+            predicate: predicate,
+            limit: 0,
+            sortDescriptors: [sortDescriptor],
+            resultsHandler: updateWeightData
+        )
+        // Execute our query
+        healthStore.execute(query)
+        
+        
+    }
+
+    func updateWeightData(query: HKSampleQuery, results: [HKSample]?, error: Error?) {
+        
+        let currData = results?.first as? HKQuantitySample
+        
+        let weightInKilograms = Measurement(value: currData?.quantity.doubleValue(for: .gramUnit(with: .kilo)) ?? 0, unit: UnitMass.kilograms)
+        let weightString = "\(weightInKilograms.converted(to: .pounds))"
+        
+        saveHealthKitWeightDataToUserEntity(weightString: String(weightString.prefix(3)))
+        
     }
     
     func saveRunToCoreData(workoutItem: HKWorkout) {
@@ -352,6 +333,28 @@ struct ProfileView: View {
                 // Show the error here
             }
         }
+    }
+    
+    func saveHealthKitBMIDataToUserEntity(bmiString: String) {
+        userAccount.first?.userBMI = bmiString
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
+        }
+    }
+    
+    func saveHealthKitWeightDataToUserEntity(weightString: String) {
+        userAccount.first?.currentWeight = weightString
+       // if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
+       // }
     }
 
 }

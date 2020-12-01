@@ -18,6 +18,7 @@ extension User {
     }
 
     @NSManaged public var currentWeight: String?
+    @NSManaged public var userBMI: String?
     @NSManaged public var dateMilesLastSet: Date?
     @NSManaged public var goalWeight: String?
     @NSManaged public var shoeMaxMiles: Int16
