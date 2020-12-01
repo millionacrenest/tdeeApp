@@ -13,7 +13,7 @@ import Combine
 
 struct RunsDetailView: View {
     
-    var workoutItem: HKWorkout
+    var workoutItem: RunLogged
     
     @Environment(\.managedObjectContext) var managedObjectContext
    
@@ -32,7 +32,7 @@ struct RunsDetailView: View {
         ScrollView {
             VStack {
                 
-                RunView(dateRun: "\(workoutItem.endDate)")
+                RunView(workoutItem: workoutItem)
                 Text("Run completed in \(intervalToShow ?? "")")
                 Text("Run distance: \(distanceToShow ?? "") miles")
                 Text("Run calories: \(caloriesBurned ?? "")")
@@ -63,9 +63,9 @@ struct RunsDetailView: View {
                 
             }.onAppear {
                 
-                intervalToShow = formatRunTime(interval: workoutItem.duration)
-                distanceToShow = String(format: "%.0f", workoutItem.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
-                caloriesBurned = String(format: "%.0f", workoutItem.totalEnergyBurned?.doubleValue(for: HKUnit.kilocalorie()) ?? 0)
+//                intervalToShow = formatRunTime(interval: workoutItem.duration)
+//                distanceToShow = String(format: "%.0f", workoutItem.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
+//                caloriesBurned = String(format: "%.0f", workoutItem.totalEnergyBurned?.doubleValue(for: HKUnit.kilocalorie()) ?? 0)
             }.sheet(isPresented: $isShowPhotoLibrary) {
                 ImagePicker(selectedImage: self.$image, sourceType: .camera)
             }

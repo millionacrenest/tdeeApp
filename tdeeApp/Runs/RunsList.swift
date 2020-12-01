@@ -11,8 +11,14 @@ import HealthKit
 
 struct RunsList: View {
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        entity: RunLogged.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \RunLogged.dateRun, ascending: true)
+        ]
+    ) var workouts: FetchedResults<RunLogged>
     
-    @State var workouts = [HKWorkout]()
     
     var body: some View {
         VStack {
@@ -23,34 +29,8 @@ struct RunsList: View {
 //
             }
         }
-    .onAppear {
-            getRunningWorkouts()
-        }
     }
     
-    func getRunningWorkouts() {
-        
-        let healthStore = HKHealthStore()
-
-        let predicate =  HKQuery.predicateForWorkouts(with: HKWorkoutActivityType.running)
-           
-           let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
-           
-           let sampleQuery = HKSampleQuery(sampleType: HKWorkoutType.workoutType(), predicate: predicate, limit: 0, sortDescriptors: [sortDescriptor])
-               { (sampleQuery, results, error ) -> Void in
-
-                   if let queryError = error {
-                       print( "There was an error while reading the samples: \(queryError.localizedDescription)")
-                   }
-            
-        
-            workouts = results as! [HKWorkout]
-            
-           }
-        
-        healthStore.execute(sampleQuery)
-        
-    }
 }
 
 struct RunsList_Previews: PreviewProvider {

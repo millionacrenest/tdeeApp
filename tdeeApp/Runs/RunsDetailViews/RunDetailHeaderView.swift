@@ -10,31 +10,32 @@ import SwiftUI
 
 struct RunDetailHeaderView: View {
     
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest var runInfo: FetchedResults<RunLogged>
-    
-    @State private var runDescription: String = ""
-    @State private var runImage = UIImage()
-    @State private var isEditing = false
-    
+//    @Environment(\.managedObjectContext) var managedObjectContext
+//    @FetchRequest var runInfo: FetchedResults<RunLogged>
+//
+//    @State private var runDescription: String = ""
+//    @State private var runImage = UIImage()
+//    @State private var isEditing = false
+//
     var body: some View {
         HStack {
-            Image(uiImage: UIImage(data: runInfo.first?.runImage ?? Data()) ?? UIImage()).resizable()
-                .scaledToFill()
-                .frame(minWidth: UIScreen.main.bounds.width, maxWidth: UIScreen.main.bounds.width)
-            Spacer()
-            VStack {
-                Text(convertAndFormatDateString())
-                Spacer()
-                Text("Distance: 450")
-            }
-            
+            Text("this is the header view")
+//            Image(uiImage: UIImage(data: runInfo.first?.runImage ?? Data()) ?? UIImage()).resizable()
+//                .scaledToFill()
+//                .frame(minWidth: UIScreen.main.bounds.width, maxWidth: UIScreen.main.bounds.width)
+//            Spacer()
+//            VStack {
+//                Text(convertAndFormatDateString())
+//                Spacer()
+//                Text("Distance: 450")
+//            }
+
         }
     }
-    
-    func convertAndFormatDateString() -> String {
-        
-        return "Dec 1, 2020"
-    }
+//
+//    func convertAndFormatDateString() -> String {
+//
+//        return "Dec 1, 2020"
+//    }
     
 }

@@ -11,17 +11,16 @@ import HealthKit
 
 struct RunsRow: View {
     
-    var workoutItem: HKWorkout
-    @Environment(\.managedObjectContext) var managedObjectContext
+    var workoutItem: RunLogged
     
     var body: some View {
         VStack {
-            Text("Run completed: \(workoutItem.endDate)")
+            Text("Run completed: \(workoutItem.dateRun ?? "")")
             Spacer()
-            Text("Total Distance: \(workoutItem.totalDistance!)")
-            Text("Duration: \(workoutItem.duration)")
-            Text("Calories Burned: \(workoutItem.totalEnergyBurned!)")
-            Text("UUID \(workoutItem.uuid)")
+            Text("Total Distance: \(workoutItem.distance ?? "")")
+//            Text("Duration: \(workoutItem.)")
+//            Text("Calories Burned: \(workoutItem.totalEnergyBurned!)")
+            Text("UUID \(workoutItem.runUUID?.uuidString ?? "0")")
         }
     }
     

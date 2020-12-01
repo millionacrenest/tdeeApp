@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RunDetail : View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest var runInfo: FetchedResults<RunLogged>
+    var workoutItem: RunLogged
     
     @State private var runDescription: String = ""
     @State private var runImage = UIImage()
@@ -18,7 +18,7 @@ struct RunDetail : View {
     
     var body: some View {
         VStack {
-            Text("run info \(runInfo.first?.dateRun ?? "")")
+            Text("run info \(workoutItem.dateRun ?? "TEST")")
             Spacer()
             TextView(text: $runDescription).frame(minWidth: 300, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
             
@@ -29,7 +29,7 @@ struct RunDetail : View {
                 Text("SAVE CHANGES")
             }
             Spacer()
-            Image(uiImage: UIImage(data: runInfo.first?.runImage ?? Data()) ?? UIImage()).resizable()
+            Image(uiImage: UIImage(data: workoutItem.runImage ?? Data()) ?? UIImage()).resizable()
                 .scaledToFill()
                 .frame(minWidth: UIScreen.main.bounds.width, maxWidth: UIScreen.main.bounds.width)
             Spacer()
@@ -38,15 +38,15 @@ struct RunDetail : View {
                 .frame(minWidth: UIScreen.main.bounds.width, maxWidth: UIScreen.main.bounds.width)
             
         }.onAppear {
-            runImage = UIImage(data: runInfo.first?.runImage ?? Data()) ?? UIImage()
-            runDescription = runInfo.first?.runDescription ?? ""
+            runImage = UIImage(data: workoutItem.runImage ?? Data()) ?? UIImage()
+            runDescription = workoutItem.runDescription ?? ""
         }
     }
     
     func saveRunData() {
         
-        runInfo.first?.runDescription = runDescription
-        runInfo.first?.runImage = runImage.jpegData(compressionQuality: 1.0)
+        workoutItem.runDescription = runDescription
+        workoutItem.runImage = runImage.jpegData(compressionQuality: 1.0)
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
