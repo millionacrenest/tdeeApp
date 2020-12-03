@@ -8,8 +8,6 @@
 
 import SwiftUI
 import HealthKit
-import CoreData
-import Combine
 
 struct RunsDetailView: View {
     
@@ -28,15 +26,15 @@ struct RunsDetailView: View {
     
     var body: some View {
         
-
+        
         ScrollView {
             VStack {
-                
+                RunMapView()
                 RunView(workoutItem: workoutItem)
                 Text("Run completed in \(durationToShow ?? "")")
                 Text("Run distance: \(distanceToShow ?? "") miles")
                 Text("Run calories: \(caloriesBurned ?? "")")
-                
+
                 Image(uiImage: self.image)
                     .resizable()
                     .scaledToFill()
@@ -59,8 +57,8 @@ struct RunsDetailView: View {
                     .cornerRadius(20)
                     .padding(.horizontal)
                 }
-            
-                
+
+
             }.onAppear {
                 durationToShow = workoutItem.duration
                 distanceToShow = workoutItem.distance

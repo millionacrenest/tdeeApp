@@ -14,13 +14,16 @@ struct RunsRow: View {
     var workoutItem: RunLogged
     
     var body: some View {
-        VStack {
-            Text("Run completed: \(workoutItem.dateRun)")
-            Spacer()
-            Text("Total Distance: \(workoutItem.distance ?? "")")
-//            Text("Duration: \(workoutItem.)")
-//            Text("Calories Burned: \(workoutItem.totalEnergyBurned!)")
-            Text("UUID \(workoutItem.runUUID?.uuidString ?? "0")")
+        HStack {
+            RunMapView()
+            VStack {
+                Text("Run completed: \(workoutItem.dateRun)")
+                Spacer()
+                Text("Total Distance: \(workoutItem.distance ?? "")")
+    //            Text("Duration: \(workoutItem.)")
+    //            Text("Calories Burned: \(workoutItem.totalEnergyBurned!)")
+                Text("UUID \(workoutItem.runUUID?.uuidString ?? "0")")
+            }
         }
     }
     

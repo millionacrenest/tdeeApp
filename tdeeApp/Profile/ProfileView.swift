@@ -42,17 +42,19 @@ struct ProfileView: View {
     
     
     var body: some View {
+        
         NavigationView {
             ScrollView {
                 ZStack {
                     VStack {
                         VStack {
+
                             ZStack {
                             Image("fixx").resizable()
                                 .clipShape(Circle()).frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/2.5)
                                 .shadow(radius: 10)
                                 .overlay(Circle().stroke(Color.gray, lineWidth: 5))
-                                
+
                             }
                             if userAccount.first?.goalWeight != nil {
                                 Text("GOAL Weight: \(userAccount.first?.goalWeight ?? "0")")
@@ -61,7 +63,7 @@ struct ProfileView: View {
                             } else {
                                 Text("GOAL WEIGHT NOT SET")
                             }
-                            
+
                         }
                         Spacer()
                         Text("You run an average of:")
@@ -87,7 +89,7 @@ struct ProfileView: View {
                         }).padding(12)
                     }.onAppear {
                         getHealthKitAuth()
-                        
+
                     }
                 }
             }.navigationTitle("Runner's Bonus")
@@ -181,7 +183,9 @@ struct ProfileView: View {
                 // Handle any errors here.
                 fatalError("The initial query failed.")
             }
-            
+            if let route = samples?.first as? HKWorkoutRoute {
+                getRouteData(route: route)
+            }
             
            
         }
@@ -194,12 +198,43 @@ struct ProfileView: View {
             }
             
             // Process updates or additions here.
+            print("updated samples: ", samples?.first?.sampleType ?? [HKSample]())
             
             
         }
 
         healthStore.execute(routeQuery)
         
+    }
+    
+    func getRouteData(route: HKWorkoutRoute) {
+        // Create the route query.
+        let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
+            
+            // This block may be called multiple times.
+            
+            if let error = errorOrNil {
+                // Handle any errors here.
+                return
+            }
+            
+            guard let locations = locationsOrNil else {
+                fatalError("*** Invalid State: This can only fail if there was an error. ***")
+            }
+            print("locations coordinate", locations.first?.coordinate)
+            
+            // Do something with this batch of location data.
+                
+            if done {
+                // The query returned all the location data associated with the route.
+                // Do something with the complete data set.
+            }
+            
+            // You can stop the query by calling:
+            // store.stop(query)
+            
+        }
+        healthStore.execute(query)
     }
     
     func getCurrentCaloriesInAndDaysToLoseAPound() {

@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct RunDetail : View {
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     var workoutItem: RunLogged
     
@@ -17,11 +18,13 @@ struct RunDetail : View {
     @State private var isEditing = false
     
     var body: some View {
+
         VStack {
+
             Text("run info \(workoutItem.dateRun)")
             Spacer()
             TextView(text: $runDescription).frame(minWidth: 300, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-            
+
             Spacer()
             Button(action: {
                 saveRunData()
@@ -36,7 +39,7 @@ struct RunDetail : View {
             ImagePicker(selectedImage: $runImage, sourceType: .camera)
                 .scaledToFill()
                 .frame(minWidth: UIScreen.main.bounds.width, maxWidth: UIScreen.main.bounds.width)
-            
+
         }.onAppear {
             runImage = UIImage(data: workoutItem.runImage ?? Data()) ?? UIImage()
             runDescription = workoutItem.runDescription ?? ""
