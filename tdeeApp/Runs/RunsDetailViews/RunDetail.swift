@@ -18,7 +18,7 @@ struct RunDetail : View {
     
     var body: some View {
         VStack {
-            Text("run info \(workoutItem.dateRun ?? "TEST")")
+            Text("run info \(workoutItem.dateRun)")
             Spacer()
             TextView(text: $runDescription).frame(minWidth: 300, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
             

@@ -15,7 +15,7 @@ struct RunsRow: View {
     
     var body: some View {
         VStack {
-            Text("Run completed: \(workoutItem.dateRun ?? "")")
+            Text("Run completed: \(workoutItem.dateRun)")
             Spacer()
             Text("Total Distance: \(workoutItem.distance ?? "")")
 //            Text("Duration: \(workoutItem.)")

@@ -8,8 +8,9 @@
     </entity>
     <entity name="RunLogged" representedClassName="RunLogged" syncable="YES">
         <attribute name="caloriesBurned" optional="YES" attributeType="String"/>
-        <attribute name="dateRun" optional="YES" attributeType="String"/>
+        <attribute name="dateRun" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="distance" optional="YES" attributeType="String"/>
+        <attribute name="duration" optional="YES" attributeType="String"/>
         <attribute name="runDescription" optional="YES" attributeType="String"/>
         <attribute name="runImage" optional="YES" attributeType="Binary"/>
         <attribute name="runUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -18,13 +19,13 @@
         <attribute name="currentWeight" optional="YES" attributeType="String"/>
         <attribute name="dateMilesLastSet" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goalWeight" optional="YES" attributeType="String"/>
-        <attribute name="shoeMaxMiles" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="shoeMaxMiles" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="userBMI" optional="YES" attributeType="String"/>
         <attribute name="userID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
     <elements>
         <element name="ProgressEntity" positionX="-27" positionY="18" width="128" height="89"/>
-        <element name="RunLogged" positionX="-27" positionY="72" width="128" height="119"/>
+        <element name="RunLogged" positionX="-27" positionY="72" width="128" height="134"/>
         <element name="User" positionX="-27" positionY="45" width="128" height="119"/>
     </elements>
 </model>

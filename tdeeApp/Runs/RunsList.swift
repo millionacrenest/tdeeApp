@@ -15,7 +15,7 @@ struct RunsList: View {
     @FetchRequest(
         entity: RunLogged.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \RunLogged.dateRun, ascending: true)
+            NSSortDescriptor(keyPath: \RunLogged.dateRun, ascending: false)
         ]
     ) var workouts: FetchedResults<RunLogged>
     

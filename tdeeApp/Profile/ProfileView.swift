@@ -20,6 +20,12 @@ struct ProfileView: View {
             NSSortDescriptor(keyPath: \User.userID, ascending: true)
         ]
     ) var userAccount: FetchedResults<User>
+    @FetchRequest(
+        entity: RunLogged.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \RunLogged.dateRun, ascending: false)
+        ]
+    ) var workouts: FetchedResults<RunLogged>
     
     @State private var miles = "0"
     @State private var runnersBonus: String? {
@@ -30,13 +36,7 @@ struct ProfileView: View {
     @State private var selectedDayValue: Double = 0
     @State private var daysToLoseAPound = "0"
     @State private var caloriesToEatPerDay = "1600"
-    @State private var healthKitIsAuthorized: Bool = false {
-        didSet {
-            getBMI()
-            getWeight()
-            getRunningWorkouts()
-        }
-    }
+    @State private var healthKitIsAuthorized: Bool = false
     
     let healthStore = HKHealthStore()
     
@@ -86,12 +86,7 @@ struct ProfileView: View {
                             updateCaloriesForDaysToLoseAPound()
                         }).padding(12)
                     }.onAppear {
-                        if healthKitIsAuthorized {
-                           // getRunningWorkouts()
-                            
-                        } else {
-                            getHealthKitAuth()
-                        }
+                        getHealthKitAuth()
                         
                     }
                 }
@@ -125,6 +120,9 @@ struct ProfileView: View {
             return
           }
           healthKitIsAuthorized = true
+          getBMI()
+          getWeight()
+          getRunningWorkouts()
           print("HealthKit Successfully Authorized.")
         }
     }
@@ -148,15 +146,17 @@ struct ProfileView: View {
             var miles = [Double]()
             
             workouts = results as! [HKWorkout]
-            for workout in workouts {
-                saveRunToCoreData(workoutItem: workout)
-            }
-            for workout in workouts.prefix(7) {
-                getRunningWorkoutRoute(workoutItem: workout)
-                if workout.endDate > startDate {
-                    miles.append(workout.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
+            
+                for workout in workouts {
+                    saveRunToCoreData(workoutItem: workout)
                 }
-            }
+                for workout in workouts.prefix(7) {
+                    getRunningWorkoutRoute(workoutItem: workout)
+                    if workout.endDate > startDate {
+                        miles.append(workout.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
+                    }
+                }
+            
             
             let averageOfMiles = miles.reduce(0, +)
             self.miles = String(averageOfMiles/7)
@@ -314,25 +314,33 @@ struct ProfileView: View {
     }
     
     func saveRunToCoreData(workoutItem: HKWorkout) {
-        
-        let runLogged = RunLogged(context: managedObjectContext)
-        runLogged.runUUID = workoutItem.uuid
-        runLogged.dateRun = "\(workoutItem.endDate)"
-        runLogged.caloriesBurned = String(format: "%.0f", workoutItem.totalEnergyBurned?.doubleValue(for: HKUnit.kilocalorie()) ?? 0)
-        runLogged.distance = String(format: "%.0f", workoutItem.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
-       
-        
-        //let data = image.jpegData(compressionQuality: 1.0)
-     //   runLogged.runUUID = workoutItem
-        
-        // save image
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Show the error here
+        let foundRun = workouts.filter { $0.runUUID == workoutItem.uuid }
+        if foundRun.first?.runUUID == nil {
+            let runLogged = RunLogged(context: managedObjectContext)
+            runLogged.runUUID = workoutItem.uuid
+            runLogged.dateRun = workoutItem.endDate
+            runLogged.caloriesBurned = String(format: "%.0f", workoutItem.totalEnergyBurned?.doubleValue(for: HKUnit.kilocalorie()) ?? 0)
+            runLogged.distance = String(format: "%.0f", workoutItem.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
+            
+            runLogged.duration = formatRunTime(interval: workoutItem.duration)
+            if managedObjectContext.hasChanges {
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    // Show the error here
+                }
             }
+        } else {
+            print("FOUND RUN, SKIP")
         }
+    }
+    
+    func formatRunTime(interval: TimeInterval) -> String {
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated
+        return formatter.string(from: TimeInterval(interval))!
     }
     
     func saveHealthKitBMIDataToUserEntity(bmiString: String) {

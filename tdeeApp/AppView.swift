@@ -47,7 +47,7 @@ struct AppView: View {
                     }
                     
             }.onAppear {
-                if (userAccount.first == nil) {
+                if (userAccount.count == 0) {
                     let userAccount = User(context: managedObjectContext)
                     userAccount.userID = UUID()
                     if managedObjectContext.hasChanges {
