@@ -41,6 +41,8 @@
 		F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DC0256466E7008F7A87 /* TextView.swift */; };
 		F3AA1DD025646B1E008F7A87 /* RunDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */; };
 		F3AA1DD525646C12008F7A87 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DD425646C12008F7A87 /* RunView.swift */; };
+		F3C2B5B925800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2B5B725800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift */; };
+		F3C2B5BA25800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2B5B825800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift */; };
 		F3C821C42559BE04007D4207 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C821C32559BE04007D4207 /* HealthKit.framework */; };
 		F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */; };
 		F3C821E42559E605007D4207 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821E32559E605007D4207 /* AppView.swift */; };
@@ -103,6 +105,8 @@
 		F3AA1DC0256466E7008F7A87 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetail.swift; sourceTree = "<group>"; };
 		F3AA1DD425646C12008F7A87 /* RunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
+		F3C2B5B725800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationPoint+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F3C2B5B825800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationPoint+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F3C821C12559BE04007D4207 /* tdeeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tdeeApp.entitlements; sourceTree = "<group>"; };
 		F3C821C32559BE04007D4207 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 		F318093C24F00B9A00199AA3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F3C2B5B725800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift */,
+				F3C2B5B825800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift */,
 				F3053D2D2562D1D9006F60DA /* RunLogged+CoreDataClass.swift */,
 				F3053D2E2562D1D9006F60DA /* RunLogged+CoreDataProperties.swift */,
 				F332DC68255317E30002AA8C /* User+CoreDataClass.swift */,
@@ -451,6 +457,7 @@
 				F383EACE24D79B7100075619 /* ProfileView.swift in Sources */,
 				F364EA64255EFB09008AAC25 /* RunsDetailView.swift in Sources */,
 				F3186EC7257EE2B000DD54DC /* HealthKitDataManager.swift in Sources */,
+				F3C2B5B925800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift in Sources */,
 				F364EA3B255DEF1C008AAC25 /* RunsList.swift in Sources */,
 				F364095D255DB27F00051A48 /* PickerView.swift in Sources */,
 				F3640954255D9FD100051A48 /* SettingsView.swift in Sources */,
@@ -472,6 +479,7 @@
 				F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */,
 				F3053D2F2562D1D9006F60DA /* RunLogged+CoreDataClass.swift in Sources */,
 				F318094824F00F4500199AA3 /* ProgressView.swift in Sources */,
+				F3C2B5BA25800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

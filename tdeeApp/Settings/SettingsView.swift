@@ -313,11 +313,22 @@ struct SettingsView: View {
         
         runLogged.duration = formatRunTime(interval: workoutItem.duration)
         print("TRM coordinates passed to core data", coordinates)
-        runLogged.routeCoordinates = coordinates
+        
+        for coordinate in coordinates {
+            let locationPoint = LocationPoint(context: managedObjectContext)
+            locationPoint.latitude = coordinate.latitude
+            locationPoint.longitude = coordinate.longitude
+            locationPoint.pointUUID = UUID()
+            locationPoint.runUUID = runLogged.runUUID
+            locationPoint.origin = runLogged
+        }
+        
+        
         
         if managedObjectContext.hasChanges {
             do {
                 print("saved this run: ", runLogged.runUUID?.uuidString)
+                print("saved locations count ", runLogged.locationPointArray.count)
                 try managedObjectContext.save()
                 
             } catch {

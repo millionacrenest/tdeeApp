@@ -11,7 +11,6 @@ import MapKit
 import Polyline
 
 struct RunMapView: View {
-    
     var workoutItem: RunLogged
     
     var body: some View {
@@ -19,6 +18,7 @@ struct RunMapView: View {
             MapView(workoutItem: workoutItem)
         }
     }
+    
 
 }
 
@@ -51,8 +51,6 @@ struct MapView: UIViewRepresentable {
   private let mapZoomEdgeInsets = UIEdgeInsets(top: 30.0, left: 30.0, bottom: 30.0, right: 30.0)
     
   var workoutItem: RunLogged
-  
-  
   func makeCoordinator() -> MapViewCoordinator {
     MapViewCoordinator(self)
   }
@@ -69,9 +67,10 @@ struct MapView: UIViewRepresentable {
   }
   
   private func updateOverlays(from mapView: MKMapView) {
-   
+    
     mapView.removeOverlays(mapView.overlays)
-    let polyline = MKPolyline(coordinates: workoutItem.routeCoordinates ?? [CLLocationCoordinate2D](), count: workoutItem.routeCoordinates?.count ?? 0)
+    
+    let polyline = MKPolyline(coordinates: workoutItem.coreLocationArray, count: workoutItem.coreLocationArray.count)
     mapView.addOverlay(polyline)
     setMapZoomArea(map: mapView, polyline: polyline, edgeInsets: mapZoomEdgeInsets, animated: true)
   }
