@@ -28,6 +28,8 @@ struct RunsList: View {
                 }
 //
             }
+        }.onAppear {
+            print(workouts.count)
         }
     }
     

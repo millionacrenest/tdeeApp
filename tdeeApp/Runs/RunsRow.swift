@@ -8,6 +8,7 @@
 
 import SwiftUI
 import HealthKit
+import MapKit
 
 struct RunsRow: View {
     
@@ -17,12 +18,12 @@ struct RunsRow: View {
         HStack {
             RunMapView()
             VStack {
-                Text("Run completed: \(workoutItem.dateRun)")
+                Text("Run completed: \(workoutItem.dateRun ?? Date())")
                 Spacer()
                 Text("Total Distance: \(workoutItem.distance ?? "")")
     //            Text("Duration: \(workoutItem.)")
     //            Text("Calories Burned: \(workoutItem.totalEnergyBurned!)")
-                Text("UUID \(workoutItem.runUUID?.uuidString ?? "0")")
+                Text("Coordinates \(workoutItem.routeCoordinates?.debugDescription ?? "MAPQUEST")")
             }
         }
     }

@@ -17,13 +17,14 @@ extension RunLogged {
         return NSFetchRequest<RunLogged>(entityName: "RunLogged")
     }
 
-    @NSManaged public var dateRun: Date
+    @NSManaged public var dateRun: Date?
     @NSManaged public var runDescription: String?
     @NSManaged public var runImage: Data?
     @NSManaged public var runUUID: UUID?
     @NSManaged public var distance: String?
     @NSManaged public var duration: String?
     @NSManaged public var caloriesBurned: String?
+    @NSManaged public var routeCoordinates: [CLLocationCoordinate2D]?
 
 }
 

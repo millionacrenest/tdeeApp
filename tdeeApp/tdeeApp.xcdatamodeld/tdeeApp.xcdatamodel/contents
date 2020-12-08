@@ -11,6 +11,7 @@
         <attribute name="dateRun" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="distance" optional="YES" attributeType="String"/>
         <attribute name="duration" optional="YES" attributeType="String"/>
+        <attribute name="routeCoordinates" optional="YES" attributeType="Transformable"/>
         <attribute name="runDescription" optional="YES" attributeType="String"/>
         <attribute name="runImage" optional="YES" attributeType="Binary"/>
         <attribute name="runUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -25,7 +26,7 @@
     </entity>
     <elements>
         <element name="ProgressEntity" positionX="-27" positionY="18" width="128" height="89"/>
-        <element name="RunLogged" positionX="-27" positionY="72" width="128" height="134"/>
+        <element name="RunLogged" positionX="-27" positionY="72" width="128" height="149"/>
         <element name="User" positionX="-27" positionY="45" width="128" height="119"/>
     </elements>
 </model>

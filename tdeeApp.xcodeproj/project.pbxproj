@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		F318094024F00D1300199AA3 /* ProgressList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318093F24F00D1300199AA3 /* ProgressList.swift */; };
 		F318094624F00EC800199AA3 /* ProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094524F00EC800199AA3 /* ProgressRow.swift */; };
 		F318094824F00F4500199AA3 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094724F00F4500199AA3 /* ProgressView.swift */; };
+		F3186EC7257EE2B000DD54DC /* HealthKitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3186EC6257EE2B000DD54DC /* HealthKitDataManager.swift */; };
 		F324F83425796F1900930854 /* RunMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324F83325796F1900930854 /* RunMapView.swift */; };
 		F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC68255317E30002AA8C /* User+CoreDataClass.swift */; };
 		F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */; };
@@ -36,6 +37,7 @@
 		F383EAD624D79B7400075619 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F383EAD424D79B7400075619 /* LaunchScreen.storyboard */; };
 		F383EAE124D79B7400075619 /* tdeeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAE024D79B7400075619 /* tdeeAppTests.swift */; };
 		F383EAEC24D79B7400075619 /* tdeeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAEB24D79B7400075619 /* tdeeAppUITests.swift */; };
+		F3894705257B02100053FAEF /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = F3894704257B02100053FAEF /* Polyline */; };
 		F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DC0256466E7008F7A87 /* TextView.swift */; };
 		F3AA1DD025646B1E008F7A87 /* RunDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DCF25646B1E008F7A87 /* RunDetail.swift */; };
 		F3AA1DD525646C12008F7A87 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DD425646C12008F7A87 /* RunView.swift */; };
@@ -69,6 +71,7 @@
 		F318093F24F00D1300199AA3 /* ProgressList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressList.swift; sourceTree = "<group>"; };
 		F318094524F00EC800199AA3 /* ProgressRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRow.swift; sourceTree = "<group>"; };
 		F318094724F00F4500199AA3 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		F3186EC6257EE2B000DD54DC /* HealthKitDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitDataManager.swift; sourceTree = "<group>"; };
 		F324F83325796F1900930854 /* RunMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunMapView.swift; sourceTree = "<group>"; };
 		F332DC68255317E30002AA8C /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3894705257B02100053FAEF /* Polyline in Frameworks */,
 				F3C821C42559BE04007D4207 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +254,7 @@
 				F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */,
 				F383EAD124D79B7400075619 /* Preview Content */,
 				F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */,
+				F3186EC6257EE2B000DD54DC /* HealthKitDataManager.swift */,
 				F34E06E6255B13F900A1E60B /* Utilities */,
 			);
 			path = tdeeApp;
@@ -316,6 +321,9 @@
 			dependencies = (
 			);
 			name = tdeeApp;
+			packageProductDependencies = (
+				F3894704257B02100053FAEF /* Polyline */,
+			);
 			productName = tdeeApp;
 			productReference = F383EAC324D79B7100075619 /* tdeeApp.app */;
 			productType = "com.apple.product-type.application";
@@ -388,6 +396,9 @@
 				Base,
 			);
 			mainGroup = F383EABA24D79B7100075619;
+			packageReferences = (
+				F3894703257B02100053FAEF /* XCRemoteSwiftPackageReference "Polyline" */,
+			);
 			productRefGroup = F383EAC424D79B7100075619 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -439,6 +450,7 @@
 				F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */,
 				F383EACE24D79B7100075619 /* ProfileView.swift in Sources */,
 				F364EA64255EFB09008AAC25 /* RunsDetailView.swift in Sources */,
+				F3186EC7257EE2B000DD54DC /* HealthKitDataManager.swift in Sources */,
 				F364EA3B255DEF1C008AAC25 /* RunsList.swift in Sources */,
 				F364095D255DB27F00051A48 /* PickerView.swift in Sources */,
 				F3640954255D9FD100051A48 /* SettingsView.swift in Sources */,
@@ -788,6 +800,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F3894703257B02100053FAEF /* XCRemoteSwiftPackageReference "Polyline" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raphaelmor/Polyline.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F3894704257B02100053FAEF /* Polyline */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3894703257B02100053FAEF /* XCRemoteSwiftPackageReference "Polyline" */;
+			productName = Polyline;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */ = {

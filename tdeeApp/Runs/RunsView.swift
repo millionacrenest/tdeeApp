@@ -10,6 +10,8 @@ import SwiftUI
 
 struct RunsView: View {
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     @State var showingDetail = false
     
     var body: some View {
