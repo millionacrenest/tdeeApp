@@ -22,6 +22,7 @@ struct RunsList: View {
     
     var body: some View {
         VStack {
+            Text("workouts count \(workouts.count)")
            List(workouts) { workout in
             NavigationLink(destination: RunsDetailView(workoutItem: workout)) {
                 RunsRow(workoutItem: workout)

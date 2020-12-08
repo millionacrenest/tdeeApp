@@ -107,11 +107,10 @@ struct SettingsView: View {
             workouts = results as? [HKWorkout] ?? [HKWorkout]()
             
                 for workout in workouts {
+                        self.getRunningWorkoutRoute(workoutItem: workout)
                     
-                    //let coordinates = self.getRunningWorkoutRoute(workoutItem: workout)
-                    print("workoutUUID ", workout.uuid)
-                
-                    self.saveToCoreData(workoutItem: workout)
+                    
+                    
                 }
                 for workout in workouts.prefix(7) {
                     
@@ -132,16 +131,8 @@ struct SettingsView: View {
         
     }
     
-    func getRunningWorkoutRoute(workoutItem: HKWorkout) -> [CLLocationCoordinate2D] {
-        var routeCoordinates = [CLLocationCoordinate2D]() {
-            didSet {
-                print(routeCoordinates)
-            }
-        }
-        
+    func getRunningWorkoutRoute(workoutItem: HKWorkout) {
         let runningObjectQuery = HKQuery.predicateForObjects(from: workoutItem)
-        
-       
         
         let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
             
@@ -150,7 +141,10 @@ struct SettingsView: View {
                 fatalError("The initial query failed.")
             }
             if let route = samples?.first as? HKWorkoutRoute {
+                print("route", route)
+                print("workout item", workoutItem.uuid)
                 self.getRouteData(route: route, workoutItem: workoutItem)
+                
             }
             
            
@@ -164,18 +158,17 @@ struct SettingsView: View {
             }
             
             // Process updates or additions here.
-            //print("updated samples: ", samples?.first?.sampleType ?? [HKSample]())
-            
+            print("updated samples: ", samples?.first?.sampleType ?? [HKSample]())
             
         }
 
         healthStore.execute(routeQuery)
-        return routeCoordinates
         
     }
     
     func getRouteData(route: HKWorkoutRoute, workoutItem: HKWorkout) {
         var locationCoordinates = [CLLocationCoordinate2D]()
+        
         // Create the route query.
         let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
             
@@ -204,10 +197,15 @@ struct SettingsView: View {
 
             // You can stop the query by calling:
             // store.stop(query)
-            
+                let foundRun = workoutItems.filter { $0.runUUID == workoutItem.uuid }
+                
+                self.saveRunToCoreData(workoutItem: workoutItem, coordinates: locationCoordinates)
+                
             }
-            healthStore.execute(query)
+            
+            
         }
+        healthStore.execute(query)
     }
     
     func getBMI() {
@@ -280,7 +278,7 @@ struct SettingsView: View {
     }
     
     func saveBMIToCoreData(bmiString: String) {
-        print("saving user (bmiString ")
+        print("saving user bmiString ")
         userAccount.first?.userBMI = bmiString
         
         if managedObjectContext.hasChanges {
@@ -305,7 +303,7 @@ struct SettingsView: View {
         }
     }
     
-    func saveToCoreData(workoutItem: HKWorkout) {
+    func saveRunToCoreData(workoutItem: HKWorkout, coordinates: [CLLocationCoordinate2D] ) {
         let runLogged = RunLogged(context: managedObjectContext)
         runLogged.runUUID = workoutItem.uuid
         print("saving run to core data", workoutItem.uuid)
@@ -314,6 +312,8 @@ struct SettingsView: View {
         runLogged.distance = String(format: "%.0f", workoutItem.totalDistance?.doubleValue(for: HKUnit.mile()) ?? 0)
         
         runLogged.duration = formatRunTime(interval: workoutItem.duration)
+        print("TRM coordinates passed to core data", coordinates)
+        runLogged.routeCoordinates = coordinates
         
         if managedObjectContext.hasChanges {
             do {

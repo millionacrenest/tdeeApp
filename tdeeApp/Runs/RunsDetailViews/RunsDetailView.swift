@@ -29,7 +29,6 @@ struct RunsDetailView: View {
         
         ScrollView {
             VStack {
-                RunMapView()
                 RunView(workoutItem: workoutItem)
                 Text("Run completed in \(durationToShow ?? "")")
                 Text("Run distance: \(distanceToShow ?? "") miles")

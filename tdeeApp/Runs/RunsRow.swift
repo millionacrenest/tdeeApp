@@ -16,14 +16,12 @@ struct RunsRow: View {
     
     var body: some View {
         HStack {
-            RunMapView()
+            RunMapView(workoutItem: workoutItem)
             VStack {
                 Text("Run completed: \(workoutItem.dateRun ?? Date())")
                 Spacer()
                 Text("Total Distance: \(workoutItem.distance ?? "")")
-    //            Text("Duration: \(workoutItem.)")
-    //            Text("Calories Burned: \(workoutItem.totalEnergyBurned!)")
-                Text("Coordinates \(workoutItem.routeCoordinates?.debugDescription ?? "MAPQUEST")")
+                Text("Calories Burned: \(workoutItem.caloriesBurned ?? "")")
             }
         }
     }

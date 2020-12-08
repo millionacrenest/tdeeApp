@@ -12,14 +12,15 @@ import Polyline
 
 struct RunMapView: View {
     
+    var workoutItem: RunLogged
+    
     var body: some View {
         VStack {
-            MapView()
+            MapView(workoutItem: workoutItem)
         }
     }
 
 }
-
 
 final class MapViewCoordinator: NSObject, MKMapViewDelegate {
   private let map: MapView
@@ -31,7 +32,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
     if let annotationView = views.first, let annotation = annotationView.annotation {
       if annotation is MKUserLocation {
-        let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
         mapView.setRegion(region, animated: true)
       }
     }
@@ -39,34 +40,18 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate {
 
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = MKPolylineRenderer(overlay: overlay)
-    renderer.strokeColor = .blue
+    renderer.strokeColor = .red
     renderer.lineWidth = 3.0
     return renderer
   }
 }
 
-class LocationViewModel: ObservableObject {
-  var locations = [CLLocationCoordinate2D]()
-  
-  func load() {
-    fetchLocations()
-  }
-  
-  private func fetchLocations() {
-    let polyline = Polyline(encodedPolyline: "_evtFpnlW{udr@i{se@rnti@gb|_A{ho`AgtcAfhbEpbtqA")
-    guard let decodedLocations = polyline.locations else { return }
-    locations = decodedLocations.map { CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)}
-  }
-}
-
 
 struct MapView: UIViewRepresentable {
-  private let locationViewModel = LocationViewModel()
   private let mapZoomEdgeInsets = UIEdgeInsets(top: 30.0, left: 30.0, bottom: 30.0, right: 30.0)
+    
+  var workoutItem: RunLogged
   
-  init() {
-    locationViewModel.load()
-  }
   
   func makeCoordinator() -> MapViewCoordinator {
     MapViewCoordinator(self)
@@ -84,8 +69,9 @@ struct MapView: UIViewRepresentable {
   }
   
   private func updateOverlays(from mapView: MKMapView) {
+   
     mapView.removeOverlays(mapView.overlays)
-    let polyline = MKPolyline(coordinates: locationViewModel.locations, count: locationViewModel.locations.count)
+    let polyline = MKPolyline(coordinates: workoutItem.routeCoordinates ?? [CLLocationCoordinate2D](), count: workoutItem.routeCoordinates?.count ?? 0)
     mapView.addOverlay(polyline)
     setMapZoomArea(map: mapView, polyline: polyline, edgeInsets: mapZoomEdgeInsets, animated: true)
   }
@@ -95,9 +81,5 @@ struct MapView: UIViewRepresentable {
   }
 }
 
-struct MapView_Previews: PreviewProvider {
-  static var previews: some View {
-    MapView()
-  }
-}
+
 
