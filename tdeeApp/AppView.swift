@@ -77,7 +77,7 @@ struct AppView: View {
                 
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                 SettingsView().environment(\.managedObjectContext, context)
-            }
+            }.buttonStyle(FilledButton())
     }
     
     

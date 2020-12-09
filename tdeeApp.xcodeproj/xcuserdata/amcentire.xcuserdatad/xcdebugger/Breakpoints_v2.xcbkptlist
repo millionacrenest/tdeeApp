@@ -3,4 +3,22 @@
    uuid = "CD9B0544-FAB7-43E6-BCCC-6619B5B7CB57"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B142E9E9-D8AB-46F9-AF3B-5F910CA00890"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/Developer/Xcode/DerivedData/tdeeApp-fugeditgwzzpxsgrlqsnfwbcisvm/SourcePackages/checkouts/lottie-ios/lottie-swift/src/Public/Animation/AnimationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "play(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

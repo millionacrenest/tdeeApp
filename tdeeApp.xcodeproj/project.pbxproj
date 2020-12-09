@@ -18,6 +18,7 @@
 		F324F83425796F1900930854 /* RunMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324F83325796F1900930854 /* RunMapView.swift */; };
 		F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC68255317E30002AA8C /* User+CoreDataClass.swift */; };
 		F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */; };
+		F346E3E52581682A006D2CD8 /* shoes-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = F346E3E42581682A006D2CD8 /* shoes-animation.json */; };
 		F34E06BE255AFCC500A1E60B /* RunsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06BD255AFCC500A1E60B /* RunsView.swift */; };
 		F34E06C7255AFD0000A1E60B /* ShoesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06C6255AFD0000A1E60B /* ShoesView.swift */; };
 		F34E06E2255B13A300A1E60B /* Color+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34E06E1255B13A300A1E60B /* Color+extensions.swift */; };
@@ -31,6 +32,8 @@
 		F36FE81F25813A8600AC6868 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FE81E25813A8600AC6868 /* CustomSlider.swift */; };
 		F36FE82425813AB700AC6868 /* Double+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FE82325813AB700AC6868 /* Double+extensions.swift */; };
 		F36FE82925815A2B00AC6868 /* FilledButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FE82825815A2B00AC6868 /* FilledButtonView.swift */; };
+		F36FE83225815F9900AC6868 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = F36FE83125815F9900AC6868 /* Lottie */; };
+		F36FE83725815FC100AC6868 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FE83625815FC100AC6868 /* LottieView.swift */; };
 		F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC624D79B7100075619 /* AppDelegate.swift */; };
 		F383EAC924D79B7100075619 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383EAC824D79B7100075619 /* SceneDelegate.swift */; };
 		F383EACC24D79B7100075619 /* tdeeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F383EACA24D79B7100075619 /* tdeeApp.xcdatamodeld */; };
@@ -80,6 +83,7 @@
 		F324F83325796F1900930854 /* RunMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunMapView.swift; sourceTree = "<group>"; };
 		F332DC68255317E30002AA8C /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F346E3E42581682A006D2CD8 /* shoes-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "shoes-animation.json"; path = "../../../../Downloads/shoes-animation.json"; sourceTree = "<group>"; };
 		F34E06BD255AFCC500A1E60B /* RunsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunsView.swift; sourceTree = "<group>"; };
 		F34E06C6255AFD0000A1E60B /* ShoesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoesView.swift; sourceTree = "<group>"; };
 		F34E06E1255B13A300A1E60B /* Color+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extensions.swift"; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 		F36FE81E25813A8600AC6868 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		F36FE82325813AB700AC6868 /* Double+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+extensions.swift"; sourceTree = "<group>"; };
 		F36FE82825815A2B00AC6868 /* FilledButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButtonView.swift; sourceTree = "<group>"; };
+		F36FE83625815FC100AC6868 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		F383EAC324D79B7100075619 /* tdeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tdeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F383EAC624D79B7100075619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F383EAC824D79B7100075619 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +131,7 @@
 			files = (
 				F3894705257B02100053FAEF /* Polyline in Frameworks */,
 				F3C821C42559BE04007D4207 /* HealthKit.framework in Frameworks */,
+				F36FE83225815F9900AC6868 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +191,7 @@
 		F34E06CE255AFD0600A1E60B /* Shoes */ = {
 			isa = PBXGroup;
 			children = (
+				F346E3E42581682A006D2CD8 /* shoes-animation.json */,
 				F34E06C6255AFD0000A1E60B /* ShoesView.swift */,
 			);
 			path = Shoes;
@@ -197,6 +204,7 @@
 				F364EA47255DF6A1008AAC25 /* ImagePicker.swift */,
 				F36FE81E25813A8600AC6868 /* CustomSlider.swift */,
 				F36FE82825815A2B00AC6868 /* FilledButtonView.swift */,
+				F36FE83625815FC100AC6868 /* LottieView.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -338,6 +346,7 @@
 			name = tdeeApp;
 			packageProductDependencies = (
 				F3894704257B02100053FAEF /* Polyline */,
+				F36FE83125815F9900AC6868 /* Lottie */,
 			);
 			productName = tdeeApp;
 			productReference = F383EAC324D79B7100075619 /* tdeeApp.app */;
@@ -413,6 +422,7 @@
 			mainGroup = F383EABA24D79B7100075619;
 			packageReferences = (
 				F3894703257B02100053FAEF /* XCRemoteSwiftPackageReference "Polyline" */,
+				F36FE83025815F9900AC6868 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = F383EAC424D79B7100075619 /* Products */;
 			projectDirPath = "";
@@ -433,6 +443,7 @@
 				F383EAD624D79B7400075619 /* LaunchScreen.storyboard in Resources */,
 				F383EAD324D79B7400075619 /* Preview Assets.xcassets in Resources */,
 				F383EAD024D79B7400075619 /* Assets.xcassets in Resources */,
+				F346E3E52581682A006D2CD8 /* shoes-animation.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +479,7 @@
 				F364EA64255EFB09008AAC25 /* RunsDetailView.swift in Sources */,
 				F3186EC7257EE2B000DD54DC /* HealthKitDataManager.swift in Sources */,
 				F3C2B5B925800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift in Sources */,
+				F36FE83725815FC100AC6868 /* LottieView.swift in Sources */,
 				F364EA3B255DEF1C008AAC25 /* RunsList.swift in Sources */,
 				F364095D255DB27F00051A48 /* PickerView.swift in Sources */,
 				F3640954255D9FD100051A48 /* SettingsView.swift in Sources */,
@@ -658,6 +670,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tdeeApp/tdeeApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"tdeeApp/Preview Content\"";
 				DEVELOPMENT_TEAM = V243T33UAS;
 				ENABLE_PREVIEWS = YES;
@@ -680,6 +693,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tdeeApp/tdeeApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"tdeeApp/Preview Content\"";
 				DEVELOPMENT_TEAM = V243T33UAS;
 				ENABLE_PREVIEWS = YES;
@@ -822,6 +836,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F36FE83025815F9900AC6868 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.9;
+			};
+		};
 		F3894703257B02100053FAEF /* XCRemoteSwiftPackageReference "Polyline" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/raphaelmor/Polyline.git";
@@ -833,6 +855,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F36FE83125815F9900AC6868 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F36FE83025815F9900AC6868 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		F3894704257B02100053FAEF /* Polyline */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F3894703257B02100053FAEF /* XCRemoteSwiftPackageReference "Polyline" */;

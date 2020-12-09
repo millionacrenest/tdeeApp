@@ -9,6 +9,7 @@
 import SwiftUI
 import HealthKit
 import UserNotifications
+import Lottie
 
 struct ShoesView: View {
     
@@ -36,41 +37,39 @@ struct ShoesView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                ZStack {
+               
                     
                     VStack {
-                        
+                        LottieView(filename: "shoes-animation")
                         Text("New Shoes Recorded:")
                         Text(shoeDate, style: .date)
                         
                         Button("Adjust Recorded Date") {
                             self.showingDatePicker.toggle()
-                        }.buttonStyle(FilledButton())
+                        }
                         .sheet(isPresented: $showingDatePicker, onDismiss: getRunningWorkouts) {
                             DatePicker("", selection: $shoeDate, displayedComponents: .date).datePickerStyle(GraphicalDatePickerStyle()).labelsHidden()
                         }
                         Text("You have run \(milesOnShoes ?? 0) miles since \(shoeDate)")
                         Spacer()
-                        Text("You will need new shoes in \(milesRemaining ?? 0) miles")
                         
+                        Text("You will need new shoes in \(milesRemaining ?? 0) miles")
+                        Spacer()
                     }.onAppear {
                         shoeDate = userAccount.first?.dateMilesLastSet ?? Date()
                         getRunningWorkouts()
-                    }
+                        
+                    }.navigationTitle("Shoe Life")
+                    .navigationBarItems(trailing:
+                        Button(action: {
+                            self.showingDetail.toggle()
+                        }) {
+                            Image(systemName: "gear").imageScale(.large)
+                        }.sheet(isPresented: $showingDetail) {
+                            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                            SettingsView().environment(\.managedObjectContext, context)
+                        })
                     
-                    
-                }
-            }.navigationTitle("Shoe Life")
-            .navigationBarItems(trailing:
-                Button(action: {
-                    self.showingDetail.toggle()
-                }) {
-                    Image(systemName: "gear").imageScale(.large)
-                }.sheet(isPresented: $showingDetail) {
-                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                    SettingsView().environment(\.managedObjectContext, context)
-                })
         }
     }
     

@@ -49,7 +49,7 @@ struct RunsDetailView: View {
 
                         Text("Photo library")
                             .font(.headline)
-                    }.buttonStyle(FilledButton())
+                    }
                 }
 
 

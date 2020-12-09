@@ -61,7 +61,7 @@ struct SettingsView: View {
                         Text("Save")
                             
                         
-                    }.buttonStyle(FilledButton())
+                    }
                 }
             }.navigationTitle("Settings")
         }
