@@ -33,7 +33,7 @@ struct ProfileView: View {
             getCurrentCaloriesInAndDaysToLoseAPound()
         }
     }
-    @State private var selectedDayValue: Double = 0
+    @State private var selectedDayValue: Double = 5
     @State private var daysToLoseAPound = "0"
     @State private var caloriesToEatPerDay = "1600"
     @State private var healthKitIsAuthorized: Bool = false
@@ -83,10 +83,24 @@ struct ProfileView: View {
                         }
                         Spacer()
                         Text("Adjust days to lose a pound:")
-                        Slider(value: $selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
-                            self.daysToLoseAPound = String(format: "%.0f", selectedDayValue)
-                            updateCaloriesForDaysToLoseAPound()
-                        }).padding(12)
+                        Text("DAYS: \(selectedDayValue)")
+//                        Slider(value: $selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
+//                            self.daysToLoseAPound = String(format: "%.0f", selectedDayValue)
+//                            updateCaloriesForDaysToLoseAPound()
+//                        }).padding(12)
+                        
+                        CustomSlider(value: $selectedDayValue,   range: (0, 14)) { modifiers in
+                          ZStack {
+                            LinearGradient(gradient: .init(colors: [Color.pink, Color.orange ]), startPoint: .leading, endPoint: .trailing)
+                            ZStack {
+                              Circle().fill(Color.white)
+                              Circle().stroke(Color.black.opacity(0.2), lineWidth: 2)
+                              
+                            }
+                            .padding([.top, .bottom, .leading, .trailing], 2)
+                            .modifier(modifiers.knob)
+                          }.cornerRadius(15)
+                        }.frame(height: 30)
                     }
                 }
             }.navigationTitle("Runner's Bonus")
