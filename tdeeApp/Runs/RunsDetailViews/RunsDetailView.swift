@@ -49,12 +49,7 @@ struct RunsDetailView: View {
 
                         Text("Photo library")
                             .font(.headline)
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(20)
-                    .padding(.horizontal)
+                    }.buttonStyle(FilledButton())
                 }
 
 

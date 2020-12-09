@@ -26,7 +26,7 @@ struct RunsView: View {
                 Image(systemName: "gear").imageScale(.large)
             }.sheet(isPresented: $showingDetail) {
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                RunsView().environment(\.managedObjectContext, context)
+                SettingsView().environment(\.managedObjectContext, context)
             })
         }
     }

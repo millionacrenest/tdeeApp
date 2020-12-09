@@ -59,14 +59,9 @@ struct SettingsView: View {
                         getWeight()
                     }) {
                         Text("Save")
-                            .frame(height: 55)
-                            .textFieldStyle(PlainTextFieldStyle())
-                            .padding([.leading, .trailing], 4)
-                            .cornerRadius(16)
-                            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                            .padding([.leading, .trailing])
+                            
                         
-                    }
+                    }.buttonStyle(FilledButton())
                 }
             }.navigationTitle("Settings")
         }
@@ -197,9 +192,7 @@ struct SettingsView: View {
 
             // You can stop the query by calling:
             // store.stop(query)
-                let foundRun = workoutItems.filter { $0.runUUID == workoutItem.uuid }
-                
-                self.saveRunToCoreData(workoutItem: workoutItem, coordinates: locationCoordinates)
+               self.saveRunToCoreData(workoutItem: workoutItem, coordinates: locationCoordinates)
                 
             }
             

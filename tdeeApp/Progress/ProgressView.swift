@@ -37,7 +37,7 @@ struct ProgressView: View {
                         self.saveToCoreData()
                     }) {
                         Text("Save")
-                    }
+                    }.buttonStyle(FilledButton())
                     ProgressList()
                 }
             .navigationTitle("Progress")

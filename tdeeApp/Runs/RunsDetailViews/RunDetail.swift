@@ -30,7 +30,7 @@ struct RunDetail : View {
                 saveRunData()
             }) {
                 Text("SAVE CHANGES")
-            }
+            }.buttonStyle(FilledButton())
             Spacer()
             Image(uiImage: UIImage(data: workoutItem.runImage ?? Data()) ?? UIImage()).resizable()
                 .scaledToFill()

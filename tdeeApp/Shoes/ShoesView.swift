@@ -40,39 +40,13 @@ struct ShoesView: View {
                 ZStack {
                     
                     VStack {
-                        Button("Request Permission") {
-                            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                                if success {
-                                    print("All set!")
-                                } else if let error = error {
-                                    print(error.localizedDescription)
-                                }
-                            }
-                            }
                         
-                        //TO DO: run function in background to send notification when set number of miles remain: https://www.hackingwithswift.com/example-code/system/how-to-run-code-when-your-app-is-terminated
-                            Button("Schedule Notification") {
-                                let content = UNMutableNotificationContent()
-                                content.title = "TIME FOR NEW SHOES"
-                                content.subtitle = "Your shoes have \(milesRemaining) miles left"
-                                content.sound = UNNotificationSound.default
-
-                                // show this notification five seconds from now
-                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
-                                // choose a random identifier
-                                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-                                // add our notification request
-                                UNUserNotificationCenter.current().add(request)
-                            }
-                    
                         Text("New Shoes Recorded:")
                         Text(shoeDate, style: .date)
                         
                         Button("Adjust Recorded Date") {
                             self.showingDatePicker.toggle()
-                        }
+                        }.buttonStyle(FilledButton())
                         .sheet(isPresented: $showingDatePicker, onDismiss: getRunningWorkouts) {
                             DatePicker("", selection: $shoeDate, displayedComponents: .date).datePickerStyle(GraphicalDatePickerStyle()).labelsHidden()
                         }
