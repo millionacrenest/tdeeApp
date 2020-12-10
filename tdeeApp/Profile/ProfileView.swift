@@ -9,6 +9,7 @@
 import SwiftUI
 import HealthKit
 import Lottie
+import UIKit
 
 struct ProfileView: View {
     
@@ -29,17 +30,17 @@ struct ProfileView: View {
     ) var workouts: FetchedResults<RunLogged>
     
     @State private var miles = "0"
-    @State private var runnersBonus: String? {
-        didSet {
-            getCurrentCaloriesInAndDaysToLoseAPound()
-        }
-    }
+    @State private var runnersBonus: String?
     @State private var selectedDayValue: Double = 5
     @State private var daysToLoseAPound = "0"
     @State private var caloriesToEatPerDay = "1600"
     @State private var healthKitIsAuthorized: Bool = false
     
+    
     let healthStore = HKHealthStore()
+    let accesssLevel: UserAccessLevel = .normal
+    
+    
     
     
     var body: some View {
@@ -48,12 +49,20 @@ struct ProfileView: View {
                 ZStack {
                     VStack {
                         VStack {
-                            LottieView(filename: "health-and-fitness")
-
+                            
+                            
                             if userAccount.first?.goalWeight != nil {
-                                Text("GOAL Weight: \(userAccount.first?.goalWeight ?? "0")")
-                                Text("Current BMI: \(userAccount.first?.userBMI ?? "no BMI data")")
-                                Text("Current Weight: \(userAccount.first?.currentWeight ?? "no weight data")")
+                                ProfileHeaderView {
+                                    HStack {
+                                        LottieView(filename: "health-and-fitness").frame(width: 150, height: 150, alignment: .leading)
+                                        VStack {
+                                            Text("GOAL Weight: \(userAccount.first?.goalWeight ?? "0")").multilineTextAlignment(.leading)
+                                    Text("Current BMI: \(userAccount.first?.userBMI ?? "no BMI data")").multilineTextAlignment(.leading)
+                                    Text("Current Weight: \(userAccount.first?.currentWeight ?? "no weight data")").multilineTextAlignment(.leading)
+                                        }
+                                    }
+                                }.padding([.top, .bottom], 20)
+                                
                             } else {
                                 Text("GOAL WEIGHT NOT SET")
                             }
@@ -62,14 +71,14 @@ struct ProfileView: View {
                         Spacer()
                         Text("You run an average of:")
                         HStack {
-                            Text(miles.prefix(3)).bold()
+                            Text(userAccount.first?.currentMilesAverage ?? "000").bold()
                             Text("miles per day")
                         }
                         Spacer()
                         VStack {
                             Text("This means your Runner's Bonus is")
                             HStack {
-                                Text(runnersBonus ?? "").bold()
+                                Text(userAccount.first?.currentRunnersBonus ?? "000").bold()
                                 Text("extra calories per day!")
                             }
                             Text("If you eat \(caloriesToEatPerDay) calories per day")
@@ -77,26 +86,42 @@ struct ProfileView: View {
                         }
                         Spacer()
                         Text("Adjust days to lose a pound:")
-                        Text("DAYS: \(selectedDayValue)")
-//                        Slider(value: $selectedDayValue, in: 1...14,step: 1,onEditingChanged: { data in
-//                            self.daysToLoseAPound = String(format: "%.0f", selectedDayValue)
-//                            updateCaloriesForDaysToLoseAPound()
-//                        }).padding(12)
 
-                        CustomSlider(value: $selectedDayValue,   range: (0, 14)) { modifiers in
-                          ZStack {
-                            LinearGradient(gradient: .init(colors: [Color.pink, Color.orange ]), startPoint: .leading, endPoint: .trailing)
-                            ZStack {
-                              Circle().fill(Color.white)
-                              Circle().stroke(Color.black.opacity(0.2), lineWidth: 2)
+                        VStack(spacing: 30) {
+                               Group {
+                                   
+                                CustomSlider(value: $selectedDayValue.didSet { _ in
+                                                self.caloriesToEatPerDay = updateCaloriesForDaysToLoseAPound(user: userAccount.first ?? User(), value: selectedDayValue)
+                                    self.daysToLoseAPound = String(Int(selectedDayValue))
+                                    
+                                },   range: (0, 14)) { modifiers in
+                                  ZStack {
+                                    LinearGradient(gradient: .init(colors: [Color.green, Color.purple ]), startPoint: .leading, endPoint: .trailing)
+                                    ZStack {
+                                      Circle().fill(Color.white)
+                                      Circle().stroke(Color.black.opacity(0.2), lineWidth: 2)
+                                      Text(daysToLoseAPound)
 
-                            }
-                            .padding([.top, .bottom, .leading, .trailing], 2)
-                            .modifier(modifiers.knob)
-                          }.cornerRadius(15)
-                        }.frame(height: 30)
-                    }
-                }.navigationTitle("Runner's Bonus")
+                                    }
+                                    .padding([.top, .bottom, .leading, .trailing], 2)
+                                    .modifier(modifiers.knob)
+                                    
+                                    
+                                  }.cornerRadius(15)
+                                  
+                                }
+                                 
+                               }.frame(width:320, height: 100).padding(.bottom, 20)
+                           }
+                       }
+                }.onAppear {
+                    runnersBonus = userAccount.first?.currentRunnersBonus
+                    self.selectedDayValue = getCurrentCaloriesInAndDaysToLoseAPound(user: userAccount.first ?? User()).1
+                    self.caloriesToEatPerDay = getCurrentCaloriesInAndDaysToLoseAPound(user: userAccount.first ?? User()).0
+                    
+                    
+                }
+                .navigationTitle("Runner's Bonus")
                 .navigationBarItems(trailing:
                     Button(action: {
                         self.showingDetail.toggle()
@@ -111,48 +136,26 @@ struct ProfileView: View {
         
     }
     
-    func getCurrentCaloriesInAndDaysToLoseAPound() {
-        
-        
-        let goalWeight = Double(userAccount.first?.goalWeight ?? "0")
-        let bonus = Double(runnersBonus ?? "") ?? 0
-        
-        let caloriesToSustainGoalWeight = Double(goalWeight ?? 0) * 15
-        
+    func buildSettings() {
+        // to do: use this to refactor save to core data, build presentation around that
+        let settings = makeSettings {
+            Setting(name: "Offline mode", value: .bool(false))
+            Setting(name: "Search page size", value: .int(25))
 
-        let caloriesRequiredPerDay = caloriesToSustainGoalWeight + bonus
-
-        let caloriesToEat = caloriesToSustainGoalWeight - (bonus/2)
-        self.caloriesToEatPerDay = String(format: "%.0f", caloriesToEat)
-
-        let calorieDeficetPerDay = caloriesRequiredPerDay - caloriesToEat
-        
-        let daysToLoseAPound = 3500/calorieDeficetPerDay
-        self.daysToLoseAPound = String(format: "%.0f", daysToLoseAPound)
-        DispatchQueue.main.async {
-            selectedDayValue = Double(daysToLoseAPound)
+            switch accesssLevel {
+                case .restricted:
+                    Setting.Empty()
+                case .normal:
+                    Setting(name: "Request experimental access", value: .bool(false))
+                case .experimental:
+                    SettingGroup(name: "Experimental") {
+                        Setting(name: "Default name", value: .string("Untitled"))
+                        Setting(name: "Fluid animations", value: .bool(true))
+                    }
+                }
         }
-        
     }
     
-    func updateCaloriesForDaysToLoseAPound() {
-        let goalWeight = Double(userAccount.first?.goalWeight ?? "0")
-        let bonus = Double(runnersBonus ?? "") ?? 0
-        
-        let caloriesToSustainGoalWeight = Double(goalWeight ?? 0) * 15
-
-
-        let caloriesRequiredPerDay = caloriesToSustainGoalWeight + bonus
-
-        //how to calculate?
-        let calorieDeficetPerDay = 3500/selectedDayValue
-        let caloriesToEat = caloriesRequiredPerDay - calorieDeficetPerDay
-        self.caloriesToEatPerDay = String(format: "%.0f", caloriesToEat)
-        
-        
-    }
-
-
 }
 
 struct ProfileView_Previews: PreviewProvider {
@@ -161,7 +164,25 @@ struct ProfileView_Previews: PreviewProvider {
     }
 }
 
-
-
+extension Binding {
+    /// Execute block when value is changed.
+    ///
+    /// Example:
+    ///
+    ///     Slider(value: $amount.didSet { print($0) }, in: 0...10)
+    func didSet(execute: @escaping (Value) ->Void) -> Binding {
+        return Binding(
+            get: {
+                return self.wrappedValue
+            },
+            set: {
+                self.wrappedValue = $0
+                execute($0)
+            }
+        )
+    }
+    
+    
+}
 
 

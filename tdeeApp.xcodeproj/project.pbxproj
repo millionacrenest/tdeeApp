@@ -16,6 +16,9 @@
 		F318094824F00F4500199AA3 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F318094724F00F4500199AA3 /* ProgressView.swift */; };
 		F3186EC7257EE2B000DD54DC /* HealthKitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3186EC6257EE2B000DD54DC /* HealthKitDataManager.swift */; };
 		F324F83425796F1900930854 /* RunMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324F83325796F1900930854 /* RunMapView.swift */; };
+		F32A2E542582656F007834C1 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A2E532582656F007834C1 /* Setting.swift */; };
+		F32A2E8925829094007834C1 /* View+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A2E8825829094007834C1 /* View+extensions.swift */; };
+		F32A2E9D258299A1007834C1 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A2E9C258299A1007834C1 /* ProfileHeaderView.swift */; };
 		F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC68255317E30002AA8C /* User+CoreDataClass.swift */; };
 		F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */; };
 		F346E3E52581682A006D2CD8 /* shoes-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = F346E3E42581682A006D2CD8 /* shoes-animation.json */; };
@@ -83,6 +86,9 @@
 		F318094724F00F4500199AA3 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		F3186EC6257EE2B000DD54DC /* HealthKitDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitDataManager.swift; sourceTree = "<group>"; };
 		F324F83325796F1900930854 /* RunMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunMapView.swift; sourceTree = "<group>"; };
+		F32A2E532582656F007834C1 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		F32A2E8825829094007834C1 /* View+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extensions.swift"; sourceTree = "<group>"; };
+		F32A2E9C258299A1007834C1 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		F332DC68255317E30002AA8C /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F346E3E42581682A006D2CD8 /* shoes-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "shoes-animation.json"; sourceTree = "<group>"; };
@@ -221,6 +227,7 @@
 				F3AA1DC0256466E7008F7A87 /* TextView.swift */,
 				F36FE82325813AB700AC6868 /* Double+extensions.swift */,
 				F3C34B4B2581A6240079F09C /* ButtonStyle.swift */,
+				F32A2E8825829094007834C1 /* View+extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -230,6 +237,7 @@
 			children = (
 				F3C34B632581ACBA0079F09C /* health-and-fitness.json */,
 				F383EACD24D79B7100075619 /* ProfileView.swift */,
+				F32A2E9C258299A1007834C1 /* ProfileHeaderView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -238,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				F3640953255D9FD100051A48 /* SettingsView.swift */,
+				F32A2E532582656F007834C1 /* Setting.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -482,6 +491,7 @@
 				F3AA1DD025646B1E008F7A87 /* RunDetail.swift in Sources */,
 				F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */,
 				F383EAC724D79B7100075619 /* AppDelegate.swift in Sources */,
+				F32A2E9D258299A1007834C1 /* ProfileHeaderView.swift in Sources */,
 				F383EACE24D79B7100075619 /* ProfileView.swift in Sources */,
 				F364EA64255EFB09008AAC25 /* RunsDetailView.swift in Sources */,
 				F3186EC7257EE2B000DD54DC /* HealthKitDataManager.swift in Sources */,
@@ -491,6 +501,7 @@
 				F364095D255DB27F00051A48 /* PickerView.swift in Sources */,
 				F3640954255D9FD100051A48 /* SettingsView.swift in Sources */,
 				F36FE81F25813A8600AC6868 /* CustomSlider.swift in Sources */,
+				F32A2E542582656F007834C1 /* Setting.swift in Sources */,
 				F36FE82425813AB700AC6868 /* Double+extensions.swift in Sources */,
 				F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */,
 				F318093B24F00B3600199AA3 /* ProgressEntity+CoreDataProperties.swift in Sources */,
@@ -511,6 +522,7 @@
 				F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */,
 				F3053D2F2562D1D9006F60DA /* RunLogged+CoreDataClass.swift in Sources */,
 				F318094824F00F4500199AA3 /* ProgressView.swift in Sources */,
+				F32A2E8925829094007834C1 /* View+extensions.swift in Sources */,
 				F3C2B5BA25800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

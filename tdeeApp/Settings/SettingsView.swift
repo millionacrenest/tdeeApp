@@ -67,6 +67,12 @@ struct SettingsView: View {
         }
     }
     
+    func preintSetting() {
+        let arrayToPrint = makeSettings {
+            
+        }
+    }
+    
     func saveGoalWeightToCoreData(goalWeightString: String) {
         print("saving user goal weight ", userAccount.first?.userID)
         userAccount.first?.goalWeight = goalWeightString
@@ -116,10 +122,10 @@ struct SettingsView: View {
             
             
             let averageOfMiles = miles.reduce(0, +)
-           // self.miles = String(averageOfMiles/7)
+            let currentAverageMiles = String(averageOfMiles/7).prefix(3)
             let runnersBonus = (averageOfMiles/7) * 100
-           // self.runnersBonus = String(format: "%.0f", runnersBonus)
-            
+            let currentRunnersBonus = String(format: "%.0f", runnersBonus)
+            saveCurrentMilesAndBonusToCoreData(miles: String(currentAverageMiles), bonus: currentRunnersBonus)
            }
         
         healthStore.execute(sampleQuery)
@@ -268,6 +274,20 @@ struct SettingsView: View {
         saveWeightToCoreData(weightString: String(weightString.prefix(3)))
        // saveHealthKitWeightDataToUserEntity(weightString: String(weightString.prefix(3)))
         
+    }
+    
+    func saveCurrentMilesAndBonusToCoreData(miles: String, bonus: String) {
+        
+        userAccount.first?.currentMilesAverage = miles
+        userAccount.first?.currentRunnersBonus = bonus
+        
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                // Show the error here
+            }
+        }
     }
     
     func saveBMIToCoreData(bmiString: String) {

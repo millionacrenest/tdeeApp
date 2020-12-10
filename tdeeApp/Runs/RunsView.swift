@@ -25,7 +25,7 @@ struct RunsView: View {
             }) {
                 Image(systemName: "gear").imageScale(.large)
             }.buttonStyle(ButtonStylePalette.destructive)
-            .sheet(isPresented: $showingDetail) {
+                                .sheet(isPresented: $showingDetail) {
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                 SettingsView().environment(\.managedObjectContext, context)
             })

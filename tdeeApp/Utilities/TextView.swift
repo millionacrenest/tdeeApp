@@ -24,9 +24,9 @@ struct TextView: UIViewRepresentable {
         myTextView.isScrollEnabled = true
         myTextView.isEditable = true
         myTextView.isUserInteractionEnabled = true
-        myTextView.backgroundColor = .blue
+        myTextView.backgroundColor = .white
         myTextView.layer.borderColor = UIColor.black.cgColor
-        myTextView.layer.borderWidth = 10
+        myTextView.layer.borderWidth = 1
 
         return myTextView
     }

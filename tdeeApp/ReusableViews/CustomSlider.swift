@@ -44,7 +44,8 @@ struct CustomSlider<Component: View>: View {
       let modifiers = CustomSliderComponents(
           barLeft: CustomSliderModifier(name: .barLeft, size: barLeftSize, offset: 0),
           barRight: CustomSliderModifier(name: .barRight, size: barRightSize, offset: barLeftSize.width),
-          knob: CustomSliderModifier(name: .knob, size: knobSize, offset: offsetX))
+          knob: CustomSliderModifier(name: .knob, size: knobSize, offset: offsetX),
+        result: String(self.value))
 
       return ZStack { viewBuilder(modifiers).gesture(drag) }
     }
@@ -58,6 +59,7 @@ struct CustomSlider<Component: View>: View {
         value = value < xrange.min ? xrange.min : value // limit to trailing edge
         value = value.convert(fromRange: (xrange.min, xrange.max), toRange: range)
         self.value = value
+        
     }
     
     private func getOffsetX(frame: CGRect) -> CGFloat {
@@ -72,6 +74,7 @@ struct CustomSliderComponents {
     let barLeft: CustomSliderModifier
     let barRight: CustomSliderModifier
     let knob: CustomSliderModifier
+    let result: String
 }
 struct CustomSliderModifier: ViewModifier {
     enum Name {
@@ -91,4 +94,20 @@ struct CustomSliderModifier: ViewModifier {
     }
 }
 
+extension CustomSlider {
+    func updateCaloriesForDaysToLoseAPound(user: User, value: Double) -> String {
+        let goalWeight = Double(user.goalWeight ?? "0")
+        let bonus = Double(user.currentRunnersBonus ?? "") ?? 0
+        
+        let caloriesToSustainGoalWeight = Double(goalWeight ?? 0) * 15
 
+
+        let caloriesRequiredPerDay = caloriesToSustainGoalWeight + bonus
+
+        //how to calculate?
+        let calorieDeficetPerDay = 3500/value
+        let caloriesToEat = caloriesRequiredPerDay - calorieDeficetPerDay
+        return String(format: "%.0f", caloriesToEat)
+        
+    }
+}

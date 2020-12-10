@@ -17,15 +17,35 @@ struct RunsRow: View {
     var body: some View {
         HStack {
             RunMapView(workoutItem: workoutItem)
-            VStack {
+            RunsRowView {
                 Text("Run completed: \(workoutItem.dateRun ?? Date())")
-                Spacer()
                 Text("Total Distance: \(workoutItem.distance ?? "")")
                 Text("Calories Burned: \(workoutItem.caloriesBurned ?? "")")
             }
         }
     }
     
+}
+
+struct RunsRowView<Content: View>: View {
+    let content: Content
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    var body: some View {
+        VStack {
+        content
+            .padding()
+            .cornerRadius(16)
+            .transition(.move(edge: .top))
+            .animation(.spring())
+            .background(Color(.tertiarySystemBackground))
+         
+        }
+        
+    }
 }
 
 

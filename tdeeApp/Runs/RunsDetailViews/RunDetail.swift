@@ -10,6 +10,8 @@ import SwiftUI
 
 struct RunDetail : View {
     
+    //TO DO: refactor this view using view builder for presentation
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     var workoutItem: RunLogged
     
