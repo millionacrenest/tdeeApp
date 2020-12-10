@@ -8,6 +8,7 @@
 
 import SwiftUI
 import HealthKit
+import Lottie
 
 struct ProfileView: View {
     
@@ -44,18 +45,11 @@ struct ProfileView: View {
     var body: some View {
         
         NavigationView {
-            ScrollView {
                 ZStack {
                     VStack {
                         VStack {
+                            LottieView(filename: "health-and-fitness")
 
-                            ZStack {
-                            Image("fixx").resizable()
-                                .clipShape(Circle()).frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/2.5)
-                                .shadow(radius: 10)
-                                .overlay(Circle().stroke(Color.gray, lineWidth: 5))
-
-                            }
                             if userAccount.first?.goalWeight != nil {
                                 Text("GOAL Weight: \(userAccount.first?.goalWeight ?? "0")")
                                 Text("Current BMI: \(userAccount.first?.userBMI ?? "no BMI data")")
@@ -88,31 +82,31 @@ struct ProfileView: View {
 //                            self.daysToLoseAPound = String(format: "%.0f", selectedDayValue)
 //                            updateCaloriesForDaysToLoseAPound()
 //                        }).padding(12)
-                        
+
                         CustomSlider(value: $selectedDayValue,   range: (0, 14)) { modifiers in
                           ZStack {
                             LinearGradient(gradient: .init(colors: [Color.pink, Color.orange ]), startPoint: .leading, endPoint: .trailing)
                             ZStack {
                               Circle().fill(Color.white)
                               Circle().stroke(Color.black.opacity(0.2), lineWidth: 2)
-                              
+
                             }
                             .padding([.top, .bottom, .leading, .trailing], 2)
                             .modifier(modifiers.knob)
                           }.cornerRadius(15)
                         }.frame(height: 30)
                     }
-                }
-            }.navigationTitle("Runner's Bonus")
-            .navigationBarItems(trailing:
-                Button(action: {
-                    self.showingDetail.toggle()
-                }) {
-                    Image(systemName: "gear").imageScale(.large)
-                }.sheet(isPresented: $showingDetail) {
-                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                    SettingsView().environment(\.managedObjectContext, context)
-                })
+                }.navigationTitle("Runner's Bonus")
+                .navigationBarItems(trailing:
+                    Button(action: {
+                        self.showingDetail.toggle()
+                    }) {
+                        Image(systemName: "gear").imageScale(.large)
+                    }.sheet(isPresented: $showingDetail) {
+                        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                        SettingsView().environment(\.managedObjectContext, context)
+                    })
+
         }
         
     }

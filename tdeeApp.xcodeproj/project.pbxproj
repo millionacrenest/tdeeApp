@@ -50,6 +50,7 @@
 		F3C2B5B925800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2B5B725800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift */; };
 		F3C2B5BA25800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2B5B825800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift */; };
 		F3C34B4C2581A6240079F09C /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C34B4B2581A6240079F09C /* ButtonStyle.swift */; };
+		F3C34B642581ACBA0079F09C /* health-and-fitness.json in Resources */ = {isa = PBXBuildFile; fileRef = F3C34B632581ACBA0079F09C /* health-and-fitness.json */; };
 		F3C821C42559BE04007D4207 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C821C32559BE04007D4207 /* HealthKit.framework */; };
 		F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */; };
 		F3C821E42559E605007D4207 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821E32559E605007D4207 /* AppView.swift */; };
@@ -84,7 +85,7 @@
 		F324F83325796F1900930854 /* RunMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunMapView.swift; sourceTree = "<group>"; };
 		F332DC68255317E30002AA8C /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F346E3E42581682A006D2CD8 /* shoes-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "shoes-animation.json"; path = "../../../../Downloads/shoes-animation.json"; sourceTree = "<group>"; };
+		F346E3E42581682A006D2CD8 /* shoes-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "shoes-animation.json"; sourceTree = "<group>"; };
 		F34E06BD255AFCC500A1E60B /* RunsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunsView.swift; sourceTree = "<group>"; };
 		F34E06C6255AFD0000A1E60B /* ShoesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoesView.swift; sourceTree = "<group>"; };
 		F34E06E1255B13A300A1E60B /* Color+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extensions.swift"; sourceTree = "<group>"; };
@@ -120,6 +121,7 @@
 		F3C2B5B725800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationPoint+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F3C2B5B825800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationPoint+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F3C34B4B2581A6240079F09C /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		F3C34B632581ACBA0079F09C /* health-and-fitness.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "health-and-fitness.json"; sourceTree = "<group>"; };
 		F3C821C12559BE04007D4207 /* tdeeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tdeeApp.entitlements; sourceTree = "<group>"; };
 		F3C821C32559BE04007D4207 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		F364090B255C4DF600051A48 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F3C34B632581ACBA0079F09C /* health-and-fitness.json */,
 				F383EACD24D79B7100075619 /* ProfileView.swift */,
 			);
 			path = Profile;
@@ -447,6 +450,7 @@
 				F383EAD324D79B7400075619 /* Preview Assets.xcassets in Resources */,
 				F383EAD024D79B7400075619 /* Assets.xcassets in Resources */,
 				F346E3E52581682A006D2CD8 /* shoes-animation.json in Resources */,
+				F3C34B642581ACBA0079F09C /* health-and-fitness.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
