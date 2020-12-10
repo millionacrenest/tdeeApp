@@ -49,6 +49,7 @@
 		F3AA1DD525646C12008F7A87 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA1DD425646C12008F7A87 /* RunView.swift */; };
 		F3C2B5B925800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2B5B725800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift */; };
 		F3C2B5BA25800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C2B5B825800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift */; };
+		F3C34B4C2581A6240079F09C /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C34B4B2581A6240079F09C /* ButtonStyle.swift */; };
 		F3C821C42559BE04007D4207 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C821C32559BE04007D4207 /* HealthKit.framework */; };
 		F3C821CA2559BFAD007D4207 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */; };
 		F3C821E42559E605007D4207 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C821E32559E605007D4207 /* AppView.swift */; };
@@ -118,6 +119,7 @@
 		F3AA1DD425646C12008F7A87 /* RunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
 		F3C2B5B725800BB1002AFBB4 /* LocationPoint+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationPoint+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F3C2B5B825800BB1002AFBB4 /* LocationPoint+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationPoint+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F3C34B4B2581A6240079F09C /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		F3C821C12559BE04007D4207 /* tdeeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tdeeApp.entitlements; sourceTree = "<group>"; };
 		F3C821C32559BE04007D4207 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		F3C821C92559BFAD007D4207 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				F34E06ED255B385A00A1E60B /* Date+extensions.swift */,
 				F3AA1DC0256466E7008F7A87 /* TextView.swift */,
 				F36FE82325813AB700AC6868 /* Double+extensions.swift */,
+				F3C34B4B2581A6240079F09C /* ButtonStyle.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */,
 				F3053D302562D1D9006F60DA /* RunLogged+CoreDataProperties.swift in Sources */,
 				F318093A24F00B3600199AA3 /* ProgressEntity+CoreDataClass.swift in Sources */,
+				F3C34B4C2581A6240079F09C /* ButtonStyle.swift in Sources */,
 				F34E06E2255B13A300A1E60B /* Color+extensions.swift in Sources */,
 				F3AA1DC1256466E7008F7A87 /* TextView.swift in Sources */,
 				F3053D2F2562D1D9006F60DA /* RunLogged+CoreDataClass.swift in Sources */,

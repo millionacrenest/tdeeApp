@@ -46,7 +46,7 @@ struct ShoesView: View {
                         
                         Button("Adjust Recorded Date") {
                             self.showingDatePicker.toggle()
-                        }
+                        }.buttonStyle(ButtonStylePalette.secondary)
                         .sheet(isPresented: $showingDatePicker, onDismiss: getRunningWorkouts) {
                             DatePicker("", selection: $shoeDate, displayedComponents: .date).datePickerStyle(GraphicalDatePickerStyle()).labelsHidden()
                         }
@@ -68,7 +68,7 @@ struct ShoesView: View {
                         }.sheet(isPresented: $showingDetail) {
                             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                             SettingsView().environment(\.managedObjectContext, context)
-                        })
+                        }).buttonStyle(ButtonStylePalette.destructive)
                     
         }
     }

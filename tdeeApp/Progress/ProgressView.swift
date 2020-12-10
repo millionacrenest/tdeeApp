@@ -46,7 +46,8 @@ struct ProgressView: View {
                     self.showingDetail.toggle()
                 }) {
                     Image(systemName: "gear").imageScale(.large)
-                }.sheet(isPresented: $showingDetail) {
+                }.buttonStyle(ButtonStylePalette.destructive)
+                .sheet(isPresented: $showingDetail) {
                     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                     SettingsView().environment(\.managedObjectContext, context)
                 })

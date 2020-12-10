@@ -25,3 +25,18 @@ extension Color {
         self.init(red: red / 255, green: green / 255, blue: blue / 255)
     }
 }
+
+enum ColorsPalette {
+    case primary
+    case secondary
+    case tertiary
+    case destructive
+    var color: Color {
+        switch self {
+        case .primary: return Color.red
+        case .secondary: return Color.green
+        case .tertiary: return Color.blue
+        case .destructive: return Color.yellow
+        }
+    }
+}
