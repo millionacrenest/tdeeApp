@@ -40,7 +40,8 @@ struct ShoesView: View {
                
                     
                     VStack {
-                        LottieView(filename: "shoes-animation")
+                        LottieView(filename: "sneaker-outlined")
+                        RunsRowView {
                         Text("New Shoes Recorded:")
                         Text(shoeDate, style: .date)
                         
@@ -51,10 +52,11 @@ struct ShoesView: View {
                             DatePicker("", selection: $shoeDate, displayedComponents: .date).datePickerStyle(GraphicalDatePickerStyle()).labelsHidden()
                         }
                         Text("You have run \(milesOnShoes ?? 0) miles since \(shoeDate)")
-                        Spacer()
+                        
                         
                         Text("You will need new shoes in \(milesRemaining ?? 0) miles")
-                        Spacer()
+                        
+                        }
                     }.onAppear {
                         shoeDate = userAccount.first?.dateMilesLastSet ?? Date()
                         getRunningWorkouts()

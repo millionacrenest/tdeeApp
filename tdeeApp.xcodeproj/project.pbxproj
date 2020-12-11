@@ -19,6 +19,7 @@
 		F32A2E542582656F007834C1 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A2E532582656F007834C1 /* Setting.swift */; };
 		F32A2E8925829094007834C1 /* View+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A2E8825829094007834C1 /* View+extensions.swift */; };
 		F32A2E9D258299A1007834C1 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A2E9C258299A1007834C1 /* ProfileHeaderView.swift */; };
+		F32A2EA52582A99E007834C1 /* sneaker-outlined.json in Resources */ = {isa = PBXBuildFile; fileRef = F32A2EA42582A99E007834C1 /* sneaker-outlined.json */; };
 		F332DC6A255317E30002AA8C /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC68255317E30002AA8C /* User+CoreDataClass.swift */; };
 		F332DC6B255317E30002AA8C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */; };
 		F346E3E52581682A006D2CD8 /* shoes-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = F346E3E42581682A006D2CD8 /* shoes-animation.json */; };
@@ -89,6 +90,7 @@
 		F32A2E532582656F007834C1 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		F32A2E8825829094007834C1 /* View+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extensions.swift"; sourceTree = "<group>"; };
 		F32A2E9C258299A1007834C1 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		F32A2EA42582A99E007834C1 /* sneaker-outlined.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sneaker-outlined.json"; sourceTree = "<group>"; };
 		F332DC68255317E30002AA8C /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F332DC69255317E30002AA8C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F346E3E42581682A006D2CD8 /* shoes-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "shoes-animation.json"; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				F346E3E42581682A006D2CD8 /* shoes-animation.json */,
+				F32A2EA42582A99E007834C1 /* sneaker-outlined.json */,
 				F34E06C6255AFD0000A1E60B /* ShoesView.swift */,
 			);
 			path = Shoes;
@@ -456,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F383EAD624D79B7400075619 /* LaunchScreen.storyboard in Resources */,
+				F32A2EA52582A99E007834C1 /* sneaker-outlined.json in Resources */,
 				F383EAD324D79B7400075619 /* Preview Assets.xcassets in Resources */,
 				F383EAD024D79B7400075619 /* Assets.xcassets in Resources */,
 				F346E3E52581682A006D2CD8 /* shoes-animation.json in Resources */,

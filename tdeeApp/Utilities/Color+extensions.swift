@@ -33,7 +33,7 @@ enum ColorsPalette {
     case destructive
     var color: Color {
         switch self {
-        case .primary: return Color.red
+        case .primary: return Color.purple
         case .secondary: return Color.green
         case .tertiary: return Color.blue
         case .destructive: return Color.yellow

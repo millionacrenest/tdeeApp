@@ -18,7 +18,7 @@ struct RunsRow: View {
         HStack {
             RunMapView(workoutItem: workoutItem)
             RunsRowView {
-                Text("Run completed: \(workoutItem.dateRun ?? Date())")
+                Text("\(workoutItem.dateRun ?? Date())")
                 Text("Total Distance: \(workoutItem.distance ?? "")")
                 Text("Calories Burned: \(workoutItem.caloriesBurned ?? "")")
             }
