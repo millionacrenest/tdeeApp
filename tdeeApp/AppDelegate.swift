@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
           }
           shouldReturn = true
+            HealthKitDataManager().getRunningWorkouts()
         }
         return shouldReturn
     }

@@ -38,9 +38,6 @@ struct ProfileView: View {
     
     
     let healthStore = HKHealthStore()
-    let accesssLevel: UserAccessLevel = .normal
-    
-    
     
     
     var body: some View {
@@ -136,25 +133,6 @@ struct ProfileView: View {
         
     }
     
-    func buildSettings() {
-        // to do: use this to refactor save to core data, build presentation around that
-        let settings = makeSettings {
-            Setting(name: "Offline mode", value: .bool(false))
-            Setting(name: "Search page size", value: .int(25))
-
-            switch accesssLevel {
-                case .restricted:
-                    Setting.Empty()
-                case .normal:
-                    Setting(name: "Request experimental access", value: .bool(false))
-                case .experimental:
-                    SettingGroup(name: "Experimental") {
-                        Setting(name: "Default name", value: .string("Untitled"))
-                        Setting(name: "Fluid animations", value: .bool(true))
-                    }
-                }
-        }
-    }
     
 }
 
@@ -164,25 +142,6 @@ struct ProfileView_Previews: PreviewProvider {
     }
 }
 
-extension Binding {
-    /// Execute block when value is changed.
-    ///
-    /// Example:
-    ///
-    ///     Slider(value: $amount.didSet { print($0) }, in: 0...10)
-    func didSet(execute: @escaping (Value) ->Void) -> Binding {
-        return Binding(
-            get: {
-                return self.wrappedValue
-            },
-            set: {
-                self.wrappedValue = $0
-                execute($0)
-            }
-        )
-    }
-    
-    
-}
+
 
 

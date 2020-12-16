@@ -57,10 +57,5 @@ class HealthKitSetupAssistant {
 
     }
     
-    
-
-    
-    
-    
 }
 
